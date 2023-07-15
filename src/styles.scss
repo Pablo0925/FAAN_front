@@ -21,9 +21,9 @@
 }
 
 html {
-    align-items: center;
-    justify-items: center;
-    scroll-behavior: smooth;
+	align-items: center;
+	justify-items: center;
+	scroll-behavior: smooth;
 }
 
 body {
@@ -34,12 +34,22 @@ body {
 
 
 /*BUTTONS*/
-.btn-primary {
-    background: #2e6db0;
-    border: none;
-    outline: none;
+.btn-primarys {
+	background: #2e6db0;
+	border: none;
+	outline: none;
+	color: white;
+	height: 70px;
+	margin-top: 5px;
 }
 
-.btn-primary:hover {
-    background: #3b98b0;
+.btn-primarys:hover {
+	background: #2e6db0f0;
+	color: white;
+
+}
+
+.btn-primarys:active {
+	background: #2e6db0;
+	color: white;
 }

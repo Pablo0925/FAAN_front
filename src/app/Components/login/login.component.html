@@ -1,9 +1,6 @@
-<!----------------------- Main Container -------------------------->
 <div class="pirncipal">
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
-        <!----------------------- Login Container -------------------------->
         <div class="row border rounded-5 p-3 bg-white box-area" style="box-shadow:0.5px -0.5px 12px 6.5px #00000036;">
-            <!--------------------------- Left Box ----------------------------->
             <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
                 style="background: linear-gradient(0deg, #2e6db0 0%, #3b98b0 100%);">
                 <div class="featured-image mb-3">
@@ -17,20 +14,19 @@
                     this
                     platform.</small>
             </div>
-            <!-------------------- ------ Right Box ---------------------------->
             <div class="col-md-6 right-box">
                 <div class="row align-items-center">
                     <div class="header-text mb-4">
-                        <h2>Hello,Again</h2>
-                        <p>We are happy to have you back.</p>
+                        <h2>Hola</h2>
+                        <p>Sistema fundacion FAAN.</p>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-lg bg-light fs-6"
-                            placeholder="Email address">
+                        <input type="text" name="username" [(ngModel)]="usuario.username"
+                            class="form-control form-control-lg bg-light fs-6" placeholder="Username">
                     </div>
                     <div class="input-group mb-1">
-                        <input type="password" class="form-control form-control-lg bg-light fs-6"
-                            placeholder="Password">
+                        <input type="password" name="password" [(ngModel)]="usuario.password"
+                            class="form-control form-control-lg bg-light fs-6" placeholder="Password">
                     </div>
                     <div class="input-group mb-5 d-flex justify-content-between">
                         <div class="forgot">
@@ -38,7 +34,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-1">
-                        <button class="btn btn-lg btn-primary w-100 fs-6">Login</button>
+                        <button type="submit" (click)="singIn()" class="btn btn-lg btn-primarys w-100 fs-6">Login</button>
                     </div>
                 </div>
             </div>
