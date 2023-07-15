@@ -1,0 +1,7 @@
+
+<div *ngIf="isLoggin === false">
+    <router-outlet></router-outlet>
+</div>
+<div *ngIf="isLoggin === true">
+    <app-dashboard></app-dashboard>
+</div>
