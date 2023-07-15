@@ -20,6 +20,11 @@
 	--red: #FC3B56;
 }
 
+html {
+    align-items: center;
+    justify-items: center;
+    scroll-behavior: smooth;
+}
 
 body {
 	background: var(--grey);
