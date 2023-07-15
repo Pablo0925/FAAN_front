@@ -8,18 +8,20 @@ declare var navBar: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  
 
-  isLoggin:boolean=false;
+
+  isLoggin: boolean = false;
 
   constructor(
+    private _CargarScript: CargarScrpitsService,
   ) {
+    _CargarScript.Cargar(["dashboard"]);
   }
 
   ngOnInit(): void {
 
   }
-  
+
 
 }
 
