@@ -10,11 +10,6 @@ import { Usuario, usuarioLoginDTO } from 'src/app/Models/usuario';
 })
 export class LoginComponent implements OnInit {
 
-  usuario: usuarioLoginDTO = {
-    username: '',
-    password: ''
-  };
-
   constructor(
     private router: Router,
     private authService: AuthService
@@ -23,15 +18,16 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public infoUsuario = new Usuario();
+  public infoUsuario!: Usuario;
+  public usuarioLoginDTO!: usuarioLoginDTO;
 
 
   // METHOD AUTHENTICATION USER
   public singIn(): void {
-    if (!this.usuario.password || !this.usuario.password) {
+    if (!this.usuarioLoginDTO.password || !this.usuarioLoginDTO.password) {
       alert('EMPYTY FIELDS')
     } else {
-      this.authService.login(this.usuario).subscribe(data => {
+      this.authService.login(this.usuarioLoginDTO).subscribe(data => {
         if (!data) {
           console.log('CREDENCIALES INCORRECTAS');
           localStorage.removeItem('id_username');
