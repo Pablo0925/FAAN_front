@@ -1,4 +1,3 @@
-import { type } from "jquery";
 import { Persona } from "./persona";
 import { Rol } from "./rol";
 
