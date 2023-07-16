@@ -1,4 +1,4 @@
-// import { FichaMedica } from "./fichaMedica";
+import { FichaMedica } from "./fichaMedica";
 import { TipoEnfermedad } from "./tipoEnfermedad";
 
 export interface Enfermedad {
@@ -7,5 +7,5 @@ export interface Enfermedad {
     observaciones:    string;
     estadoEnfermedad: string;
     tipoEnfermedad:   TipoEnfermedad;
-    //fichaMedica:      FichaMedica;
+    fichaMedica:      FichaMedica;
 }

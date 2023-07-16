@@ -1,4 +1,4 @@
-// import { FichaMedica } from "./fichaMedica";
+import { FichaMedica } from "./fichaMedica";
 import { TipoAlergias } from "./tipoAlergias";
 
 export interface Alergias {
@@ -6,5 +6,5 @@ export interface Alergias {
     fechaDeteccion: Date;
     observacion:    string;
     tipoAlergias:   TipoAlergias;
-    // fichaMedica:    FichaMedica;
+    fichaMedica:    FichaMedica;
 }
