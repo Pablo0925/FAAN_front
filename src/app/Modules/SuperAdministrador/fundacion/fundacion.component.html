@@ -2,7 +2,7 @@
   <img class="card-img-top" src="../../../../assets/img/81c4ce.png" height="150px" />
   <div class="container">
     <div class="text-center">
-      <img class="img-avatar rounded-circle" src="../../../../assets/img/logo.png" />
+      <img class="img-avatar rounded-circle" [src]='"https://bucketgtmt.s3.amazonaws.com/" + fundacion.logoFundacion' />
       <h1> {{fundacion.nombreFundacion}} </h1>
       <p style="text-align: center;">{{fundacion.acronimo}}</p>
     </div>
@@ -18,12 +18,21 @@
 </p-card>
 
 <!-- MODAL EDIT DATA -->
-<p-dialog header="" [(visible)]="visible" [breakpoints]="{ '960px': '75vw' }" [style]="{ width: '70vw', height: '500vw'}" [draggable]="false" [resizable]="false">
-  <form (ngSubmit)="updateFundacionById()"  ngNativeValidate style="padding: 15px;">
+<p-dialog header="" [(visible)]="visible" [breakpoints]="{ '960px': '75vw' }"
+  [style]="{ width: '70vw', height: '500vw'}" [draggable]="false" [resizable]="false">
+
+  <form (ngSubmit)="updateFundacionById()" ngNativeValidate style="padding: 15px;">
+
     <div class="card flex justify-content-center">
-      <p-fileUpload class="m-3" mode="basic" chooseLabel="Choose" name="demo[]"
-        url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"></p-fileUpload>
+      <div class="col-12 md:col-4 mt-1">
+        <div class="p-inputgroup">
+          <span class="p-float-label">
+            <input type="file" accept="image/jpeg, image/jpg, image/png" (change)="onFileSelected($event)" />
+          </span>
+        </div>
+      </div>
     </div>
+
     <p-card header="Datos Fundación" class="m-5 text-center align-items-center">
       <div class="grid p-fluid m-2">
 
@@ -112,8 +121,8 @@
         <div class="col-12 md:col-12 mt-1">
           <div class="p-inputgroup">
             <span class="p-float-label">
-              <textarea rows="5" cols="30" pInputTextarea  pInputText id="objetivo"
-                name="objetivo" [(ngModel)]="fundacion.objetivo">{{fundacion.objetivo}} </textarea>
+              <textarea rows="5" cols="30" pInputTextarea pInputText id="objetivo" name="objetivo"
+                [(ngModel)]="fundacion.objetivo">{{fundacion.objetivo}} </textarea>
               <label htmlFor="objetivo" class="pi pi-user"> Objetivo<span class="red-asterisk"></span></label>
             </span>
           </div>
