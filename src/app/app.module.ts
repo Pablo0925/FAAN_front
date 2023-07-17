@@ -14,6 +14,7 @@ import { MascotasComponent } from './Modules/Administrador/mascotas/mascotas.com
 import { RegistroMascotasComponent } from './Modules/Administrador/registro-mascotas/registro-mascotas.component';
 import { FundacionComponent } from './Modules/SuperAdministrador/fundacion/fundacion.component';
 import { PerfilUsuarioComponent } from './Modules/SuperAdministrador/perfil-usuario/perfil-usuario.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { PerfilUsuarioComponent } from './Modules/SuperAdministrador/perfil-usua
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(), 
   ],
   providers: [],
   bootstrap: [AppComponent]
