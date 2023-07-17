@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { UploadEvent } from 'primeng/fileupload';
 import { Fundacion } from 'src/app/Models/fundacion';
 import { FundacionService } from 'src/app/Service/fundacion.service';
@@ -13,7 +14,8 @@ export class FundacionComponent implements OnInit {
 
   constructor(
     private fundacionService: FundacionService,
-    private imagenService: ImagenService
+    private imagenService: ImagenService,
+    private toastService: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -37,32 +39,51 @@ export class FundacionComponent implements OnInit {
   }
 
   selectedFile!: File;
-  isTieneArchivo: boolean = false;
+  isKeyImage: string = "";
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    if (this.selectedFile && this.selectedFile.size > 300000) {
-      // this.toastrService.warning(
-      //   'El archivo seleccionado es demasiado grande',
-      //   ' Por favor, seleccione un archivo menor a 300 KB.',
-      //   {
-      //     timeOut: 1000,
-      //   }
-      // );
-      return;
-    }
-    this.imagenService.savePictureInBuket(this.selectedFile).subscribe((data)=>{
-      console.log(data)
-    })
-    this.isTieneArchivo = true;
-  }
+    console.log(this.selectedFile.size)
+    if (this.selectedFile && this.selectedFile.size > 1000000) {
+      this.toastService.warning(
+        'El archivo seleccionado es demasiado grande',
+        ' Por favor, seleccione un archivo menor a 1000 KB.',
+        {
+          timeOut: 1000,
+        }
+      );
+      event.target.value = null;
 
+    } else {
+      this.toastService.success(
+        'Foto seleccionada',
+        'Correctamente',
+        {
+          timeOut: 1000,
+        }
+      )
+    }
+  }
 
   // UPDATE DATA FUNDATION
-  public updateFundacionById():void{
-    this.fundacionService.updateFundacionById(this.fundacion.idFudacion!, this.fundacion).subscribe((data)=>{
-      this.fundacion = data;
-      alert('update')
-    })
+  public updateFundacionById(): void {
+    if (this.selectedFile!) {
+      this.imagenService.savePictureInBuket(this.selectedFile).subscribe((data) => {
+        console.log(data);
+        this.isKeyImage = data.key;
+        this.fundacion.logoFundacion = this.isKeyImage;
+        console.log(this.isKeyImage);
+        console.log(this.fundacion.logoFundacion + 'dsad');
+        this.fundacionService.updateFundacionById(this.fundacion.idFudacion!, this.fundacion).subscribe((data) => {
+          this.fundacion = data;
+          alert('update')
+        })
+      })
+    } else {
+      this.fundacionService.updateFundacionById(this.fundacion.idFudacion!, this.fundacion).subscribe((data) => {
+        this.fundacion = data;
+        alert('update')
+      })
+    }
   }
-  
+
 }

@@ -1,5 +1,5 @@
 <p-card header="">
-  <img class="card-img-top" src="../../../../assets/img/81c4ce.png" height="150px" />
+  <img class="card-img-top" src="../../../../assets/img/81c4ce.png" height="100px" />
   <div class="container">
     <div class="text-center">
       <img class="img-avatar rounded-circle" [src]='"https://bucketgtmt.s3.amazonaws.com/" + fundacion.logoFundacion' />
@@ -7,9 +7,9 @@
       <p style="text-align: center;">{{fundacion.acronimo}}</p>
     </div>
     <ul class="list-unstyled text-muted">
-      <li><i class='bx bx-current-location m-2'></i> {{fundacion.direccion}}</li>
+      <li><i class='bx bx-current-location m-2'></i>{{fundacion.direccion}}</li>
       <li><i class='bx bx-world m-2'></i> <a href={{fundacion.paginaWeb}}>{{fundacion.paginaWeb}}</a></li>
-      <li><i class='bx bxs-calendar m-2'></i> {{fundacion.horarios}} </li>
+      <li><i class='bx bxs-calendar m-2'></i>{{fundacion.horarios}} </li>
     </ul>
     <p>{{fundacion.objetivo}}</p>
     <button type="button" (click)="showDialog()" class="btn btn-primarys m-2 card-img-top"
@@ -18,24 +18,27 @@
 </p-card>
 
 <!-- MODAL EDIT DATA -->
-<p-dialog header="" [(visible)]="visible" [breakpoints]="{ '960px': '75vw' }"
-  [style]="{ width: '70vw', height: '500vw'}" [draggable]="false" [resizable]="false">
+<p-dialog  header="Datos Fundación" [(visible)]="visible" [modal]="true" [style]="{ width: '80vw' }" [draggable]="false" [resizable]="false">
+
 
   <form (ngSubmit)="updateFundacionById()" ngNativeValidate style="padding: 15px;">
 
-    <div class="card flex justify-content-center">
-      <div class="col-12 md:col-4 mt-1">
-        <div class="p-inputgroup">
-          <span class="p-float-label">
-            <input type="file" accept="image/jpeg, image/jpg, image/png" (change)="onFileSelected($event)" />
-          </span>
+    <p-card header="" class="m-5 text-center align-items-center">
+
+      <div class="grid p-fluid m-4">
+        <div class="card flex justify-content-center">
+          <div class="col-12 md:col-12 mt-1">
+            <div class="p-inputgroup">
+              <span class="p-float-label">
+                <input type="file" accept="image/jpeg, image/jpg, image/png" (change)="onFileSelected($event)" />
+              </span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <p-card header="Datos Fundación" class="m-5 text-center align-items-center">
+
       <div class="grid p-fluid m-2">
-
         <div class="col-12 md:col-4 mt-1">
           <div class="p-inputgroup">
             <span class="p-float-label">
