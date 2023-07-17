@@ -1,5 +1,5 @@
 <p-card header="">
-  <img class="card-img-top" src="../../../../assets/img/81c4ce.png" height="150px" />
+  <img class="card-img-top" src="../../../../assets/img/81c4ce.png" height="100px" />
   <div class="container">
     <div class="text-center">
       <img class="img-avatar rounded-circle" [src]='"https://bucketgtmt.s3.amazonaws.com/" + fundacion.logoFundacion' />
@@ -18,12 +18,12 @@
 </p-card>
 
 <!-- MODAL EDIT DATA -->
-<p-dialog header="" [(visible)]="visible" [breakpoints]="{ '960px': '75vw' }"
-  [style]="{ width: '70vw', height: '500vw'}" [draggable]="false" [resizable]="false">
+<p-dialog  header="Datos Fundación" [(visible)]="visible" [modal]="true" [style]="{ width: '80vw' }" [draggable]="false" [resizable]="false">
+
 
   <form (ngSubmit)="updateFundacionById()" ngNativeValidate style="padding: 15px;">
 
-    <p-card header="Datos Fundación" class="m-5 text-center align-items-center">
+    <p-card header="" class="m-5 text-center align-items-center">
 
       <div class="grid p-fluid m-4">
         <div class="card flex justify-content-center">
