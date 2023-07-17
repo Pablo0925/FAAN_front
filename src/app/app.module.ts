@@ -12,6 +12,8 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MascotasComponent } from './Modules/Administrador/mascotas/mascotas.component';
 import { RegistroMascotasComponent } from './Modules/Administrador/registro-mascotas/registro-mascotas.component';
+import { FundacionComponent } from './Modules/SuperAdministrador/fundacion/fundacion.component';
+import { PerfilUsuarioComponent } from './Modules/SuperAdministrador/perfil-usuario/perfil-usuario.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { RegistroMascotasComponent } from './Modules/Administrador/registro-masc
     DashboardComponent,
     MascotasComponent,
     RegistroMascotasComponent,
+    FundacionComponent,
+    PerfilUsuarioComponent,
   ],
   imports: [
     BrowserModule,

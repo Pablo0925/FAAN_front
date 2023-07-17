@@ -1,0 +1,17 @@
+<p-card header="">
+  <img class="card-img-top" src="../../../../assets/img/81c4ce.png" height="150px" />
+  <div class="container">
+    <div class="text-center">
+      <img class="img-avatar rounded-circle" src="../../../../assets/img/logo.png" />
+      <h1> {{fundacion.nombreFundacion}} </h1>
+      <p style="text-align: center;">{{fundacion.acronimo}}</p>
+    </div>
+    <ul class="list-unstyled text-muted">
+      <li><i class='bx bx-current-location m-2'></i> {{fundacion.direccion}}</li>
+      <li><i class='bx bx-world m-2'></i> <a href={{fundacion.paginaWeb}}>{{fundacion.paginaWeb}}</a></li>
+      <li><i class='bx bxs-calendar m-2'></i> {{fundacion.horarios}} </li>
+    </ul>
+    <p>{{fundacion.objetivo}}</p>
+    <button type="submit" class="btn btn-primarys m-2 card-img-top" style="align-items: center;">Actualizar</button>
+  </div>
+</p-card>
