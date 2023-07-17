@@ -8,14 +8,14 @@
 }
 
 :root {
-	--grey: #F1F0F6;
+	--grey: #f7fafb;
 	--dark-grey: #8D8D8D;
 	--light: #fff;
 	--dark: #000;
 	--green: #81D43A;
 	--light-green: #E3FFCB;
-	--blue: #1775F1;
-	--light-blue: #D0E4FF;
+	--blue: #52a4b7;
+	--light-blue: #f7fafb;
 	--dark-blue: #0C5FCD;
 	--red: #FC3B56;
 }
@@ -31,25 +31,44 @@ body {
 	overflow-x: hidden;
 }
 
+/*TITLE*/
+.title {
+	color: #000;
+	margin: 5px;
+	text-align: center;
+	align-items: center;
+	font-weight: bold;
+}
 
+p{
+	text-align: justify;
+}
+
+/*AVATAR*/
+.img-avatar {
+	height: 120px;
+	width: 120px;
+	margin: -60px auto 0 auto;
+}
 
 /*BUTTONS*/
 .btn-primarys {
-	background: #2e6db0;
+	background: #52a4b7;
 	border: none;
 	outline: none;
 	color: white;
-	height: 70px;
+	height: 50px;
 	margin-top: 5px;
+	
 }
 
 .btn-primarys:hover {
-	background: #2e6db0f0;
+	background: #52a5b7bf;
 	color: white;
 
 }
 
 .btn-primarys:active {
-	background: #2e6db0;
+	background: #52a5b7bf;
 	color: white;
 }
