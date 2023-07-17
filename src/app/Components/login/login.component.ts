@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Usuario,usuarioLoginDTO } from 'src/app/Models/models';
 import { AuthService } from 'src/app/Service/auth.service';
-import { Usuario, usuarioLoginDTO } from 'src/app/Models/usuario';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,12 @@ export class LoginComponent implements OnInit {
   }
 
   public infoUsuario!: Usuario;
-  public usuarioLoginDTO!: usuarioLoginDTO;
+
+  
+  public usuarioLoginDTO = {
+    username: '',
+    password: ''
+  };
 
 
   // METHOD AUTHENTICATION USER

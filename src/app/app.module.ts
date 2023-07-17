@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MascotasComponent } from './Modules/Administrador/mascotas/mascotas.component';
+import { RegistroMascotasComponent } from './Modules/Administrador/registro-mascotas/registro-mascotas.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MascotasComponent } from './Modules/Administrador/mascotas/mascotas.com
     LoginComponent,
     DashboardComponent,
     MascotasComponent,
+    RegistroMascotasComponent,
   ],
   imports: [
     BrowserModule,
