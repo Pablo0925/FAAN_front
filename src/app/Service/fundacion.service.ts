@@ -15,4 +15,8 @@ export class FundacionService {
   public getAllFundacionById(idFundacion:number): Observable<Fundacion> {
     return this.http.get<Fundacion>(environment.apiuri + '/fundacion/findOne/' + idFundacion);
   }
+
+  public updateFundacionById(idFundacion:number, fundacion:Fundacion): Observable<Fundacion>{
+    return this.http.put<Fundacion>(environment.apiuri + '/fundacion/update/' + idFundacion, fundacion);
+  }
 }
