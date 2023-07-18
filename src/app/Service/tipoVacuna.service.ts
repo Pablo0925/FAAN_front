@@ -31,7 +31,7 @@ export class TipoVacunaService {
   }
 
   public saveTipoVacuna(tipoVacuna: TipoVacuna):Observable<TipoVacuna>{
-    return this.http.post<TipoVacuna>(environment.apiuriPublic+'/tipoVacuna/save', tipoVacuna);
+    return this.http.post<TipoVacuna>(environment.apiuri+'/tipoVacuna/save', tipoVacuna);
   }
 
 }
