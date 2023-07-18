@@ -131,12 +131,11 @@ export class ControlAnimalComponent implements OnInit {
     this.vacuna.estadoVacuna = 'A';
     this.vacunaService.saveVacuna(this.vacuna).subscribe((data) => {
       alert('SUCESSFULL');
+      this.getListaVacunasByIdFichaMedica(this.isFichaMedica.idFichaMedica!)
       this.vacuna = {} as Vacuna;
       this.isFichaMedica = {} as FichaMedica;
       this.selectedVacuna = {} as TipoVacuna;
       this.visibleVacuna = false;
-      this.getListaVacunasByIdFichaMedica(this.isFichaMedica.idFichaMedica!)
-
     })
   }
 
