@@ -44,7 +44,7 @@ export class PerfilUsuarioComponent implements OnInit {
   // MODEL
   public fundacion = new Fundacion();
   public getDataFundation(idFundacion: number) {
-    this.fundacionService.getAllFundacionById(idFundacion).subscribe((data) => {
+    this.fundacionService.getFundacionById(idFundacion).subscribe((data) => {
       this.fundacion = data;
     })
   }
