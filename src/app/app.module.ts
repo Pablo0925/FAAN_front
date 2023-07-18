@@ -40,7 +40,7 @@ import { RegisterRazaAnimalComponent } from './Modules/Administrador/animal/regi
     FormsModule,
     CommonModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(), 
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
