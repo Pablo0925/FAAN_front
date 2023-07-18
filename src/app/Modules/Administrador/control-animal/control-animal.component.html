@@ -1,5 +1,5 @@
 <p-card header="" class="m-2">
-    <h1 class="title">Control del Animal</h1>
+    <h1 class="title">Control del Animal {{isIdAnimal}} </h1>
     <div class="d-flex align-items-center">
         <span class="p-input-icon-left" style="flex: 70%;">
             <i class="pi pi-search"></i>
@@ -20,7 +20,7 @@
             Vacuna</button>
     </div>
     <div class="card">
-        <p-table [value]="ListAnimales">
+        <p-table [value]="vacunasAnimales">
             <ng-template pTemplate="header">
                 <tr>
                     <th>N</th>
@@ -33,9 +33,10 @@
             <ng-template pTemplate="body" let-columns="columns" let-data>
                 <tr>
                     <td>{{ data.temaUnidadSilabo }}</td>
-                    <td>{{ data.elementosCompetenciaSilabo }}</td>
-                    <td>{{ data.activadesResultadoAprendizaje }}</td>
-                    <td>{{ data.formaEvidenciar }}</td>
+                    <td>{{ data.fechaVacuna }}</td>
+                    <td>{{ data.nombreVacuna }}</td>
+                    <td>{{ data.observaciones }}</td>
+                    <td>{{ data.estadoVacuna }}</td>
                 </tr>
             </ng-template>
         </p-table>
@@ -72,10 +73,10 @@
     <form (ngSubmit)="saveVacuna()" ngNativeValidate style="padding: 15px;">
         <div class="grid p-fluid m-2">
             <div class="col-12 md:col-12 mt-1 justify-content-center">
-              <p-dropdown appendTo="body" [options]="listTipoVacuna" [(ngModel)]="selectedVacuna"
+              <p-dropdown appendTo="body" [options]="listTipoVacuna" (onChange)="beta()" [(ngModel)]="selectedVacuna"
                 placeholder="Seleccione una vacuna" optionLabel="nombreVacuna"></p-dropdown>
             </div>
-          </div>
+        </div>
         <div class="grid p-fluid m-2">
             <div class="col-12 md:col-12 mt-1">
                 <div class="p-inputgroup">
@@ -120,6 +121,10 @@
                     <img src="../../../../assets/img/dog_eyes.jpg" alt="">
                 </div>
                 <p> {{mascotas.nombreAnimal}} </p>
+                <p> {{mascotas.placaAnimal}} </p>
+                <div class="text-center">
+                    <button type="btn" (click)="selectAnimal(mascotas.idAnimal,mascotas.fichaMedica)" class="btn btn-primarys">Seleccionar</button>
+                </div>
             </div>
         </div>
         <div class="m-5" style="text-align: center; align-items: center;">

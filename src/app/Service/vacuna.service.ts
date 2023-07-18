@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 import { environment } from '../environment/enviroment';
 import { Vacuna } from '../Models/vacuna';
 import { StorageService } from './storage.service';
+import { VacunasAnimales } from '../Payloads/payloadVacunasAnimal';
 
 
 @Injectable({
@@ -31,7 +32,12 @@ export class VacunaService {
   }
 
   public saveVacuna(vacuna: Vacuna):Observable<Vacuna>{
-    return this.http.post<Vacuna>(environment.apiuriPublic+'/vacuna/save', vacuna);
+    return this.http.post<Vacuna>(environment.apiuri+'/vacuna/save', vacuna);
+  }
+
+  // PAYLOADAS
+  public getListaVacunasByIdFichaMedica(idFichaMedica:number):Observable<VacunasAnimales[]>{
+    return this.http.get<VacunasAnimales[]>(environment.apiuri+'/vacuna/fichamedica/' + idFichaMedica);
   }
 
 }
