@@ -103,7 +103,7 @@ export class ControlAnimalComponent implements OnInit {
 
   // GET VACUNAS
   listTipoVacuna: TipoVacuna[] = [];
-  selectedVacuna: TipoVacuna = new TipoVacuna();
+  selectedVacuna = new TipoVacuna();
 
   getAllTiposVacunas() {
     this.tipoVacunaService.getListaTipoVacuna().subscribe((data) => {
@@ -135,6 +135,8 @@ export class ControlAnimalComponent implements OnInit {
       this.isFichaMedica = {} as FichaMedica;
       this.selectedVacuna = {} as TipoVacuna;
       this.visibleVacuna = false;
+      this.getListaVacunasByIdFichaMedica(this.isFichaMedica.idFichaMedica!)
+
     })
   }
 
