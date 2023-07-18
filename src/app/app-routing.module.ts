@@ -7,12 +7,16 @@ import { MascotasComponent } from './Modules/Administrador/mascotas/mascotas.com
 import { RegistroMascotasComponent } from './Modules/Administrador/registro-mascotas/registro-mascotas.component';
 import { FundacionComponent } from './Modules/SuperAdministrador/fundacion/fundacion.component';
 import { PerfilUsuarioComponent } from './Modules/SuperAdministrador/perfil-usuario/perfil-usuario.component';
+import { RegisterTipoAnimalComponent } from './Modules/Administrador/animal/register-tipo-animal/register-tipo-animal.component';
 
 const routes: Routes = [
 
   // MASCOTAS
   { path: 'registro-mascota', component: RegistroMascotasComponent},
   { path: 'mascotas', component: MascotasComponent},
+
+  //REGISTRO DE TIPO DE ANIMAL-----------------------------------------------------
+  {path:'animal', component: RegisterTipoAnimalComponent  },
 
   // SHARED
   { path: 'dashboard', component: DashboardComponent },
