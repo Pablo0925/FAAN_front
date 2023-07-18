@@ -12,11 +12,21 @@ export class FundacionService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
-  public getAllFundacionById(idFundacion:number): Observable<Fundacion> {
-    return this.http.get<Fundacion>(environment.apiuri + '/fundacion/findOne/' + idFundacion);
+  public getListaFundacion():Observable<Fundacion[]>{
+    return this.http.get<Fundacion[]>(environment.apiuri+'/fundacion/list', { headers: this.storageService.returnToken()});
+  }
+
+
+  public getFundacionById(idFundacion:number): Observable<Fundacion> {
+    return this.http.get<Fundacion>(environment.apiuri + '/fundacion/findOne/' + idFundacion, { headers: this.storageService.returnToken()});
   }
 
   public updateFundacionById(idFundacion:number, fundacion:Fundacion): Observable<Fundacion>{
-    return this.http.put<Fundacion>(environment.apiuri + '/fundacion/update/' + idFundacion, fundacion);
+    return this.http.put<Fundacion>(environment.apiuri + '/fundacion/update/' + idFundacion, fundacion, { headers: this.storageService.returnToken()});
   }
+
+  public saveFundacion(fundacion: Fundacion):Observable<Fundacion>{
+    return this.http.post<Fundacion>(environment.apiuriPublic+'/fundacion/save', fundacion, { headers: this.storageService.returnToken()});
+  }
+
 }
