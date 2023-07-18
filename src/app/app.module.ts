@@ -10,25 +10,25 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MascotasComponent } from './Modules/Administrador/mascotas/mascotas.component';
 import { RegistroMascotasComponent } from './Modules/Administrador/registro-mascotas/registro-mascotas.component';
 import { FundacionComponent } from './Modules/SuperAdministrador/fundacion/fundacion.component';
 import { PerfilUsuarioComponent } from './Modules/SuperAdministrador/perfil-usuario/perfil-usuario.component';
 import { ToastrModule } from 'ngx-toastr';
 import { RegisterTipoAnimalComponent } from './Modules/Administrador/animal/register-tipo-animal/register-tipo-animal.component';
 import { RegisterRazaAnimalComponent } from './Modules/Administrador/animal/register-raza-animal/register-raza-animal.component';
+import { ControlAnimalComponent } from './Modules/Administrador/control-animal/control-animal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    MascotasComponent,
     RegistroMascotasComponent,
     FundacionComponent,
     PerfilUsuarioComponent,
     RegisterTipoAnimalComponent,
-    RegisterRazaAnimalComponent
+    RegisterRazaAnimalComponent,
+    ControlAnimalComponent
   ],
   imports: [
     BrowserModule,
