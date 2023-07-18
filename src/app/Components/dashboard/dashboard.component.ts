@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private _CargarScript: CargarScrpitsService,
-    private payloadService:PayloadService
+    private payloadService: PayloadService
   ) {
     _CargarScript.Cargar(["dashboard"]);
   }
@@ -23,108 +23,114 @@ export class DashboardComponent implements OnInit {
     this.getDatas();
   }
 
-  data: any;
-  options: any;
+
 
   payloadNAdopcionRaza: PeyloadNumeroAdopcionRaza[] = [];
   payloadNAdopcionYears: PeyloadNumeroAdopcionFecha[] = [];
 
   // DATAS
-  getDatas(){
-    this.payloadService.getAllPeyloadNumeroAdopcionRaza().subscribe((data)=>{
+  getDatas() {
+    this.payloadService.getAllPeyloadNumeroAdopcionRaza().subscribe((data) => {
       this.payloadNAdopcionRaza = data;
-      const razas = this.payloadNAdopcionRaza.map(animales => animales.nombreRaza); 
+      const razas = this.payloadNAdopcionRaza.map(animales => animales.nombreRaza);
       const adopciones = this.payloadNAdopcionRaza.map(animales => animales.numeroAdopcion);
       this.graficoPastel(razas, adopciones);
     })
-    this.payloadService.getAllPeyloadNumeroAdopcionFecha().subscribe((data)=>{
+    this.payloadService.getAllPeyloadNumeroAdopcionFecha().subscribe((data) => {
       this.payloadNAdopcionYears = data;
       console.log(this.payloadNAdopcionYears)
-      const years = this.payloadNAdopcionYears.map(animales => animales.fechaAdopcion); 
+      const years = this.payloadNAdopcionYears.map(animales => animales.fechaAdopcion);
       const adopciones = this.payloadNAdopcionYears.map(animales => animales.numeroAdopcionFecha);
-      this.graficoLine(years, adopciones);
+      this.graficoBarras(years, adopciones);
+
     })
   }
 
   // GRAPHICS
-
-  public chartPastel: any;
-  public chartLiner: any;
+  data: any;
+  options: any;
 
   graficoPastel(nombresRazas: any, adopcionesPorRaza: any) {
-    if (this.chartPastel) {
-      this.chartPastel.destroy();
-    }
-    this.chartPastel = new Chart("myChartPastel", {
-      type: 'pie',
-      data: {
-        labels: nombresRazas,
-        datasets: [{
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+
+    this.data = {
+      labels: nombresRazas,
+      datasets: [
+        {
+          label: 'Adopciones',
           data: adopcionesPorRaza,
-          backgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56',
-            '#4BC0C0',
-            '#9966FF',
-            '#FF9F40'
-          ]
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: true,
-            labels: {
-              color: 'rgb(255, 99, 132)'
-            },
-            position: 'bottom'
+          backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
+          hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
+        }
+      ]
+    };
+
+    this.options = {
+      plugins: {
+        legend: {
+          labels: {
+            usePointStyle: true,
+            color: textColor
           }
         }
       }
-    });
+    };
   }
 
-  public graficoLine(years: any, adopcionesPorAño: any) {
-    if (this.chartLiner) {
-      this.chartLiner.destroy();
-    }
-    this.chartLiner = new Chart("myChartLine", {
-      type: 'line',
-      data: {
-        labels: years, 
-        datasets: [{
-          label: '# de Adopciones',
+
+  basicData: any;
+  basicOptions: any;
+
+  graficoBarras(years: any, adopcionesPorAño: any) {
+    const documentStyle = getComputedStyle(document.documentElement);
+    // const textColor = documentStyle.getPropertyValue('--text-color');
+    // const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
+    this.basicData = {
+      labels: years,
+      datasets: [
+        {
+          label: 'Adopciones',
           data: adopcionesPorAño,
-          backgroundColor: '#36A2EB',
-          borderColor: '#36A2EB',
-          fill: false,
+          backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+          borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
           borderWidth: 1
-        }]
+        }
+      ]
+    };
+
+    this.basicOptions = {
+      plugins: {
+        legend: {
+          labels: {
+            color: '#52a4b7'
+          }
+        }
       },
-      options: {
-        responsive: true,
-        scales: {
-          x: {
-            type: 'category', 
-            ticks: {
-              autoSkip: true,
-              maxTicksLimit: 10
-            }
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: '#52a4b7'
           },
-          y: {
-            beginAtZero: true
+          grid: {
+            color: surfaceBorder,
+            drawBorder: false
           }
         },
-        plugins: {
-          legend: {
-            display: true,
-            position: 'bottom'
+        x: {
+          ticks: {
+            color: '#52a4b7'
+          },
+          grid: {
+            color: surfaceBorder,
+            drawBorder: false
           }
         }
       }
-    });
+    };
   }
 
 }
