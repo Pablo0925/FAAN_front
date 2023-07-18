@@ -12,11 +12,11 @@ export class RegisterTipoAnimalComponent implements OnInit {
 
     public tipoAnimalDialog: boolean = false;
 
-    public tipoAnimal!: TipoAnimal;
+    public tipoAnimal = new TipoAnimal();
 
     public submitted: boolean = false;
 
-    public ListTipoAnimal!: TipoAnimal[];
+    public ListTipoAnimal: TipoAnimal[] = [];
 
     constructor(private tipoAnimalService: TipoAnimalService) {
 
@@ -68,7 +68,7 @@ export class RegisterTipoAnimalComponent implements OnInit {
     }
 
     public updateTipoAnimal(tipoAnimal: TipoAnimal): void {
-        this.tipoAnimalService.updateTipoAnimal(tipoAnimal.idTipoAnimal, tipoAnimal).subscribe((data) => {
+        this.tipoAnimalService.updateTipoAnimal(tipoAnimal.idTipoAnimal!, tipoAnimal).subscribe((data) => {
             if (data != null) {
 
                 try {
@@ -90,7 +90,7 @@ export class RegisterTipoAnimalComponent implements OnInit {
         tipoAnimal.estadoTipo = tipoAnimal.estadoTipo === 'A' ? 'I' : 'A';
         this.tipoAnimalService
             .updateTipoAnimal(
-                tipoAnimal.idTipoAnimal, tipoAnimal
+                tipoAnimal.idTipoAnimal!, tipoAnimal
             )
             .subscribe((data) => {
                 if (data != null) {
@@ -119,3 +119,6 @@ export class RegisterTipoAnimalComponent implements OnInit {
     }
 
 }
+
+// para vaciar una interface
+//    this.tipoAnimal = {} as TipoAnimal;
