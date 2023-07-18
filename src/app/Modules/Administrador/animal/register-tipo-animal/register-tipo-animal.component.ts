@@ -28,7 +28,7 @@ export class RegisterTipoAnimalComponent implements OnInit {
 
     public findPageableTipoAnimal() {
         try {
-            this.tipoAnimalService.findByAllTipoAnimal(0, 5, []).subscribe((data: any) => {
+            this.tipoAnimalService.findByAllTipoAnimal(0, 3, []).subscribe((data: any) => {
                 if (data !== null) {
                     console.log(data)
                     this.ListTipoAnimal = data.content;
@@ -44,13 +44,10 @@ export class RegisterTipoAnimalComponent implements OnInit {
         this.submitted = true;
         if (this.tipoAnimal.nombreTipo?.trim() && this.tipoAnimal.descripcionAnimal?.trim()) {
             if (this.tipoAnimal.idTipoAnimal) {
-
                 this.updateTipoAnimal(this.tipoAnimal);
-
             } else {
                 this.createTipoAnimal(this.tipoAnimal);
             }
-
             this.tipoAnimalDialog = false;
             this.tipoAnimal = {} as TipoAnimal;
         }

@@ -1,0 +1,34 @@
+<p-card header="" class="m-2">
+    <h1 class="title">Control del Animal</h1>
+    <div class="d-flex align-items-center">
+        <span class="p-input-icon-left" style="flex: 70%;">
+            <i class="pi pi-search"></i>
+            <input placeholder="Buscar Mascota" type="text" id="isTextDigit" name="isTextDigit"
+                [(ngModel)]="isTextDigit" pInputText style="width: 100%;" />
+        </span>
+        <button type="button" (click)="showModalAnimales()" class="btn btn-primarys m-2" style="flex: 30%;">Seleccionar Animal</button>
+    </div>
+</p-card>
+
+<!-- MODAL ANIMALES -->
+<p-dialog header="Datos Fundación" [(visible)]="visible" [modal]="true" [style]="{ width: '80vw' }" [draggable]="false" [resizable]="false">
+
+    <p-card header="" class="m-5 text-center align-items-center">
+        <div class="container">
+            <div class="card" *ngFor="let mascotas of ListAnimales">
+              <div class="img-wrapper">
+                 <img src="../../../../assets/img/dog_eyes.jpg" alt="">
+              </div>
+              <p> {{mascotas.nombreAnimal}} </p>
+            </div>
+        </div>
+        <div class="m-5" style="text-align: center; align-items: center;">
+            <button *ngIf="isPage !== 0" type="button" (click)="anteriorPage()" class="btn p-button-rounded"
+                ><i class="pi pi-arrow-circle-left"></i></button>
+            <button *ngIf="isPage !== pageTotal" type="button" (click)="siguientePage()" class="btn p-button-rounded "
+                style="margin-left: 50px;"> <i
+                    class="pi pi-arrow-circle-right"></i></button>
+        </div>
+    </p-card>
+
+</p-dialog>
