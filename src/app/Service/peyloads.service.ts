@@ -4,13 +4,14 @@ import { StorageService } from './storage.service';
 import { Fundacion } from '../Models/fundacion';
 import { Observable } from 'rxjs';
 import { environment } from '../environment/enviroment';
-import { PeyloadNumeroAdopcionRaza } from '../Models/peyloadNumeroAdopcionRaza';
-import { PeyloadNumeroAdopcionFecha } from '../Models/peyloadNumeroAdopcionFecha';
+import { PeyloadNumeroAdopcionRaza } from '../Payloads/peyloadNumeroAdopcionRaza';
+import { PeyloadNumeroAdopcionFecha } from '../Payloads/peyloadNumeroAdopcionFecha';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class FundacionService {
+export class PayloadService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
@@ -19,7 +20,7 @@ export class FundacionService {
   }
 
   public getAllPeyloadNumeroAdopcionFecha(): Observable<PeyloadNumeroAdopcionFecha[]>{
-    return this.http.get<PeyloadNumeroAdopcionFecha[]>(environment.apiuri + `/animal/lista/PeyloadNumeroAdopcionRaza`);
+    return this.http.get<PeyloadNumeroAdopcionFecha[]>(environment.apiuri + `/animal/lista/PeyloadNumeroAdopcionFecha`);
   }
 
 }

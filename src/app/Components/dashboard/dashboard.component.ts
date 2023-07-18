@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { PeyloadNumeroAdopcionFecha } from 'src/app/Payloads/peyloadNumeroAdopcionFecha';
+import { PeyloadNumeroAdopcionRaza } from 'src/app/Payloads/peyloadNumeroAdopcionRaza';
 import { CargarScrpitsService } from 'src/app/Service/cargar-scrpits.service';
+import { PayloadService } from 'src/app/Service/peyloads.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,44 +14,39 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private _CargarScript: CargarScrpitsService,
+    private payloadService:PayloadService
   ) {
     _CargarScript.Cargar(["dashboard"]);
   }
 
   ngOnInit(): void {
-    this.graficoOne();
+    this.getDatas();
   }
 
   data: any;
   options: any;
 
-  // GRAPHIC ONE
-  public graficoOne(): void {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
+  payloadNAdopcionRaza: PeyloadNumeroAdopcionRaza[] = [];
+  payloadNAdopcionYears: PeyloadNumeroAdopcionFecha[] = [];
 
-    this.data = {
-      labels: ['A', 'B', 'C'],
-      datasets: [
-        {
-          data: [540, 325, 702],
-          backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-          hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
-        }
-      ]
-    };
-
-    this.options = {
-      plugins: {
-        legend: {
-          labels: {
-            usePointStyle: true,
-            color: textColor
-          }
-        }
-      }
-    };
+  // DATAS
+  getDatas(){
+    this.payloadService.getAllPeyloadNumeroAdopcionRaza().subscribe((data)=>{
+      this.payloadNAdopcionRaza = data;
+      const razas = this.payloadNAdopcionRaza.map(animales => animales.nombreRaza); 
+      const adopciones = this.payloadNAdopcionRaza.map(animales => animales.numeroAdopcion);
+      this.graficoPastel(razas, adopciones);
+    })
+    this.payloadService.getAllPeyloadNumeroAdopcionFecha().subscribe((data)=>{
+      this.payloadNAdopcionYears = data;
+      console.log(this.payloadNAdopcionYears)
+      const years = this.payloadNAdopcionYears.map(animales => animales.fechaAdopcion); 
+      const adopciones = this.payloadNAdopcionYears.map(animales => animales.numeroAdopcionFecha);
+      this.graficoLine(years, adopciones);
+    })
   }
+
+  // GRAPHICS
 
   public chartPastel: any;
   public chartLiner: any;
