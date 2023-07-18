@@ -13,7 +13,7 @@ export class AnimalService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
-  public getAllAnimales(page:number,size:number,sort:string): Observable<Animal[]> {
+  public getAllAnimalesPages(page:number,size:number,sort:string[]): Observable<Animal[]> {
     return this.http.get<Animal[]>(environment.apiuri + '/animal/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
   }
 

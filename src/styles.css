@@ -40,8 +40,9 @@ body {
 	font-weight: bold;
 }
 
-p{
+p {
 	text-align: justify;
+	text-align: center;
 }
 
 /*AVATAR*/
@@ -59,7 +60,7 @@ p{
 	color: white;
 	height: 50px;
 	margin-top: 5px;
-	
+
 }
 
 .btn-primarys:hover {
