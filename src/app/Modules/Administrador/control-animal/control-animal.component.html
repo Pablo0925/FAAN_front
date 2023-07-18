@@ -109,21 +109,23 @@
 
     <p-card header="" class="m-5 text-center align-items-center">
         <div class="container">
-            <div class="card" *ngFor="let mascotas of ListAnimales">
-                <div class="img-wrapper">
-                    <img src="../../../../assets/img/dog_eyes.jpg" alt="">
-                </div>
-                <p> {{mascotas.nombreAnimal}} </p>
-                <p> {{mascotas.placaAnimal}} </p>
-                <div class="text-center">
+            <div class="cardA-container">
+                <div class="cardA" *ngFor="let mascotas of ListAnimales">
+                  <div class="img-wrapper">
+                    <img src="../../../../assets/img/dog_eyes.jpg" alt="Imagen de mascota">
+                  </div>
+                  <p class="nombre">{{mascotas.nombreAnimal}}</p>
+                  <p class="placa"><span style="font-weight: bold;">Placa:</span> {{mascotas.placaAnimal}}</p>
+                  <div class="text-center">
                     <button type="btn" (click)="selectAnimal(mascotas.idAnimal,mascotas.fichaMedica)" class="btn btn-primarys">Seleccionar</button>
+                  </div>
                 </div>
-            </div>
+              </div>              
         </div>
         <div class="m-5" style="text-align: center; align-items: center;">
-            <button *ngIf="isPage !== 0" type="button" (click)="anteriorPage()" class="btn p-button-rounded"><i
+            <button *ngIf="isPage !== 0" type="button" (click)="anteriorPage()" class="btn btn-primarys p-button-rounded"><i
                     class="pi pi-arrow-circle-left"></i></button>
-            <button *ngIf="isPage !== pageTotal" type="button" (click)="siguientePage()" class="btn p-button-rounded "
+            <button *ngIf="isPage !== pageTotal" type="button" (click)="siguientePage()" class="btn btn-primarys p-button-rounded "
                 style="margin-left: 50px;"> <i class="pi pi-arrow-circle-right"></i></button>
         </div>
     </p-card>
