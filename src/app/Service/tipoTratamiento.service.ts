@@ -13,21 +13,25 @@ export class TipoTratamientoService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
-
-  public getListaidTipoTratamiento():Observable<TipoTratamiento[]>{
-    return this.http.get<TipoTratamiento[]>(environment.apiuri+'/tipoTratamiento/list', { headers: this.storageService.returnToken()});
+  public getAllTipoTratamiento(page:number,size:number,sort:string): Observable<TipoTratamiento[]> {
+    return this.http.get<TipoTratamiento[]>(environment.apiuri + '/tipoTratamiento/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
   }
 
-  public getidTipoTratamientoById(idTipoTratamiento: number):Observable<TipoTratamiento>{
-    return this.http.get<TipoTratamiento>(environment.apiuri+'/tipoTratamiento/findOne/'+idTipoTratamiento, { headers: this.storageService.returnToken()});
+
+  public getListaTipoTratamiento():Observable<TipoTratamiento[]>{
+    return this.http.get<TipoTratamiento[]>(environment.apiuri+'/tipoTratamiento/list');
   }
 
-  public updateidTipoTratamiento(idTipoTratamiento:number, tipoTratamiento: TipoTratamiento):Observable<TipoTratamiento>{
-    return this.http.put<TipoTratamiento>(environment.apiuri+'/tipoTratamiento/update/'+idTipoTratamiento, tipoTratamiento, { headers: this.storageService.returnToken()});
+  public getTipoTratamientoById(idTipoTratamiento: number):Observable<TipoTratamiento>{
+    return this.http.get<TipoTratamiento>(environment.apiuri+'/tipoTratamiento/findOne/'+idTipoTratamiento);
   }
 
-  public saveidTipoTratamiento(tipoTratamiento: TipoTratamiento):Observable<TipoTratamiento>{
-    return this.http.post<TipoTratamiento>(environment.apiuriPublic+'/tipoTratamiento/save', tipoTratamiento, { headers: this.storageService.returnToken()});
+  public updateTipoTratamiento(idTipoTratamiento:number, tipoTratamiento: TipoTratamiento):Observable<TipoTratamiento>{
+    return this.http.put<TipoTratamiento>(environment.apiuri+'/tipoTratamiento/update/'+idTipoTratamiento, tipoTratamiento);
+  }
+
+  public saveTipoTratamiento(tipoTratamiento: TipoTratamiento):Observable<TipoTratamiento>{
+    return this.http.post<TipoTratamiento>(environment.apiuriPublic+'/tipoTratamiento/save', tipoTratamiento);
   }
 
 }

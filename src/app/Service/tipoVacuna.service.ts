@@ -13,21 +13,25 @@ export class TipoVacunaService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
+  public getAllTipoVacuna(page:number,size:number,sort:string): Observable<TipoVacuna[]> {
+    return this.http.get<TipoVacuna[]>(environment.apiuri + '/tipoVacuna/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
+  }
+
 
   public getListaTipoVacuna():Observable<TipoVacuna[]>{
-    return this.http.get<TipoVacuna[]>(environment.apiuri+'/tipoVacuna/list', { headers: this.storageService.returnToken()});
+    return this.http.get<TipoVacuna[]>(environment.apiuri+'/tipoVacuna/list');
   }
 
   public getTipoVacunaById(idTipoVacuna: number):Observable<TipoVacuna>{
-    return this.http.get<TipoVacuna>(environment.apiuri+'/tipoVacuna/findOne/'+idTipoVacuna, { headers: this.storageService.returnToken()});
+    return this.http.get<TipoVacuna>(environment.apiuri+'/tipoVacuna/findOne/'+idTipoVacuna);
   }
 
   public updateTipoVacuna(idTipoVacuna:number, tipoVacuna: TipoVacuna):Observable<TipoVacuna>{
-    return this.http.put<TipoVacuna>(environment.apiuri+'/tipoVacuna/update/'+idTipoVacuna, tipoVacuna, { headers: this.storageService.returnToken()});
+    return this.http.put<TipoVacuna>(environment.apiuri+'/tipoVacuna/update/'+idTipoVacuna, tipoVacuna);
   }
 
   public saveTipoVacuna(tipoVacuna: TipoVacuna):Observable<TipoVacuna>{
-    return this.http.post<TipoVacuna>(environment.apiuriPublic+'/tipoVacuna/save', tipoVacuna, { headers: this.storageService.returnToken()});
+    return this.http.post<TipoVacuna>(environment.apiuriPublic+'/tipoVacuna/save', tipoVacuna);
   }
 
 }

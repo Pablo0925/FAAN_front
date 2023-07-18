@@ -28,7 +28,7 @@ export class StorageService {
     return localStorage.getItem(USER_KEY);
   }
 
- public returnToken(): HttpHeaders{
+ /*public returnToken(): HttpHeaders{
   let auth_token = localStorage.getItem("token");
   const headers = new HttpHeaders({
      'Content-Type': 'application/json',
@@ -36,6 +36,6 @@ export class StorageService {
      });
 
    return  headers;
-   }
+   }*/
 
 }

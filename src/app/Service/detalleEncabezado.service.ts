@@ -14,21 +14,25 @@ export class DetalleEncabezadoService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
+  public getAllDetalleAdopcion(page:number,size:number,sort:string): Observable<DetalleAdopcion[]> {
+    return this.http.get<DetalleAdopcion[]>(environment.apiuri + '/detalleadopcion/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
+  }
 
-  public getListaDetalleAdopcion ():Observable<DetalleAdopcion []>{
-    return this.http.get<DetalleAdopcion []>(environment.apiuri+'/detalleadopcion/list', { headers: this.storageService.returnToken()});
+
+  public getListaDetalleAdopcion():Observable<DetalleAdopcion []>{
+    return this.http.get<DetalleAdopcion []>(environment.apiuri+'/detalleadopcion/list');
   }
 
   public getDetalleAdopcionById(idAdopcion: number):Observable<DetalleAdopcion >{
-    return this.http.get<DetalleAdopcion >(environment.apiuri+'/detalleadopcion/findOne/'+idAdopcion, { headers: this.storageService.returnToken()});
+    return this.http.get<DetalleAdopcion >(environment.apiuri+'/detalleadopcion/findOne/'+idAdopcion);
   }
 
   public updateDetalleAdopcion (idAdopcion:number, DetalleAdopcion : DetalleAdopcion ):Observable<DetalleAdopcion >{
-    return this.http.put<DetalleAdopcion >(environment.apiuri+'/detalleadopcion/update/'+idAdopcion, DetalleAdopcion , { headers: this.storageService.returnToken()});
+    return this.http.put<DetalleAdopcion >(environment.apiuri+'/detalleadopcion/update/'+idAdopcion, DetalleAdopcion );
   }
 
   public saveDetalleAdopcion (detalleAdopcion : DetalleAdopcion ):Observable<DetalleAdopcion >{
-    return this.http.post<DetalleAdopcion >(environment.apiuriPublic+'/detalleadopcion/save', detalleAdopcion, { headers: this.storageService.returnToken()});
+    return this.http.post<DetalleAdopcion >(environment.apiuriPublic+'/detalleadopcion/save', detalleAdopcion);
   }
 
 }

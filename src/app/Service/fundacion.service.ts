@@ -12,21 +12,26 @@ export class FundacionService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
+
+  public getAllFundacion(page:number,size:number,sort:string): Observable<Fundacion[]> {
+    return this.http.get<Fundacion[]>(environment.apiuri + '/fundacion/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
+  }
+  
   public getListaFundacion():Observable<Fundacion[]>{
-    return this.http.get<Fundacion[]>(environment.apiuri+'/fundacion/list', { headers: this.storageService.returnToken()});
+    return this.http.get<Fundacion[]>(environment.apiuri+'/fundacion/list');
   }
 
 
   public getFundacionById(idFundacion:number): Observable<Fundacion> {
-    return this.http.get<Fundacion>(environment.apiuri + '/fundacion/findOne/' + idFundacion, { headers: this.storageService.returnToken()});
+    return this.http.get<Fundacion>(environment.apiuri + '/fundacion/findOne/' + idFundacion);
   }
 
   public updateFundacionById(idFundacion:number, fundacion:Fundacion): Observable<Fundacion>{
-    return this.http.put<Fundacion>(environment.apiuri + '/fundacion/update/' + idFundacion, fundacion, { headers: this.storageService.returnToken()});
+    return this.http.put<Fundacion>(environment.apiuri + '/fundacion/update/' + idFundacion, fundacion);
   }
 
   public saveFundacion(fundacion: Fundacion):Observable<Fundacion>{
-    return this.http.post<Fundacion>(environment.apiuriPublic+'/fundacion/save', fundacion, { headers: this.storageService.returnToken()});
+    return this.http.post<Fundacion>(environment.apiuriPublic+'/fundacion/save', fundacion);
   }
 
 }

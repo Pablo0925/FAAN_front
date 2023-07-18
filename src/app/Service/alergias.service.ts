@@ -13,21 +13,25 @@ export class AlergiasService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
+  public getAllAlergias(page:number,size:number,sort:string): Observable<Alergias[]> {
+    return this.http.get<Alergias[]>(environment.apiuri + '/alergias/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
+  }
+
 
   public getListaAlergias():Observable<Alergias[]>{
-    return this.http.get<Alergias[]>(environment.apiuri+'/alergias/list', { headers: this.storageService.returnToken()});
+    return this.http.get<Alergias[]>(environment.apiuri+'/alergias/list');
   }
 
   public getAlergiasById(idAlergias: number):Observable<Alergias>{
-    return this.http.get<Alergias>(environment.apiuri+'/alergias/findOne/'+idAlergias, { headers: this.storageService.returnToken()});
+    return this.http.get<Alergias>(environment.apiuri+'/alergias/findOne/'+idAlergias);
   }
 
   public updateAlergias(idAlergias:number, Alergias: Alergias):Observable<Alergias>{
-    return this.http.put<Alergias>(environment.apiuri+'/alergias/update/'+idAlergias, Alergias, { headers: this.storageService.returnToken()});
+    return this.http.put<Alergias>(environment.apiuri+'/alergias/update/'+idAlergias, Alergias);
   }
 
   public saveAlergias(alergias: Alergias):Observable<Alergias>{
-    return this.http.post<Alergias>(environment.apiuriPublic+'/alergias/save', alergias, { headers: this.storageService.returnToken()});
+    return this.http.post<Alergias>(environment.apiuriPublic+'/alergias/save', alergias);
   }
 
 }

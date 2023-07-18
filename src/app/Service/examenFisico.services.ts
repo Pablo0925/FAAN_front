@@ -13,21 +13,24 @@ export class ExamenFisicoService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
+  public getAllExamenFisico(page:number,size:number,sort:string): Observable<ExamenFisico[]> {
+    return this.http.get<ExamenFisico[]>(environment.apiuri + '/examenFisico/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
+  }
 
   public getListaExamenFisico():Observable<ExamenFisico[]>{
-    return this.http.get<ExamenFisico[]>(environment.apiuri+'/examenFisico/list', { headers: this.storageService.returnToken()});
+    return this.http.get<ExamenFisico[]>(environment.apiuri+'/examenFisico/list');
   }
 
   public getExamenFisicoById(idExamenFisico: number):Observable<ExamenFisico>{
-    return this.http.get<ExamenFisico>(environment.apiuri+'/examenFisico/findOne/'+idExamenFisico, { headers: this.storageService.returnToken()});
+    return this.http.get<ExamenFisico>(environment.apiuri+'/examenFisico/findOne/'+idExamenFisico);
   }
 
   public updateExamenFisico(idExamenFisico:number, ExamenFisico: ExamenFisico):Observable<ExamenFisico>{
-    return this.http.put<ExamenFisico>(environment.apiuri+'/examenFisico/update/'+idExamenFisico, ExamenFisico, { headers: this.storageService.returnToken()});
+    return this.http.put<ExamenFisico>(environment.apiuri+'/examenFisico/update/'+idExamenFisico, ExamenFisico);
   }
 
   public saveExamenFisico(examenFisico: ExamenFisico):Observable<ExamenFisico>{
-    return this.http.post<ExamenFisico>(environment.apiuriPublic+'/examenFisico/save', examenFisico, { headers: this.storageService.returnToken()});
+    return this.http.post<ExamenFisico>(environment.apiuriPublic+'/examenFisico/save', examenFisico);
   }
 
 }

@@ -13,21 +13,25 @@ export class TipoEnfermedadService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
+  public getAllTipoEnfermedad(page:number,size:number,sort:string): Observable<TipoEnfermedad[]> {
+    return this.http.get<TipoEnfermedad[]>(environment.apiuri + '/tipoenfermedad/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
+  }
+
 
   public getListaTipoEnfermedad():Observable<TipoEnfermedad[]>{
-    return this.http.get<TipoEnfermedad[]>(environment.apiuri+'/tipoenfermedad/list', { headers: this.storageService.returnToken()});
+    return this.http.get<TipoEnfermedad[]>(environment.apiuri+'/tipoenfermedad/list');
   }
 
   public getTipoEnfermedadById(idTipoEnfermedad: number):Observable<TipoEnfermedad>{
-    return this.http.get<TipoEnfermedad>(environment.apiuri+'/tipoenfermedad/findOne/'+idTipoEnfermedad, { headers: this.storageService.returnToken()});
+    return this.http.get<TipoEnfermedad>(environment.apiuri+'/tipoenfermedad/findOne/'+idTipoEnfermedad);
   }
 
   public updateTipoEnfermedad(idTipoEnfermedad:number, tipoenfermedad: TipoEnfermedad):Observable<TipoEnfermedad>{
-    return this.http.put<TipoEnfermedad>(environment.apiuri+'/tipoenfermedad/update/'+idTipoEnfermedad, tipoenfermedad, { headers: this.storageService.returnToken()});
+    return this.http.put<TipoEnfermedad>(environment.apiuri+'/tipoenfermedad/update/'+idTipoEnfermedad, tipoenfermedad);
   }
 
   public saveTipoEnfermedad(tipoenfermedad: TipoEnfermedad):Observable<TipoEnfermedad>{
-    return this.http.post<TipoEnfermedad>(environment.apiuriPublic+'/tipoenfermedad/save', tipoenfermedad, { headers: this.storageService.returnToken()});
+    return this.http.post<TipoEnfermedad>(environment.apiuriPublic+'/tipoenfermedad/save', tipoenfermedad);
   }
 
 }

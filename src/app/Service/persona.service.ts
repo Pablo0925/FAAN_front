@@ -15,19 +15,19 @@ export class PersonaService {
 
 
   public getListaPersonas():Observable<Persona[]>{
-    return this.http.get<Persona[]>(environment.apiuri+'/persona/list', { headers: this.storageService.returnToken()});
+    return this.http.get<Persona[]>(environment.apiuri+'/persona/list');
   }
 
   public getPersonaById(idPersona: number):Observable<Persona>{
-    return this.http.get<Persona>(environment.apiuri+'/persona/findOne/'+idPersona, { headers: this.storageService.returnToken()});
+    return this.http.get<Persona>(environment.apiuri+'/persona/findOne/'+idPersona);
   }
 
   public updatePersona(idPersona:number, persona: Persona):Observable<Persona>{
-    return this.http.put<Persona>(environment.apiuri+'/persona/update/'+idPersona, persona, { headers: this.storageService.returnToken()});
+    return this.http.put<Persona>(environment.apiuri+'/persona/update/'+idPersona, persona);
   }
 
   public savePersona(persona: Persona):Observable<Persona>{
-    return this.http.post<Persona>(environment.apiuriPublic+'/persona/save', persona, { headers: this.storageService.returnToken()});
+    return this.http.post<Persona>(environment.apiuriPublic+'/persona/save', persona);
   }
 
 }
