@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Animal, TipoAnimal, TipoVacuna, Vacuna } from 'src/app/Models/models';
+import { Animal, FichaMedica, TipoAnimal, TipoVacuna, Vacuna } from 'src/app/Models/models';
+import { VacunasAnimales } from 'src/app/Payloads/payloadVacunasAnimal';
 import { AnimalService } from 'src/app/Service/animal.service';
 import { TipoVacunaService } from 'src/app/Service/tipoVacuna.service';
+import { VacunaService } from 'src/app/Service/vacuna.service';
 
 @Component({
   selector: 'app-control-animal',
@@ -13,7 +15,8 @@ export class ControlAnimalComponent implements OnInit {
 
   constructor(
     private animalesService: AnimalService,
-    private tipoVacunaService: TipoVacunaService
+    private tipoVacunaService: TipoVacunaService,
+    private vacunaService: VacunaService
   ) { }
 
 
@@ -61,12 +64,16 @@ export class ControlAnimalComponent implements OnInit {
   }
 
   // VER DATOS VACUNAS
-  public verDatosVacunasByIdFichaAnimal(idFichaAnimal: number) {
+  vacunasAnimales: VacunasAnimales[] = [];
 
+  public getListaVacunasByIdFichaMedica(idFichaMedica: number) {
+    this.vacunaService.getListaVacunasByIdFichaMedica(idFichaMedica).subscribe((data)=>{
+      this.vacunasAnimales = data
+    })
   }
 
   // TEXT FOR INPUT SEARCH
-  public isTextDigit?: string
+  public isTextDigit: string = ""
 
   // MODAL
   visible: boolean = false;
@@ -77,7 +84,7 @@ export class ControlAnimalComponent implements OnInit {
   }
 
   // MODAL TIPO VACUNA
-  tipoVacuna= new TipoVacuna();
+  tipoVacuna = new TipoVacuna();
   visibleTipoVacuna: boolean = false;
 
   showModalTipoVacuna() {
@@ -85,39 +92,61 @@ export class ControlAnimalComponent implements OnInit {
     this.tipoVacuna = {} as TipoVacuna;
   }
 
-  saveTipoVacuna(){
+  saveTipoVacuna() {
     this.tipoVacuna.estado = true;
-    this.tipoVacunaService.saveTipoVacuna(this.tipoVacuna).subscribe((data)=>{
+    this.tipoVacunaService.saveTipoVacuna(this.tipoVacuna).subscribe((data) => {
       alert('SUCESSFULL');
       this.tipoVacuna = {} as TipoVacuna;
       this.visibleTipoVacuna = false;
     })
   }
 
-  // GET VACUANAS
-  listTipoVacuna:TipoVacuna[] = [];
-  getAllTiposVacunas(){
-    this.tipoVacunaService.getListaTipoVacuna().subscribe((data)=>{
+  // GET VACUNAS
+  listTipoVacuna: TipoVacuna[] = [];
+  selectedVacuna = new TipoVacuna();
+
+  getAllTiposVacunas() {
+    this.tipoVacunaService.getListaTipoVacuna().subscribe((data) => {
       this.listTipoVacuna = data;
-    })
+    });
+  }
+
+  beta() {
+    console.log(this.selectedVacuna);
   }
 
   // MODAl ADD VACUNA FOR ANIMAL
   vacuna = new Vacuna();
   visibleVacuna: boolean = false;
-  selectedVacuna: Vacuna | undefined;
+
   showModalVacuna() {
     this.getAllTiposVacunas();
     this.visibleVacuna = true;
     this.vacuna = {} as Vacuna;
   }
 
-  saveVacuna(){
-    this.tipoVacunaService.saveTipoVacuna(this.tipoVacuna).subscribe((data)=>{
+  saveVacuna() {
+    this.vacuna.tipoVacuna = this.selectedVacuna;
+    this.vacuna.fichaMedica = this.isFichaMedica;
+    this.vacuna.estadoVacuna = 'A';
+    this.vacunaService.saveVacuna(this.vacuna).subscribe((data) => {
       alert('SUCESSFULL');
+      this.getListaVacunasByIdFichaMedica(this.isFichaMedica.idFichaMedica!)
       this.vacuna = {} as Vacuna;
+      this.isFichaMedica = {} as FichaMedica;
+      this.selectedVacuna = {} as TipoVacuna;
       this.visibleVacuna = false;
     })
+  }
+
+  // SELECT ANIMAL
+  isIdAnimal!: number
+  isFichaMedica = new FichaMedica()
+  selectAnimal(idAnimal: number, fichaMedica: FichaMedica) {
+    this.isIdAnimal = idAnimal;
+    this.isFichaMedica = fichaMedica;
+    this.visible = false;
+    this.getListaVacunasByIdFichaMedica(fichaMedica.idFichaMedica!)
   }
 
 }

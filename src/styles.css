@@ -9,7 +9,7 @@
 
 :root {
 	--grey: #f7fafb;
-	--dark-grey: #8D8D8D;
+	--dark-grey: #ddf7ff;
 	--light: #fff;
 	--dark: #000;
 	--green: #81D43A;
@@ -42,7 +42,6 @@ body {
 
 p {
 	text-align: justify;
-	text-align: center;
 }
 
 /*AVATAR*/
