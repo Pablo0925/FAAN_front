@@ -54,7 +54,7 @@ export class RegisterRazaAnimalComponent implements OnInit {
   public findByAtributeName() {
     this.loading = true;
     this.submitFindAtribute = true;
-    this.razaAnimalService.getAllRazaAnimalAtribute(0, 5, ['idRazaAnimal', 'asc'], 'nombreRaza', this.valueAtribute).subscribe((data: any) => {
+    this.razaAnimalService.getAllRazaAnimalAtribute(0, 4, ['idRazaAnimal', 'asc'], 'nombreRaza', this.valueAtribute).subscribe((data: any) => {
       if(data !== null){
         this.listRazaAnimal = data.content;
         this.loading = false;
