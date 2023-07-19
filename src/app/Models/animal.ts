@@ -6,6 +6,7 @@ import { RazaAnimal } from "./razaAnimal";
 export interface Animal {
     idAnimal:      number;
     nombreAnimal:  string;
+    placaAnimal: string;
     fotoAnimal:    string;
     edadAnimal:    number;
     estadoAnimal:  string;
