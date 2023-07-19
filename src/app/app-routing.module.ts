@@ -8,6 +8,7 @@ import { FundacionComponent } from './Modules/SuperAdministrador/fundacion/funda
 import { PerfilUsuarioComponent } from './Modules/SuperAdministrador/perfil-usuario/perfil-usuario.component';
 import { RegisterTipoAnimalComponent } from './Modules/Administrador/animal/register-tipo-animal/register-tipo-animal.component';
 import { ControlAnimalComponent } from './Modules/Administrador/control-animal/control-animal.component';
+import { RegisterRazaAnimalComponent } from './Modules/Administrador/animal/register-raza-animal/register-raza-animal.component';
 
 const routes: Routes = [
 
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'control-animal', component: ControlAnimalComponent},
 
   //REGISTRO DE TIPO DE ANIMAL-----------------------------------------------------
-  {path:'animal', component: RegisterTipoAnimalComponent  },
+  {path:'animal-tipo', component: RegisterTipoAnimalComponent  },
+  {path:'animal-raza', component: RegisterRazaAnimalComponent  },
 
   // SHARED
   { path: 'dashboard', component: DashboardComponent },

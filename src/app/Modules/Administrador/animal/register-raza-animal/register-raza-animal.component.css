@@ -1,0 +1,18 @@
+.callout {
+    background-color: #fbc02d; /* Color de fondo llamativo */
+    color: #fff; /* Color del texto para resaltar */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+    animation: pulse 1s infinite alternate; /* Animación para hacerlo llamativo */
+  }
+  
+  @keyframes pulse {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.1);
+    }
+  }
+  
