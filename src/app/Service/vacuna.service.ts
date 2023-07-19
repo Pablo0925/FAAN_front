@@ -35,9 +35,4 @@ export class VacunaService {
     return this.http.post<Vacuna>(environment.apiuri+'/vacuna/save', vacuna);
   }
 
-  // PAYLOADAS
-  public getListaVacunasByIdFichaMedica(idFichaMedica:number):Observable<VacunasAnimales[]>{
-    return this.http.get<VacunasAnimales[]>(environment.apiuri+'/vacuna/fichamedica/' + idFichaMedica);
-  }
-
 }

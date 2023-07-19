@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Animal, FichaMedica, TipoAnimal, TipoVacuna, Vacuna } from 'src/app/Models/models';
+import { Animal, ExamenFisico, FichaMedica, TipoAnimal, TipoVacuna, Vacuna } from 'src/app/Models/models';
+import { AlergiaAnimales } from 'src/app/Payloads/payloadAlergiaAnimal';
+import { EnfermedadAnimales } from 'src/app/Payloads/payloadEnfermedadAnimal';
+import { ExamenFisicoAnimales } from 'src/app/Payloads/payloadExamenFisicoAnimal';
+import { TratamientoAnimales } from 'src/app/Payloads/payloadTratamientoAnimal';
 import { VacunasAnimales } from 'src/app/Payloads/payloadVacunasAnimal';
 import { AnimalService } from 'src/app/Service/animal.service';
+import { PayloadService } from 'src/app/Service/peyloads.service';
 import { TipoVacunaService } from 'src/app/Service/tipoVacuna.service';
 import { VacunaService } from 'src/app/Service/vacuna.service';
 
@@ -16,7 +21,8 @@ export class ControlAnimalComponent implements OnInit {
   constructor(
     private animalesService: AnimalService,
     private tipoVacunaService: TipoVacunaService,
-    private vacunaService: VacunaService
+    private vacunaService: VacunaService,
+    private payloadservice: PayloadService
   ) { }
 
 
@@ -67,8 +73,44 @@ export class ControlAnimalComponent implements OnInit {
   vacunasAnimales: VacunasAnimales[] = [];
 
   public getListaVacunasByIdFichaMedica(idFichaMedica: number) {
-    this.vacunaService.getListaVacunasByIdFichaMedica(idFichaMedica).subscribe((data)=>{
+    this.payloadservice.getPeyloadVacunasAnimalById(idFichaMedica).subscribe((data) => {
       this.vacunasAnimales = data
+    })
+  }
+
+  // VER DATOS ENFERMEDADES
+  enfermedadAnimales: EnfermedadAnimales[] = [];
+
+  public getPeyloadEnfermedadAnimal(idFichaMedica: number) {
+    this.payloadservice.getPeyloadEnfermedadAnimalById(idFichaMedica).subscribe((data2) => {
+      this.enfermedadAnimales = data2
+    })
+  }
+
+  // VER DATOS TRATAMIENTOS
+  tratamientoAnimales: TratamientoAnimales[] = [];
+
+  public getPeyloadTratamientoAnimal(idFichaMedica: number) {
+    this.payloadservice.getPeyloadPeyloadTratamientoAnimalById(idFichaMedica).subscribe((data3) => {
+      this.tratamientoAnimales = data3
+    })
+  }
+
+  // VER DATOS ALERGIAS
+  alergiasAnimales: AlergiaAnimales[] = [];
+
+  public getPeyloadAlergiaAnimal(idFichaMedica: number) {
+    this.payloadservice.getPeyloadAlergiaAnimalById(idFichaMedica).subscribe((data4) => {
+      this.alergiasAnimales = data4
+    })
+  }
+
+  // VER DATOS EXAMENFISICO
+  examenfisico: ExamenFisicoAnimales[] = [];
+
+  public getPeyloadExamenFisicoAnimal(idFichaMedica: number) {
+    this.payloadservice.getPeyloadExamenFisicoAnimalById(idFichaMedica).subscribe((data5) => {
+      this.examenfisico = data5
     })
   }
 
