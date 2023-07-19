@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Animal, FichaMedica, TipoAnimal, TipoVacuna, Vacuna } from 'src/app/Models/models';
 import { VacunasAnimales } from 'src/app/Payloads/payloadVacunasAnimal';
 import { AnimalService } from 'src/app/Service/animal.service';
+import { PayloadService } from 'src/app/Service/peyloads.service';
 import { TipoVacunaService } from 'src/app/Service/tipoVacuna.service';
 import { VacunaService } from 'src/app/Service/vacuna.service';
 
@@ -16,7 +17,8 @@ export class ControlAnimalComponent implements OnInit {
   constructor(
     private animalesService: AnimalService,
     private tipoVacunaService: TipoVacunaService,
-    private vacunaService: VacunaService
+    private vacunaService: VacunaService,
+    private payloadservice: PayloadService
   ) { }
 
 
@@ -67,7 +69,7 @@ export class ControlAnimalComponent implements OnInit {
   vacunasAnimales: VacunasAnimales[] = [];
 
   public getListaVacunasByIdFichaMedica(idFichaMedica: number) {
-    this.vacunaService.getListaVacunasByIdFichaMedica(idFichaMedica).subscribe((data)=>{
+    this.payloadservice.getPeyloadVacunasAnimalById(idFichaMedica).subscribe((data)=>{
       this.vacunasAnimales = data
     })
   }
