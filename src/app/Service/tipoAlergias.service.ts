@@ -32,7 +32,7 @@ export class TipoAlergiasService {
   }
 
   public saveTipoAlergias(tipoalergias: TipoAlergias):Observable<TipoAlergias>{
-    return this.http.post<TipoAlergias>(environment.apiuriPublic+'/tipoalergias/save', tipoalergias);
+    return this.http.post<TipoAlergias>(environment.apiuri+'/tipoalergias/save', tipoalergias);
   }
 
 }
