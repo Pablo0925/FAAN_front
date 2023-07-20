@@ -1,4 +1,4 @@
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { environment } from '../environment/enviroment';
@@ -14,24 +14,35 @@ export class RazaAnimalService {
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
 
-  public getAllRazaAnimal(page:number,size:number,sort:string): Observable<RazaAnimal[]> {
+  public getAllRazaAnimal(page: number, size: number, sort: string[]): Observable<RazaAnimal[]> {
     return this.http.get<RazaAnimal[]>(environment.apiuri + '/razaAnimal/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
   }
 
-  public getListaRazaAnimal():Observable<RazaAnimal[]>{
-    return this.http.get<RazaAnimal[]>(environment.apiuri+'/razaAnimal/list');
+  public getAllRazaAnimalAtribute(page: number, size: number, sort: string[], nameAtribute: string, valueAtricute: string): Observable<RazaAnimal[]> {
+    let params = new HttpParams()
+      .set('page', page)
+      .set('size', size)
+      .set('sort', sort.join(','))
+      .set('columnName', nameAtribute)
+      .set('value', valueAtricute);
+      
+    return this.http.get<RazaAnimal[]>(environment.apiuri + '/razaAnimal/pageable/find', { params });
   }
 
-  public getRazaAnimalById(idRazaAnimal: number):Observable<RazaAnimal>{
-    return this.http.get<RazaAnimal>(environment.apiuri+'/razaAnimal/findOne/'+idRazaAnimal);
+  public getListaRazaAnimal(): Observable<RazaAnimal[]> {
+    return this.http.get<RazaAnimal[]>(environment.apiuri + '/razaAnimal/list');
   }
 
-  public updateRazaAnimal(idRazaAnimal:number, razaAnimal: RazaAnimal):Observable<RazaAnimal>{
-    return this.http.put<RazaAnimal>(environment.apiuri+'/razaAnimal/update/'+idRazaAnimal, razaAnimal);
+  public getRazaAnimalById(idRazaAnimal: number): Observable<RazaAnimal> {
+    return this.http.get<RazaAnimal>(environment.apiuri + '/razaAnimal/findOne/' + idRazaAnimal);
   }
 
-  public saveRazaAnimal(razaAnimal: RazaAnimal):Observable<RazaAnimal>{
-    return this.http.post<RazaAnimal>(environment.apiuriPublic+'/razaAnimal/save', razaAnimal);
+  public updateRazaAnimal(idRazaAnimal: number, razaAnimal: RazaAnimal): Observable<RazaAnimal> {
+    return this.http.put<RazaAnimal>(environment.apiuri + '/razaAnimal/update/' + idRazaAnimal, razaAnimal);
+  }
+
+  public saveRazaAnimal(razaAnimal: RazaAnimal): Observable<RazaAnimal> {
+    return this.http.post<RazaAnimal>(environment.apiuri + '/razaAnimal/save', razaAnimal);
   }
 
 }

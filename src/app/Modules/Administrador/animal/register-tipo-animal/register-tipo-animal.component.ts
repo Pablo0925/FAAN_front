@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { throwError } from 'rxjs';
 import { TipoAnimal } from 'src/app/Models/tipoAnimal';
+import { ScreenSizeService } from 'src/app/Service/screen-size-service.service';
 import { TipoAnimalService } from 'src/app/Service/tipo-animal.service';
 
 @Component({
@@ -18,12 +19,29 @@ export class RegisterTipoAnimalComponent implements OnInit {
 
     public ListTipoAnimal: TipoAnimal[] = [];
 
-    constructor(private tipoAnimalService: TipoAnimalService) {
+    public errorUnique: string = '';
 
-    }
+    //Size of window..
+    public screenWidth: number = 0;
+    public screenHeight: number = 0;
+
+    constructor(private tipoAnimalService: TipoAnimalService, private screenSizeService: ScreenSizeService) { }
 
     ngOnInit(): void {
         this.findPageableTipoAnimal();
+
+        this.getSizeWindowResize();
+    }
+
+    public getSizeWindowResize() {
+        const { width, height } = this.screenSizeService.getCurrentSize();
+        this.screenWidth = width;
+        this.screenHeight = height;
+
+        this.screenSizeService.onResize.subscribe(({ width, height }) => {
+            this.screenWidth = width;
+            this.screenHeight = height;
+        });
     }
 
     public findPageableTipoAnimal() {
@@ -35,7 +53,7 @@ export class RegisterTipoAnimalComponent implements OnInit {
                 }
             });
         } catch (error) {
-            console.log('Exeption')
+            throw new Error()
         }
 
     }
@@ -48,8 +66,6 @@ export class RegisterTipoAnimalComponent implements OnInit {
             } else {
                 this.createTipoAnimal(this.tipoAnimal);
             }
-            this.tipoAnimalDialog = false;
-            this.tipoAnimal = {} as TipoAnimal;
         }
     }
 
@@ -59,10 +75,14 @@ export class RegisterTipoAnimalComponent implements OnInit {
                 if (data != null) {
                     alert('succesfull created..')
                     this.ListTipoAnimal.push(data);
+                    this.closeDialog();
+                }
+            }, (err) => {
+                if (err.error) {
+                    this.errorUnique = 'Nombre existente.';
                 }
             })
         } catch (error) {
-
             throw new Error()
         }
     }
@@ -70,15 +90,19 @@ export class RegisterTipoAnimalComponent implements OnInit {
     public updateTipoAnimal(tipoAnimal: TipoAnimal): void {
         this.tipoAnimalService.updateTipoAnimal(tipoAnimal.idTipoAnimal!, tipoAnimal).subscribe((data) => {
             if (data != null) {
-
                 try {
                     const indexfind = this.ListTipoAnimal.findIndex((tanimal) => tanimal.idTipoAnimal === data.idTipoAnimal);
                     this.ListTipoAnimal[indexfind] = data;
                 } catch (error) {
                     throw new Error()
                 }
-
+                this.closeDialog();
                 alert('succesfull updated..')
+            }
+        }, (err) => {
+            console.log(err)
+            if (err.status === 400) {
+                this.errorUnique = 'Nombre existente.';
             }
         })
     }
@@ -86,7 +110,7 @@ export class RegisterTipoAnimalComponent implements OnInit {
     public eliminadoLogicoDeLosTiposAnimales(
         tipoAnimal: TipoAnimal
     ) {
-   
+
         tipoAnimal.estadoTipo = tipoAnimal.estadoTipo === 'A' ? 'I' : 'A';
         this.tipoAnimalService
             .updateTipoAnimal(
@@ -95,19 +119,27 @@ export class RegisterTipoAnimalComponent implements OnInit {
             .subscribe((data) => {
                 if (data != null) {
                     if (tipoAnimal.estadoTipo) {
-                      alert('Update')
+                        alert('Update')
                     }
                 }
             });
     }
 
-    public openNew() {
+    public closeDialog(): void {
+        this.tipoAnimalDialog = false;
+        this.tipoAnimal = {} as TipoAnimal;
+        this.errorUnique = '';
+    }
+
+    public openNewTipoAnimal() {
+        this.errorUnique = '';
         this.tipoAnimal = {} as TipoAnimal;
         this.submitted = false;
         this.tipoAnimalDialog = true;
     }
 
-    public editProduct(tipoAnimal: TipoAnimal) {
+    public editTipoAnimal(tipoAnimal: TipoAnimal) {
+        this.errorUnique = '';
         this.tipoAnimal = { ...tipoAnimal };
         this.tipoAnimalDialog = true;
     }
