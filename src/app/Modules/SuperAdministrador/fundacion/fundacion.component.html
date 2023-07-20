@@ -12,13 +12,16 @@
       <li><i class='bx bxs-calendar m-2'></i>{{fundacion.horarios}} </li>
     </ul>
     <p>{{fundacion.objetivo}}</p>
-    <button type="button" (click)="showDialog()" class="btn btn-primarys m-2 card-img-top"
-      style="align-items: center;">Actualizar</button>
+
+    <button pButton pRipple label="Actualizar" class="p-button-primary mr-2" style="width: 100%;"
+      (click)="showDialog()"></button>
+
   </div>
 </p-card>
 
 <!-- MODAL EDIT DATA -->
-<p-dialog  header="Datos Fundación" [(visible)]="visible" [modal]="true" [style]="{ width: '80vw' }" [draggable]="false" [resizable]="false">
+<p-dialog header="Datos Fundación" [(visible)]="visible" [modal]="true" [style]="{ width: '80vw' }" [draggable]="false"
+  [resizable]="false">
 
 
   <form (ngSubmit)="updateFundacionById()" ngNativeValidate style="padding: 15px;">
