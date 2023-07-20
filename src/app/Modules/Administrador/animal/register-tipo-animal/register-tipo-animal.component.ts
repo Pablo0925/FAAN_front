@@ -71,6 +71,7 @@ export class RegisterTipoAnimalComponent implements OnInit {
 
     public createTipoAnimal(tipoAnimal: TipoAnimal): void {
         try {
+            this.tipoAnimal.estadoTipo = 'A';
             this.tipoAnimalService.saveTipoAnimal(tipoAnimal).subscribe((data) => {
                 if (data != null) {
                     alert('succesfull created..')

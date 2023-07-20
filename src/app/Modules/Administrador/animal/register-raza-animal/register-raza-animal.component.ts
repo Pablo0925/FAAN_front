@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LazyLoadEvent } from 'primeng/api';
 import { RazaAnimal } from 'src/app/Models/razaAnimal';
 import { TipoAnimal } from 'src/app/Models/tipoAnimal';
 import { RazaAnimalService } from 'src/app/Service/razaAnimal.service';
@@ -55,7 +54,7 @@ export class RegisterRazaAnimalComponent implements OnInit {
     this.loading = true;
     this.submitFindAtribute = true;
     this.razaAnimalService.getAllRazaAnimalAtribute(0, 4, ['idRazaAnimal', 'asc'], 'nombreRaza', this.valueAtribute).subscribe((data: any) => {
-      if(data !== null){
+      if (data !== null) {
         this.listRazaAnimal = data.content;
         this.loading = false;
       }
@@ -191,7 +190,7 @@ export class RegisterRazaAnimalComponent implements OnInit {
       });
   }
 
-  public clearInputAndStatus(){
+  public clearInputAndStatus() {
     this.submitFindAtribute = false;
     this.valueAtribute = '';
     this.findPagableRazaAnimal(0, 4, ['idRazaAnimal', 'asc']);
