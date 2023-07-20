@@ -31,7 +31,7 @@ export class AlergiasService {
   }
 
   public saveAlergias(alergias: Alergias):Observable<Alergias>{
-    return this.http.post<Alergias>(environment.apiuriPublic+'/alergias/save', alergias);
+    return this.http.post<Alergias>(environment.apiuri+'/alergias/save', alergias);
   }
 
 }

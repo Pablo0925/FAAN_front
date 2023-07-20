@@ -30,7 +30,7 @@ export class ExamenFisicoService {
   }
 
   public saveExamenFisico(examenFisico: ExamenFisico):Observable<ExamenFisico>{
-    return this.http.post<ExamenFisico>(environment.apiuriPublic+'/examenFisico/save', examenFisico);
+    return this.http.post<ExamenFisico>(environment.apiuri+'/examenFisico/save', examenFisico);
   }
 
 }

@@ -31,7 +31,7 @@ export class TipoEnfermedadService {
   }
 
   public saveTipoEnfermedad(tipoenfermedad: TipoEnfermedad):Observable<TipoEnfermedad>{
-    return this.http.post<TipoEnfermedad>(environment.apiuriPublic+'/tipoenfermedad/save', tipoenfermedad);
+    return this.http.post<TipoEnfermedad>(environment.apiuri+'/tipoenfermedad/save', tipoenfermedad);
   }
 
 }

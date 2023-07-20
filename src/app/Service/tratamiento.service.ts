@@ -31,7 +31,7 @@ export class TratamientoService {
   }
 
   public saveTratamiento(tratamiento: Tratamiento):Observable<Tratamiento>{
-    return this.http.post<Tratamiento>(environment.apiuriPublic+'/tratamiento/save', tratamiento);
+    return this.http.post<Tratamiento>(environment.apiuri+'/tratamiento/save', tratamiento);
   }
 
 }

@@ -30,7 +30,7 @@ export class EnfermedadService {
   }
 
   public saveEnfermedad(enfermedad: Enfermedad):Observable<Enfermedad>{
-    return this.http.post<Enfermedad>(environment.apiuriPublic+'/enfermedad/save', enfermedad);
+    return this.http.post<Enfermedad>(environment.apiuri+'/enfermedad/save', enfermedad);
   }
 
 }
