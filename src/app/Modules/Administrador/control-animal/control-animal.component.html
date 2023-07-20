@@ -30,7 +30,8 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-columns="columns" let-data>
-                <tr>                    <td>{{ data.fechaVacuna }}</td>
+                <tr>
+                    <td>{{ data.fechaVacuna }}</td>
                     <td>{{ data.nombreVacuna }}</td>
                     <td>{{ data.observaciones }}</td>
                     <td>{{ data.estadoVacuna }}</td>
@@ -59,7 +60,8 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-columns="columns" let-data2>
-                <tr>                    <td>{{ data2.fechaEfermedad }}</td>
+                <tr>
+                    <td>{{ data2.fechaEfermedad }}</td>
                     <td>{{ data2.nombreEfermedad }}</td>
                     <td>{{ data2.observaciones }}</td>
                     <td>{{ data2.estadoEfermedad }}</td>
@@ -88,7 +90,8 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-columns="columns" let-data3>
-                <tr>                    <td>{{ data3.fechaTratamiento }}</td>
+                <tr>
+                    <td>{{ data3.fechaTratamiento }}</td>
                     <td>{{ data3.nombreTratamiento }}</td>
                     <td>{{ data3.observaciones }}</td>
                     <td>{{ data3.estadoTratamiento }}</td>
@@ -117,7 +120,8 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-columns="columns" let-data4>
-                <tr>                    <td>{{ data4.fechaAlergia }}</td>
+                <tr>
+                    <td>{{ data4.fechaAlergia }}</td>
                     <td>{{ data4.nombreAlergia }}</td>
                     <td>{{ data4.observaciones }}</td>
                     <td>{{ data4.estadoAlergia }}</td>
@@ -150,7 +154,8 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-columns="columns" let-data5>
-                <tr>                    <td>{{ data5.fechaRevisionFisisca }}</td>
+                <tr>
+                    <td>{{ data5.fechaRevisionFisisca }}</td>
                     <td>{{ data5.frecuenciaCardiaca }}</td>
                     <td>{{ data5.mucosa }}</td>
                     <td>{{ data5.ojosrojos }}</td>
@@ -194,8 +199,9 @@
     <form (ngSubmit)="saveVacuna()" ngNativeValidate style="padding: 15px;">
         <div class="grid p-fluid m-2">
             <div class="col-12 md:col-12 mt-1 justify-content-center">
-              <p-dropdown appendTo="body" id="selectedVacuna" name="selectedVacuna" [options]="listTipoVacuna" (onChange)="beta()" [(ngModel)]="selectedVacuna"
-                placeholder="Seleccione una vacuna" optionLabel="nombreVacuna"></p-dropdown>
+                <p-dropdown appendTo="body" id="selectedVacuna" name="selectedVacuna" [options]="listTipoVacuna"
+                    (onChange)="beta()" [(ngModel)]="selectedVacuna" placeholder="Seleccione una vacuna"
+                    optionLabel="nombreVacuna"></p-dropdown>
             </div>
         </div>
         <div class="grid p-fluid m-2">
@@ -219,7 +225,7 @@
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-primarys">Agregar vacuna</button>
-         </div>
+        </div>
     </form>
 </p-dialog>
 
@@ -235,22 +241,25 @@
         <div class="container">
             <div class="cardA-container">
                 <div class="cardA" *ngFor="let mascotas of ListAnimales">
-                  <div class="img-wrapper">
-                    <img src="../../../../assets/img/dog_eyes.jpg" alt="Imagen de mascota">
-                  </div>
-                  <p class="nombre">{{mascotas.nombreAnimal}}</p>
-                  <p class="placa"><span style="font-weight: bold;">Placa:</span> {{mascotas.placaAnimal}}</p>
-                  <div class="text-center">
-                    <button type="btn" (click)="selectAnimal(mascotas.idAnimal,mascotas.fichaMedica)" class="btn btn-primarys">Seleccionar</button>
-                  </div>
+                    <div class="img-wrapper">
+                        <img src="../../../../assets/img/dog_eyes.jpg" alt="Imagen de mascota">
+                    </div>
+                    <p class="nombre">{{mascotas.nombreAnimal}}</p>
+                    <p class="placa"><span style="font-weight: bold;">Placa:</span> {{mascotas.placaAnimal}}</p>
+                    <div class="text-center">
+                        <!-- problema que habie en esta liene -->
+                        <button type="btn" (click)="selectAnimal(mascotas.idAnimal!,mascotas.fichaMedica!)"
+                            class="btn btn-primarys">Seleccionar</button>
+                    </div>
                 </div>
-              </div>              
+            </div>
         </div>
         <div class="m-5" style="text-align: center; align-items: center;">
-            <button *ngIf="isPage !== 0" type="button" (click)="anteriorPage()" class="btn btn-primarys p-button-rounded"><i
-                    class="pi pi-arrow-circle-left"></i></button>
-            <button *ngIf="isPage !== pageTotal" type="button" (click)="siguientePage()" class="btn btn-primarys p-button-rounded "
-                style="margin-left: 50px;"> <i class="pi pi-arrow-circle-right"></i></button>
+            <button *ngIf="isPage !== 0" type="button" (click)="anteriorPage()"
+                class="btn btn-primarys p-button-rounded"><i class="pi pi-arrow-circle-left"></i></button>
+            <button *ngIf="isPage !== pageTotal" type="button" (click)="siguientePage()"
+                class="btn btn-primarys p-button-rounded " style="margin-left: 50px;"> <i
+                    class="pi pi-arrow-circle-right"></i></button>
         </div>
     </p-card>
 
