@@ -134,16 +134,17 @@
 								<div class="row mb-1">
 									<div class="col">
 										<label><strong>Fecha de Nacimiento:</strong></label>
-										<span>{{ persona.fechaNacimiento | date }}</span>
+										<span> {{ persona.fechaNacimiento | date }}</span>
 									</div>
 									<div class="col">
 										<label><strong>Dirección:</strong></label>
-										<span>{{ persona.direccion }}</span>
+										<span> {{ persona.direccion }}</span>
 									</div>
 								</div>
 								<div class="text-center mt-2">
 									<button pButton type="button" label="Editar" icon="pi pi-pencil"
-										(click)="emptySelectedPerson()"></button>
+										(click)="emptySelectedPerson()"
+										[disabled]="animal.idAnimal ? true : false"></button>
 								</div>
 							</div>
 						</div>
@@ -152,6 +153,12 @@
 				</div>
 
 				<ng-template #notSubmittedContent>
+
+					<div class="text-center">
+						<small class="p-error" *ngIf="submitted && isEmpty(persona)"><strong
+								style="font-size: 14px;">Rescatista es
+								requerido.</strong></small>
+					</div>
 
 					<div class=" container">
 						<div class="row justify-content-center">
@@ -221,15 +228,17 @@
 
 						<div class="col-12 md:col-6">
 							<label for="nombreRaza"><strong>Placa Animal</strong></label>
-							<span class="p-input-icon-right ">
-								<i class="pi pi-info-circle"
-									[style.color]="submitted && (!animal.placaAnimal|| errorUnique) ? 'red':''"></i>
-								<div class="p-inputgroup">
-									<input type="text" [(ngModel)]="animal.placaAnimal"
-										[class]="submitted && (!animal.placaAnimal || errorUnique) ? 'ng-invalid ng-dirty':''"
-										id="placaAnimal" name="placaAnimal" pInputText placeholder="Placa.." required />
-								</div>
-							</span>
+
+							<div class="p-inputgroup">
+								<input type="text" [(ngModel)]="animal.placaAnimal"
+									[class]="submitted && (!animal.placaAnimal || errorUnique) ? 'ng-invalid ng-dirty':''"
+									id="placaAnimal" name="placaAnimal" pInputText placeholder="Placa.." readonly
+									required>
+								<button type="button" pButton pRipple
+									[icon]="'pi ' + (animal.placaAnimal ? 'pi-refresh' : 'pi-key')"
+									styleClass="p-button-warn" (click)="generatePlacaAnimal()"
+									[disabled]="animal.idAnimal ? true : false"></button>
+							</div>
 							<small class="p-error" *ngIf="submitted && !animal.placaAnimal">Placa is required.</small>
 
 						</div>
@@ -301,7 +310,7 @@
 										</div>
 									</ng-template>
 								</p-dropdown>
-								<small class="p-error" *ngIf="submitted && isEmpty(catchIncomeSituation)">Tipo animal is
+								<small class="p-error" *ngIf="submitted && isEmpty(razaAnimal)">Raza animal is
 									required.</small>
 
 							</div>
@@ -370,8 +379,8 @@
 								</div>
 							</ng-template>
 						</p-dropdown>
-						<small class="p-error" *ngIf="submitted && isEmpty(catchIncomeSituation)">Tipo animal is
-							required.</small>
+						<small class="p-error" *ngIf="submitted && isEmpty(catchIncomeSituation)">Situación ingreso es
+							requerido.</small>
 
 					</div>
 				</div>
@@ -390,8 +399,17 @@
 						<div class="field">
 
 							<label for="nombreRaza"><strong>Descripción</strong></label>
-							<textarea id="description" pInputTextarea required rows="3" cols="20"
-								[(ngModel)]="fichaRegister.descripcionFichaRegistro"></textarea>
+							<textarea id="descripcionFichaRegistro" name="descripcionFichaRegistro"
+								[class]="submitted && (!fichaRegister.descripcionFichaRegistro) ? 'ng-invalid ng-dirty':''"
+								pInputTextarea rows="3" cols="20" [(ngModel)]="fichaRegister.descripcionFichaRegistro"
+								required placeholder="Ingrese descripcion."></textarea>
+
+							<small class="p-error"
+								*ngIf="submitted && !fichaRegister.descripcionFichaRegistro">Descripción
+								ingreso
+								es
+								requerido.</small>
+
 						</div>
 					</div>
 				</div>

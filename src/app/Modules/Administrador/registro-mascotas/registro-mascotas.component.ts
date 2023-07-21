@@ -101,9 +101,6 @@ export class RegistroMascotasComponent implements OnInit {
 		//Size of the window..
 		this.getSizeWindowResize();
 		this.loading = true;
-
-		//IncomeSituation----------
-
 	}
 
 	public findByAtributeName(code: number) {
@@ -193,10 +190,24 @@ export class RegistroMascotasComponent implements OnInit {
 	public saveAndUpdateAnimal() {
 		this.submitted = true;
 
-		if (this.animal.idAnimal) {
-			this.updateAnimal();
+		// Validate campos
+		if (this.animal.nombreAnimal?.trim() && this.animal.placaAnimal?.trim()
+			&& this.animal.edadAnimal && this.fichaRegister.descripcionFichaRegistro?.trim()
+			&& !this.isEmpty(this.tipoAnimal) && !this.isEmpty(this.razaAnimal)
+			&& !this.isEmpty(this.persona) && !this.isEmpty(this.catchIncomeSituation)) {
+
+			this.animalService.findPlacaAnimal(this.animal.placaAnimal).subscribe((data) => {
+				alert(data)
+			})
+
+			alert('listo')
+			// if (this.animal.idAnimal) {
+			// 	this.updateAnimal();
+			// } else {
+			// 	this.saveAnimal();
+			// }
 		} else {
-			this.saveAnimal();
+			alert('campos incompletos' + this.fichaRegister.descripcionFichaRegistro)
 		}
 
 	}
@@ -225,7 +236,7 @@ export class RegistroMascotasComponent implements OnInit {
 		const key = await this.uploadImage();
 
 		this.fichaRegister.situacionIngreso = this.catchIncomeSituation;
-		this.fichaRegister.persona = this.persona
+		this.fichaRegister.persona = this.persona;
 
 		this.fichaRegisterService.saveFichaRegistro(this.fichaRegister).subscribe((data) => {
 			this.animal.fichaRegistro = data;
@@ -248,28 +259,35 @@ export class RegistroMascotasComponent implements OnInit {
 			})
 		});
 
+	}
 
+	public async updateAnimal() {
+		const key = await this.uploadImage();
+
+		this.fichaRegister.situacionIngreso = this.catchIncomeSituation;
+
+		this.fichaRegisterService.updateFichaRegistro(this.fichaRegister.idFichaRegistro!, this.fichaRegister).subscribe(() => {
+			this.animal.fotoAnimal = key;
+			this.animal.razaAnimal = this.razaAnimal;
+			this.animalService.updateAnimal(this.animal.idAnimal!, this.animal).subscribe((data) => {
+				if (data != null) {
+					alert('succesfull updated..')
+					const indexfind = this.listAnimal.findIndex((animal) => animal.idAnimal === data.idAnimal);
+					this.listAnimal[indexfind] = data;
+					this.closeDialog();
+				}
+			})
+		});
 
 	}
 
-	public updateAnimal() {
-		// this.razaAnimalService.updateRazaAnimal(razaAnimal.idRazaAnimal!, razaAnimal).subscribe((data) => {
-		// 	if (data != null) {
-		// 		try {
-		// 			const indexfind = this.listRazaAnimal.findIndex((ranimal) => ranimal.idRazaAnimal === data.idRazaAnimal);
-		// 			this.listRazaAnimal[indexfind] = data;
-		// 		} catch (error) {
-		// 			throw new Error()
-		// 		}
-		// 		this.closeDialog();
-		// 		alert('succesfull updated..')
-		// 	}
-		// }, (err) => {
-		// 	console.log(err)
-		// 	if (err.status === 400) {
-		// 		this.errorUnique = 'Nombre existente.';
-		// 	}
-		// })
+	public generatePlacaAnimal() {
+		let placa = '';
+		var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		for (var i = 0; i < 6; i++) {
+			placa += chars.charAt(Math.floor(Math.random() * chars.length));
+		}
+		this.animal.placaAnimal = placa;
 	}
 
 	public eliminadoLogicoDeLosTiposAnimales(
@@ -349,7 +367,6 @@ export class RegistroMascotasComponent implements OnInit {
 
 	}
 
-
 	public avatarURL: string = '';
 	public selectedFile!: File;
 	public onBasicUpload(event: any) {
@@ -390,7 +407,6 @@ export class RegistroMascotasComponent implements OnInit {
 			});
 		}
 
-
 	}
 
 	public closeDialogIconmeSituation() {
@@ -420,7 +436,7 @@ export class RegistroMascotasComponent implements OnInit {
 		this.persona = {} as Persona;
 		this.tipoAnimal = {} as TipoAnimal;
 		this.razaAnimal = {} as RazaAnimal;
-
+		this.fichaRegister = {} as FichaRegistro;
 		this.submitted = false;
 		this.razaAnimalDialog = true;
 	}
