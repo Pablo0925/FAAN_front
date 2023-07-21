@@ -14,25 +14,25 @@ export class FichaRegistroService {
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
 
-  public getAllFichaRegistro(page:number,size:number,sort:string): Observable<FichaRegistro[]> {
+  public getAllFichaRegistro(page: number, size: number, sort: string): Observable<FichaRegistro[]> {
     return this.http.get<FichaRegistro[]>(environment.apiuri + '/fichaRegistro/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
   }
 
 
-  public getListaFichaRegistro():Observable<FichaRegistro[]>{
-    return this.http.get<FichaRegistro[]>(environment.apiuri+'/fichaRegistro/list');
+  public getListaFichaRegistro(): Observable<FichaRegistro[]> {
+    return this.http.get<FichaRegistro[]>(environment.apiuri + '/fichaRegistro/list');
   }
 
-  public getFichaRegistroById(idPersona: number):Observable<FichaRegistro>{
-    return this.http.get<FichaRegistro>(environment.apiuri+'/fichaRegistro/findOne/'+idPersona);
+  public getFichaRegistroById(idPersona: number): Observable<FichaRegistro> {
+    return this.http.get<FichaRegistro>(environment.apiuri + '/fichaRegistro/findOne/' + idPersona);
   }
 
-  public updateFichaRegistro(idPersona:number, fichaRegistro: FichaRegistro):Observable<FichaRegistro>{
-    return this.http.put<FichaRegistro>(environment.apiuri+'/fichaRegistro/update/'+idPersona, fichaRegistro);
+  public updateFichaRegistro(idPersona: number, fichaRegistro: FichaRegistro): Observable<FichaRegistro> {
+    return this.http.put<FichaRegistro>(environment.apiuri + '/fichaRegistro/update/' + idPersona, fichaRegistro);
   }
 
-  public saveFichaRegistro(fichaRegistro: FichaRegistro):Observable<FichaRegistro>{
-    return this.http.post<FichaRegistro>(environment.apiuriPublic+'/fichaRegistro/save', fichaRegistro);
+  public saveFichaRegistro(fichaRegistro: FichaRegistro): Observable<FichaRegistro> {
+    return this.http.post<FichaRegistro>(environment.apiuri + '/fichaRegistro/save', fichaRegistro);
   }
 
 }

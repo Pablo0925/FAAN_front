@@ -1,7 +1,9 @@
+import { Persona } from "./persona";
 import { SituacionIngreso } from "./situacionIngreso";
 
-export interface FichaRegistro {
-    idFichaRegistro: number;
-    descripcionFichaRegistro: string;
-    situacionIngreso: SituacionIngreso;
+export class FichaRegistro {
+    idFichaRegistro?: number;
+    descripcionFichaRegistro?: string;
+    situacionIngreso?: SituacionIngreso;
+    persona?: Persona
 }

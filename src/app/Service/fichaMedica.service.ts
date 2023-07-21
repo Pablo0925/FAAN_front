@@ -13,24 +13,24 @@ export class FichaMedicaService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
-  public getAllFichaMedica(page:number,size:number,sort:string): Observable<FichaMedica[]> {
+  public getAllFichaMedica(page: number, size: number, sort: string): Observable<FichaMedica[]> {
     return this.http.get<FichaMedica[]>(environment.apiuri + '/fichaMedica/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
   }
 
-  public getListaidFichaMedica():Observable<FichaMedica[]>{
-    return this.http.get<FichaMedica[]>(environment.apiuri+'/fichaMedica/list');
+  public getListaidFichaMedica(): Observable<FichaMedica[]> {
+    return this.http.get<FichaMedica[]>(environment.apiuri + '/fichaMedica/list');
   }
 
-  public getidFichaMedicaById(idFichaMedica: number):Observable<FichaMedica>{
-    return this.http.get<FichaMedica>(environment.apiuri+'/fichaMedica/findOne/'+idFichaMedica);
+  public getidFichaMedicaById(idFichaMedica: number): Observable<FichaMedica> {
+    return this.http.get<FichaMedica>(environment.apiuri + '/fichaMedica/findOne/' + idFichaMedica);
   }
 
-  public updateidFichaMedica(idFichaMedica:number, FichaMedica: FichaMedica):Observable<FichaMedica>{
-    return this.http.put<FichaMedica>(environment.apiuri+'/fichaMedica/update/'+idFichaMedica, FichaMedica);
+  public updateidFichaMedica(idFichaMedica: number, FichaMedica: FichaMedica): Observable<FichaMedica> {
+    return this.http.put<FichaMedica>(environment.apiuri + '/fichaMedica/update/' + idFichaMedica, FichaMedica);
   }
 
-  public saveidFichaMedica(fichaMedica: FichaMedica):Observable<FichaMedica>{
-    return this.http.post<FichaMedica>(environment.apiuriPublic+'/fichaMedica/save', fichaMedica);
+  public saveidFichaMedica(fichaMedica: FichaMedica): Observable<FichaMedica> {
+    return this.http.post<FichaMedica>(environment.apiuri + '/fichaMedica/save', fichaMedica);
   }
 
 }

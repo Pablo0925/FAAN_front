@@ -1,5 +1,5 @@
-export interface SituacionIngreso {
-    idSituacionIngreso:     number;
-    nombreSituacionIngreso: string;
-    estadoSituacionIngreso: string;
+export class SituacionIngreso {
+    idSituacionIngreso?: number;
+    nombreSituacionIngreso?: string;
+    estadoSituacionIngreso?: string;
 }
