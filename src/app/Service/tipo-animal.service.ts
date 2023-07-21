@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { TipoAnimal } from '../Models/tipoAnimal';
-import { environment } from '../environment/enviroment';
+import { environment } from '../../environment/enviroment';
 import { Observable } from 'rxjs';
 
 @Injectable({
