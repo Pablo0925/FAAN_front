@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { environment } from '../environment/enviroment';
+import { environment } from '../../environment/enviroment';
 import { Animal } from '../Models/animal';
 import { StorageService } from './storage.service';
 
@@ -35,6 +35,12 @@ export class AnimalService {
 
   public saveAnimal(animal: Animal): Observable<Animal> {
     return this.http.post<Animal>(environment.apiuri + '/animal/save', animal);
+  }
+
+  //FIND EXIST PLACA
+  public findPlacaAnimal(placa: string): Observable<Boolean> {
+    return this.http.get<Boolean>(environment.apiuri + '/animal/exitPlaca/' + placa);
+
   }
 
 }

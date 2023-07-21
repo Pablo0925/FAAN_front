@@ -17,6 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { RegisterTipoAnimalComponent } from './Modules/Administrador/animal/register-tipo-animal/register-tipo-animal.component';
 import { RegisterRazaAnimalComponent } from './Modules/Administrador/animal/register-raza-animal/register-raza-animal.component';
 import { ControlAnimalComponent } from './Modules/Administrador/control-animal/control-animal.component';
+import { ControlUsuariosComponent } from './Modules/SuperAdministrador/control-usuarios/control-usuarios.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ControlAnimalComponent } from './Modules/Administrador/control-animal/c
     PerfilUsuarioComponent,
     RegisterTipoAnimalComponent,
     RegisterRazaAnimalComponent,
-    ControlAnimalComponent
+    ControlAnimalComponent,
+    ControlUsuariosComponent
   ],
   imports: [
     BrowserModule,

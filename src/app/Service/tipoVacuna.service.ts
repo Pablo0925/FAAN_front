@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { environment } from '../environment/enviroment';
+import { environment } from '../../environment/enviroment';
 import { TipoVacuna } from '../Models/tipoVacuna';
 import { StorageService } from './storage.service';
 

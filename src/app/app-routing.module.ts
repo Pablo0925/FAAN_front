@@ -9,6 +9,7 @@ import { PerfilUsuarioComponent } from './Modules/SuperAdministrador/perfil-usua
 import { RegisterTipoAnimalComponent } from './Modules/Administrador/animal/register-tipo-animal/register-tipo-animal.component';
 import { ControlAnimalComponent } from './Modules/Administrador/control-animal/control-animal.component';
 import { RegisterRazaAnimalComponent } from './Modules/Administrador/animal/register-raza-animal/register-raza-animal.component';
+import { ControlUsuariosComponent } from './Modules/SuperAdministrador/control-usuarios/control-usuarios.component';
 
 const routes: Routes = [
 
@@ -25,6 +26,9 @@ const routes: Routes = [
   { path: 'fundacion', component: FundacionComponent },
   { path: 'peril-usuario', component: PerfilUsuarioComponent },
 
+
+  // SUPERADMIN
+  { path: 'control-usuario', component: ControlUsuariosComponent},
   
   // PUBLIC
   { path: 'login', component: LoginComponent },
