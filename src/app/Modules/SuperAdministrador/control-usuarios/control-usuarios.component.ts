@@ -82,7 +82,7 @@ export class ControlUsuariosComponent implements OnInit {
 
   // GET ALL ROLES
   public listRoles: Rol[] = [];
-
+  
   public getAllRolesFull() {
     this.rolesService.getAllRolesFull().subscribe((data) => {
       this.listRoles = data;
