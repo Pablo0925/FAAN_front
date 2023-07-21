@@ -42,7 +42,7 @@ export class ControlUsuariosComponent implements OnInit {
   public listUsuarios: Usuario[] = [];
   public loading: boolean = false;
   public totalRecords!: number;
-  public size: number = 1;
+  public size: number = 3;
 
   public getAllUsuario(page: number, size: number, sort: string[]) {
     this.usuarioService.getAllUsuario(page, size, sort).subscribe((data: any) => {
@@ -202,4 +202,14 @@ export class ControlUsuariosComponent implements OnInit {
     this.fullname = '';
   }
 
+  getSeverity(status: boolean) {
+    switch (status) {
+      case true:
+        return 'success';
+      case false:
+        return 'warning';
+      default:
+        return 'danger';
+    }
+  }
 }

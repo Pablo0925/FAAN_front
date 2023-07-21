@@ -30,23 +30,23 @@
         </ng-template>
 
 
-        <ng-template pTemplate="header">
+        <ng-template pTemplate="header" class="text-aling-center">
             <tr>
-                <th pSortableColumn="idUsuario" style="min-width:15rem"><strong>ID</strong> <p-sortIcon
+                <th pSortableColumn="idUsuario" style="min-width:2rem"><strong>ID</strong> <p-sortIcon
                         field="idUsuario"></p-sortIcon></th>
 
-                <th pSortableColumn="fotoPerfil" style="min-width:15rem"><strong>FOTO</strong> <p-sortIcon
-                        field="fotoPerfil"></p-sortIcon>
+                <th pSortableColumn="username" tyle="min-width:15rem"><strong>USERNAME</strong> <p-sortIcon
+                        field="username"></p-sortIcon>
                 </th>
 
-                <th pSortableColumn="username" style="min-width:15rem"><strong>USERNAME</strong> <p-sortIcon
-                        field="username"></p-sortIcon></th>
+                <th pSortableColumn="persona.nombre1" style="min-width:15rem"><strong>NOMBRES/APELLIDOS</strong>
+                    <p-sortIcon field="persona.nombre1"></p-sortIcon></th>
 
-                <th pSortableColumn="usuario.persona.identificacion" style="min-width:15rem">
-                    <strong>IDENTIFICACION</strong> <p-sortIcon field="usuario.persona.identificacion"></p-sortIcon>
+                <th pSortableColumn="persona.identificacion" style="min-width:10rem">
+                    <strong>IDENTIFICACION</strong> <p-sortIcon field="persona.identificacion"></p-sortIcon>
                 </th>
 
-                <th pSortableColumn="estadoUsuario" style="min-width:15rem"><strong>ESTADO</strong> <p-sortIcon
+                <th pSortableColumn="estadoUsuario" style="min-width:10rem"><strong>ESTADO</strong> <p-sortIcon
                         field="estadoUsuario"></p-sortIcon>
                 </th>
                 <th></th>
@@ -56,17 +56,17 @@
         </ng-template>
         <ng-template pTemplate="body" let-usuario>
             <tr>
-
                 <td>{{ usuario.idUsuario }}</td>
-                <td><img [src]="'https://bucketgtmt.s3.amazonaws.com/'+ usuario.fotoPerfil" width="100" height="60"
-                        class="shadow-6" /></td>
-                <td>{{ usuario.username }}</td>
+                <td><p-avatar src='https://bucketgtmt.s3.amazonaws.com/' styleClass="mr-2" size="large" shape="circle"></p-avatar></td>
+                <td>{{ usuario.persona.nombre1 }} {{ usuario.persona.apellido1 }}</td>
                 <td>{{ usuario.persona.identificacion }}</td>
-                <td>{{ usuario.estadoUsuario }}</td>
-
+                <td><p-tag [value]="usuario.estadoUsuario" [severity]="getSeverity(usuario.estadoUsuario)"></p-tag></td>
                 <td>
-                    <button pButton pRipple icon="pi pi-pencil" (click)="editUsuario(usuario)"
+                    <button pButton pRipple pTooltip="Editar Usuario" tooltipPosition="top" icon="pi pi-pencil" (click)="editUsuario(usuario)"
                         class="p-button-rounded p-button-success p-button-outlined mr-2"></button>
+                    <button pButton pRipple icon="pi pi-power-off" (click)="editUsuario(usuario)"
+                    [pTooltip]="!usuario.estadoUsuario ? 'Activar' : 'Desactivar'" tooltipPosition="top"
+                    [class]="!usuario.estadoUsuario ? 'p-button-rounded p-button-danger p-button-outlined mr-2':'p-button-rounded p-button-success p-button-outlined mr-2'"></button>
                 </td>
             </tr>
         </ng-template>
@@ -107,7 +107,8 @@
                         <div class="col-12 md:col-4">
                             <label for="nombre1"><strong>Nombre</strong></label>
                             <span class="p-input-icon-right ">
-                                <i class="pi pi-info-circle" [style.color]="submitted && !persona.nombre1 ? 'red':''"></i>
+                                <i class="pi pi-info-circle"
+                                    [style.color]="submitted && !persona.nombre1 ? 'red':''"></i>
                                 <div class="p-inputgroup">
                                     <input pTooltip="Nombre" type="text" [(ngModel)]="persona.nombre1"
                                         [class]="submitted && !persona.nombre1 ? 'ng-invalid ng-dirty':''" id="nombre1"
@@ -120,11 +121,12 @@
                         <div class="col-12 md:col-4">
                             <label for="apellido1"><strong>Apellido</strong></label>
                             <span class="p-input-icon-right ">
-                                <i class="pi pi-info-circle" [style.color]="submitted && !persona.apellido1 ? 'red':''"></i>
+                                <i class="pi pi-info-circle"
+                                    [style.color]="submitted && !persona.apellido1 ? 'red':''"></i>
                                 <div class="p-inputgroup">
                                     <input pTooltip="Apellido" type="text" [(ngModel)]="persona.apellido1"
-                                        [class]="submitted && !persona.apellido1 ? 'ng-invalid ng-dirty':''" id="apellido1"
-                                        name="apellido1" pInputText placeholder="Apellido.." required />
+                                        [class]="submitted && !persona.apellido1 ? 'ng-invalid ng-dirty':''"
+                                        id="apellido1" name="apellido1" pInputText placeholder="Apellido.." required />
                                 </div>
                             </span>
                             <small class="p-error" *ngIf="submitted && !fullname">Nombres y Apellidos
@@ -187,10 +189,11 @@
                         </div>
                     </div>
 
-                    <div class="card col-12 md:col-12">  
-                        <p class="m-1" ><strong>Selecione los roles:</strong></p>
+                    <div class="card col-12 md:col-12">
+                        <p class="m-1"><strong>Selecione los roles:</strong></p>
                         <div *ngFor="let roles of listRoles" class="field-checkbox m-1">
-                            <p-checkbox name="roles" [value]="roles" [(ngModel)]="selectedRoles" [inputId]="roles.nombreRol"></p-checkbox>
+                            <p-checkbox name="roles" [value]="roles" [(ngModel)]="selectedRoles"
+                                [inputId]="roles.nombreRol"></p-checkbox>
                             <label [for]="roles.idRol">{{ roles.nombreRol }}</label>
                         </div>
                     </div>
