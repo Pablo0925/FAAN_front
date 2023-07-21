@@ -94,25 +94,12 @@ export class ControlUsuariosComponent implements OnInit {
   usuario = new Usuario();
 
   public async saveNewUsuario() {
-
-    let nombre1;
-    let apellido1;
-
-    if (this.fullname.includes(" ")) {
-      let partesNombre = this.fullname.split(" ");
-      nombre1 = partesNombre[0];
-      apellido1 = partesNombre.slice(1).join(" ");
-    }
-
-    this.persona.nombre1 = nombre1;
-    this.persona.apellido1 = apellido1;
-    
     const key = await this.uploadImage();
     this.personaService.savePersona(this.persona).subscribe((data) => {
       this.persona = data
       console.log(this.persona)
-      this.usuario.persona = this.persona
-      this.usuario.roles = this.selectedRoles
+      this.usuario.persona = this.persona;
+      this.usuario.roles = this.selectedRoles;
       this.usuario.estadoUsuario = true;
       this.usuario.fotoPerfil = key;
       this.usuario.tokenPassword = '';
