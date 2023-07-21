@@ -42,8 +42,8 @@
                 <th pSortableColumn="username" style="min-width:15rem"><strong>USERNAME</strong> <p-sortIcon
                         field="username"></p-sortIcon></th>
 
-                <th pSortableColumn="usuario..persona.identificacion" style="min-width:15rem">
-                    <strong>IDENTIFICACION</strong> <p-sortIcon field="usuario..persona.identificacion"></p-sortIcon>
+                <th pSortableColumn="usuario.persona.identificacion" style="min-width:15rem">
+                    <strong>IDENTIFICACION</strong> <p-sortIcon field="usuario.persona.identificacion"></p-sortIcon>
                 </th>
 
                 <th pSortableColumn="estadoUsuario" style="min-width:15rem"><strong>ESTADO</strong> <p-sortIcon
@@ -136,7 +136,7 @@
                             <span class="p-input-icon-right ">
                                 <div class="p-inputgroup">
                                     <input pTooltip="Correo" type="text" [(ngModel)]="persona.correo"
-                                        [class]="submitted && !persona.correo ? 'ng-invalid ng-dirty':''" id="celular"
+                                        [class]="submitted && !persona.correo ? 'ng-invalid ng-dirty':''" id="correo"
                                         name="correo" pInputText placeholder="Correo electronico.." required />
                                 </div>
                             </span>
@@ -182,17 +182,17 @@
                                     <th class="header-cell"><strong>ROL ASIGNADO</strong></th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-role>
+                            <ng-template pTemplate="body" let-rol>
                                 <tr>
-                                    <td class="data-cell"><strong>{{ role.nombreRol }}</strong></td>
+                                    <td class="data-cell"><strong>{{ rol.nombreRol }}</strong></td>
                                     <td class="data-cell">
-                                        <button *ngIf="isRoleAssigned(role)" pButton label="Asignado" icon="pi pi-check"
+                                        <button *ngIf="isRoleAssigned(rol)" pButton label="Asignado" icon="pi pi-check"
                                             class="assign-button assigned-role" type="button"
-                                            (click)="asignarRolesUsuario(role)"></button>
+                                            (click)="asignarRolesUsuario(rol)"></button>
 
-                                        <button *ngIf="!isRoleAssigned(role)" type="button" pButton pRipple
+                                        <button *ngIf="!isRoleAssigned(rol)" type="button" pButton pRipple
                                             label="No asignado" icon="pi pi-times" class="w-full custom-button"
-                                            (click)="asignarRolesUsuario(role)"></button>
+                                            (click)="asignarRolesUsuario(rol)"></button>
                                     </td>
                                 </tr>
                             </ng-template>

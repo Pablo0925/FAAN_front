@@ -75,8 +75,8 @@ export class ControlUsuariosComponent implements OnInit {
   // ADD UPDATE
   public editUsuario(usuario: Usuario) {
     this.usuario = { ...usuario };
-    this.persona = this.usuario.persona!;
-    this.listRoleAsignarUser = [...this.usuario.roles!];
+    this.persona = this.usuario.persona;
+    this.listRoleAsignarUser = [...this.usuario.roles];
     this.userDialog = true;
   }
 
@@ -91,11 +91,10 @@ export class ControlUsuariosComponent implements OnInit {
     });
   }
 
-  // ROLES POR USUARIO
-  public listRoleAsignarUser: Rol[] = [];
-
 
   //ASIGNAR ROLES A USUARIO
+  public listRoleAsignarUser: Rol[] = [];
+
   public asignarRolesUsuario(rol: Rol) {
     const index = this.listRoleAsignarUser.findIndex(
       (item) => item.idRol === rol.idRol
@@ -116,17 +115,20 @@ export class ControlUsuariosComponent implements OnInit {
   fullname: string = "";
   persona = new Persona();
   usuario = new Usuario();
+
   public async saveNewUsuario() {
     const key = await this.uploadImage();
     this.personaService.savePersona(this.persona).subscribe((data) => {
       this.persona = data
+      console.log(this.persona)
       this.usuario.persona = this.persona
       this.usuario.roles = this.listRoleAsignarUser
       this.usuario.estadoUsuario = true;
       this.usuario.fotoPerfil = key;
       this.usuario.tokenPassword = '';
       this.usuarioService.saveUsuario(this.usuario).subscribe((data) => {
-        this.usuario = data;
+          this.usuario = data;
+          alert('SUCESSFULL')
       }, (error) => {
         console.log('2', error)
       })
@@ -138,7 +140,7 @@ export class ControlUsuariosComponent implements OnInit {
 
   // UPDATE USUARIO
   public updateUsuario() {
-    this.usuario.roles = this.listRoles
+    this.usuario.roles = this.listRoleAsignarUser
     this.usuarioService.saveUsuario(this.usuario).subscribe((data) => {
       this.usuario = data;
     }, (error) => {
