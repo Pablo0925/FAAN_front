@@ -40,9 +40,16 @@ export class ControlAnimalComponent implements OnInit {
     private alergiasService: AlergiasService,
     private examenfisicoservice: ExamenFisicoService
   ) { }
-
+  tipoVacunaSeleccionada: TipoVacuna = new TipoVacuna();
+  tipoEnfermedadSeleccionada: TipoEnfermedad = new TipoEnfermedad();
+  tipoTratamientoSeleccionada: TipoTratamiento = new TipoTratamiento();
+  tipoAlergiaSeleccionada: TipoAlergias = new TipoAlergias();
 
   ngOnInit(): void {
+    this.getAllTiposVacunas();
+    this.getAllTiposAlergias();
+    this.getAllTiposTratamiento();
+    this.getAllTiposEfermedades();
   }
 
   // GET ANIMALES FOR PARAMETERS
@@ -133,6 +140,34 @@ export class ControlAnimalComponent implements OnInit {
       console.log(data5)
     })
   }
+  public loadingVacuna: boolean = false;
+  public loadingEnfermedad: boolean = false;
+  public loadingTratamiento: boolean = false;
+  public loadingAlergia: boolean = false;
+  public isEmpty(obj: any) {
+		// return Object.keys(obj).length === 0;
+		return obj ? Object.keys(obj).length === 0 : true;
+	}
+
+  public onRowSelect(event: any) {
+		this.tipoVacuna = event;
+    this.tipoVacunaSeleccionada = event;
+	}
+
+  public onRowSelectEnfermedad(event: any) {
+		this.tipoEnfermedad = event;
+    this.tipoEnfermedadSeleccionada = event;
+	}
+
+  public onRowSelectTratamiento(event: any) {
+		this.tipoTratamiento = event;
+    this.tipoTratamientoSeleccionada = event;
+	}
+
+  public onRowSelectAlergia(event: any) {
+		this.tipoAlergia = event;
+    this.tipoAlergiaSeleccionada = event;
+	}
 
   // TEXT FOR INPUT SEARCH
   public isTextDigit: string = ""
@@ -456,4 +491,59 @@ export class ControlAnimalComponent implements OnInit {
     }
 
 
+    actualizarVacuna() {
+
+      if (this.tipoVacunaSeleccionada) {
+        this.tipoVacunaService.updateTipoVacuna(this.tipoVacunaSeleccionada.idTipoVacuna, this.tipoVacunaSeleccionada)
+          .subscribe((updatedVacuna: TipoVacuna) => {
+
+            console.log('Tipo de vacuna actualizado:', updatedVacuna);
+            this.visibleTipoVacuna = false;
+          }, (error) => {
+            console.error('Error al actualizar el tipo de vacuna:', error);
+          });
+      }
+    }
+
+    actualizarEnfermedad() {
+
+      if (this.tipoEnfermedadSeleccionada) {
+        this.tipoEnfermedadService.updateTipoEnfermedad(this.tipoEnfermedadSeleccionada.idTipoEnfermedad, this.tipoEnfermedadSeleccionada)
+          .subscribe((updateEnfermedad: TipoEnfermedad) => {
+
+            console.log('Tipo de enfermedad actualizado:', updateEnfermedad);
+            this.visibleTipoEnfermedad = false;
+          }, (error) => {
+            console.error('Error al actualizar el tipo de enfermedad:', error);
+          });
+      }
+    }
+
+    actualizarTratamiento() {
+
+      if (this.tipoTratamientoSeleccionada) {
+        this.tipoTratamientoService.updateTipoTratamiento(this.tipoTratamientoSeleccionada.idTipoTratamiento, this.tipoTratamientoSeleccionada)
+          .subscribe((updatedTratamiento: TipoTratamiento) => {
+
+            console.log('Tipo de Tratamiento actualizado:', updatedTratamiento);
+            this.visibleTipoTratamiento = false;
+          }, (error) => {
+            console.error('Error al actualizar el tipo de Tratamiento:', error);
+          });
+      }
+    }
+
+    actualizarAlergia() {
+
+      if (this.tipoAlergiaSeleccionada) {
+        this.tipoAlergiaService.updateTipoAlergias(this.tipoAlergiaSeleccionada.idTipoAlergia, this.tipoAlergiaSeleccionada)
+          .subscribe((updatedAlergia: TipoAlergias) => {
+
+            console.log('Tipo de Alergia actualizado:', updatedAlergia);
+            this.visibleTipoAlergia = false;
+          }, (error) => {
+            console.error('Error al actualizar el tipo de Alergia:', error);
+          });
+      }
+    }
 }
