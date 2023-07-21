@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { environment } from '../environment/enviroment';
+import { environment } from '../../environment/enviroment';
 import { RazaAnimal } from '../Models/razaAnimal';
 import { StorageService } from './storage.service';
 

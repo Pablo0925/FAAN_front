@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { StorageService } from './storage.service';
 import { Usuario } from '../Models/usuario';
-import { environment } from '../environment/enviroment';
+import { environment } from '../../environment/enviroment';
 
 @Injectable({
   providedIn: 'root'
