@@ -98,7 +98,7 @@
             <label for="nombreRaza"><strong>Tipo Raza</strong></label>
 
             <!--    [style]="{'max-height': '70px', 'overflow-y': 'auto'}" -->
-            <p-dropdown [options]="listTipoAnimals"  [(ngModel)]="tipoAnimal" optionLabel="nombreTipo" [filter]="true"
+            <p-dropdown [options]="listTipoAnimals" [(ngModel)]="tipoAnimal" optionLabel="nombreTipo" [filter]="true"
                 filterBy="nombreTipo" [showClear]="true" placeholder="Seleccione tipo" appendTo="body"
                 [style]="{'overflow-y': 'auto'}">
                 <ng-template pTemplate="selectedItem">
@@ -107,7 +107,7 @@
                         <div>{{ tipoAnimal.nombreTipo }}</div>
                     </div>
                 </ng-template>
-                <ng-template let-country pTemplate="item" [style.max-height.rem]="2 * 2" >
+                <ng-template let-country pTemplate="item" [style.max-height.rem]="2 * 2">
                     <div class="flex align-items-center gap-2">
                         <div>{{ country.nombreTipo }}</div>
                     </div>
@@ -154,9 +154,8 @@
         </div>
         <ng-template #notRazaPresent>
             <div class=" text-center mt-6">
-            <i class="pi pi-spin pi-cog"
-                        style="font-size: 4.5rem; color: gray"></i>
-</div>
+                <i class="pi pi-spin pi-cog" style="font-size: 4.5rem; color: gray"></i>
+            </div>
         </ng-template>
 
 
