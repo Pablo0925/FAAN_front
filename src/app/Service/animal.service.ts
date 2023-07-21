@@ -37,4 +37,10 @@ export class AnimalService {
     return this.http.post<Animal>(environment.apiuri + '/animal/save', animal);
   }
 
+  //FIND EXIST PLACA
+  public findPlacaAnimal(placa: string): Observable<Boolean> {
+    return this.http.get<Boolean>(environment.apiuri + '/animal/exitPlaca/' + placa);
+
+  }
+
 }
