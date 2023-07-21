@@ -84,9 +84,9 @@
     <ng-template pTemplate="content">
 
         <!-- USUARIO REGISTER -->
-        <p-panel header="" [toggleable]="true" styleClass="mt-4">
+        <div class="card shadow-3">
 
-            <div class="grid p-fluid align-items-center">
+            <div class="grid p-fluid align-items-center m-4">
                 <div class="col-12 md:col-8">
                     <div class="grid p-fluid align-items-center">
                         <div class="col-12 md:col-4">
@@ -222,7 +222,7 @@
 
                 </div>
             </div>
-        </p-panel>
+        </div>
     </ng-template>
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
