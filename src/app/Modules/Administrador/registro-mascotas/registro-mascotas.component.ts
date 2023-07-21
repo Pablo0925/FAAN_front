@@ -94,6 +94,9 @@ export class RegistroMascotasComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
+		//CLEAR LOCALSTORAGE LIST, RAZA, TIPO, SITUATION..
+		this.localStorageRemoveItems();
+
 		this.findPageableAnimal(0, 4, ['idAnimal', 'asc']);
 
 		this.pageablePersona(0, 3, ['idPersona', 'asc']);
@@ -196,18 +199,18 @@ export class RegistroMascotasComponent implements OnInit {
 			&& !this.isEmpty(this.tipoAnimal) && !this.isEmpty(this.razaAnimal)
 			&& !this.isEmpty(this.persona) && !this.isEmpty(this.catchIncomeSituation)) {
 
-			this.animalService.findPlacaAnimal(this.animal.placaAnimal).subscribe((data) => {
-				alert(data)
-			})
+			if (this.animal.idAnimal) {
+				this.updateAnimal();
+			} else {
+				if (this.avatarURL?.trim()) {
+					this.saveAnimal();
+				} else {
+					alert('campos incompletos2')
 
-			alert('listo')
-			// if (this.animal.idAnimal) {
-			// 	this.updateAnimal();
-			// } else {
-			// 	this.saveAnimal();
-			// }
+				}
+			}
 		} else {
-			alert('campos incompletos' + this.fichaRegister.descripcionFichaRegistro)
+			alert('campos incompletos1')
 		}
 
 	}
@@ -221,9 +224,7 @@ export class RegistroMascotasComponent implements OnInit {
 	public async uploadImage() {
 		try {
 			const result = await this.imagenService.savePictureInBuket(this.selectedFile).toPromise();
-
 			return result.key;
-
 		} catch (error) {
 			throw new Error()
 		}
@@ -233,7 +234,14 @@ export class RegistroMascotasComponent implements OnInit {
 	public fundacion = { idFudacion: 1 } as Fundacion; //Objeto de la fundacion..
 	public async saveAnimal() {
 
+		const isPlacaAnimalTaken = await this.animalService.findPlacaAnimal(this.animal.placaAnimal!).toPromise();
+
+		if (isPlacaAnimalTaken) {
+			this.animal.placaAnimal = this.generatePlacaAnimal(8);
+		}
+
 		const key = await this.uploadImage();
+		// Further code for saving the animal or any other processing.
 
 		this.fichaRegister.situacionIngreso = this.catchIncomeSituation;
 		this.fichaRegister.persona = this.persona;
@@ -262,12 +270,13 @@ export class RegistroMascotasComponent implements OnInit {
 	}
 
 	public async updateAnimal() {
-		const key = await this.uploadImage();
+		if (this.avatarURL?.trim()) {
+			this.animal.fotoAnimal = await this.uploadImage();
+		}
 
 		this.fichaRegister.situacionIngreso = this.catchIncomeSituation;
 
 		this.fichaRegisterService.updateFichaRegistro(this.fichaRegister.idFichaRegistro!, this.fichaRegister).subscribe(() => {
-			this.animal.fotoAnimal = key;
 			this.animal.razaAnimal = this.razaAnimal;
 			this.animalService.updateAnimal(this.animal.idAnimal!, this.animal).subscribe((data) => {
 				if (data != null) {
@@ -281,13 +290,22 @@ export class RegistroMascotasComponent implements OnInit {
 
 	}
 
-	public generatePlacaAnimal() {
+	public generatePlacaAnimal(length: number): string {
+		const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		const charsetLength = charset.length;
 		let placa = '';
-		var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-		for (var i = 0; i < 6; i++) {
-			placa += chars.charAt(Math.floor(Math.random() * chars.length));
+
+		const randomValues = new Uint8Array(length);
+
+		crypto.getRandomValues(randomValues);
+
+		for (let i = 0; i < length; i++) {
+			const randomIndex = randomValues[i] % charsetLength;
+			placa += charset.charAt(randomIndex);
 		}
+
 		this.animal.placaAnimal = placa;
+		return placa;
 	}
 
 	public eliminadoLogicoDeLosTiposAnimales(
@@ -321,38 +339,64 @@ export class RegistroMascotasComponent implements OnInit {
 	//INCOME SITUATION----------------------------------------
 
 	public findAllIncomeSituation() {
-		try {
-			this.incomeSituationService.getAllIncomeSituation().subscribe((data) => {
-				this.listIncomeSituation = data;
-			});
 
-		} catch (error) {
-			throw new Error();
+		let dataIncomeSituation = localStorage.getItem('listIncomeSituarion');
+		if (dataIncomeSituation) {
+			this.listIncomeSituation = JSON.parse(dataIncomeSituation);
+		} else {
+			try {
+				this.incomeSituationService.getAllIncomeSituation().subscribe((data) => {
+					this.listIncomeSituation = data;
+					localStorage.setItem('listIncomeSituarion', JSON.stringify(data));
+				});
+
+			} catch (error) {
+				throw new Error();
+			}
 		}
 
 	}
 
 	// RAZA AND TIPO ANIMAL--------------------------
 	public findByAllTipoAnimales() {
-		this.tipoAnimalService.findByAllTipoAnimal(0, 5, []).subscribe((data: any) => {
-			if (data != null) {
-				this.listTipoAnimal = data.content;
-			}
-		});
+		let dataLocal = localStorage.getItem('listTipos');
+		if (dataLocal) {
+			this.listTipoAnimal = (JSON.parse(dataLocal));
+		} else {
+			this.tipoAnimalService.findByAllTipoAnimal(0, 5, []).subscribe((data: any) => {
+				if (data != null) {
+					this.listTipoAnimal = data.content;
+					localStorage.setItem('listTipos', JSON.stringify(data.content));
+				}
+			});
+		}
+
 	}
 
 	public findByAllRazaAnimales() {
-		this.razaAnimalService.getAllRazaAnimal(0, 5, []).subscribe((data: any) => {
-			if (data != null) {
-				this.listRazaAnimal = data.content;
+		let dataLocal = localStorage.getItem('listRazas');
+		if (dataLocal) {
+			this.listRazaAnimal = (JSON.parse(dataLocal));
 
-				if (this.animal.idAnimal) {
-					this.eventCatchTipoFilter(this.animal.razaAnimal?.tipoAnimal!);
-					this.razaAnimal = this.animal.razaAnimal!;
+			this.loadingEventFilterRaza();
+		} else {
+			this.razaAnimalService.getAllRazaAnimal(0, 5, []).subscribe((data: any) => {
+				if (data != null) {
+					this.listRazaAnimal = data.content;
+					localStorage.setItem('listRazas', JSON.stringify(data.content));
+
+					this.loadingEventFilterRaza();
 				}
+			});
+		}
+	}
 
-			}
-		});
+	//EVENT FILTER RAZA OF TIPO
+	public loadingEventFilterRaza() {
+		if (this.animal.idAnimal) {
+			this.eventCatchTipoFilter(this.animal.razaAnimal?.tipoAnimal!);
+			this.razaAnimal = this.animal.razaAnimal!;
+		}
 	}
 
 	public listRazaFiltered: RazaAnimal[] = [];
@@ -399,6 +443,7 @@ export class RegistroMascotasComponent implements OnInit {
 			this.incomeSituationService.saveSituacionIngreso(this.incomeSituation).subscribe((data) => {
 				if (data != null) {
 					this.listIncomeSituation.push(data);
+					localStorage.setItem('listIncomeSituarion', JSON.stringify(this.listIncomeSituation));
 
 					setTimeout(() => {
 						this.closeDialogIconmeSituation();
@@ -452,14 +497,11 @@ export class RegistroMascotasComponent implements OnInit {
 		this.razaAnimalDialog = true;
 	}
 
-
 	public newMethodGeneral() {
 		this.findAllIncomeSituation();
 		this.findByAllTipoAnimales();
 		this.findByAllRazaAnimales();
 	}
-
-
 
 	public hideDialog() {
 		this.animal = {} as Animal;
@@ -467,6 +509,10 @@ export class RegistroMascotasComponent implements OnInit {
 		this.submitted = false;
 	}
 
-
+	public localStorageRemoveItems() {
+		localStorage.removeItem('listTipos');
+		localStorage.removeItem('listRazas');
+		localStorage.removeItem('listIncomeSituarion');
+	}
 
 }

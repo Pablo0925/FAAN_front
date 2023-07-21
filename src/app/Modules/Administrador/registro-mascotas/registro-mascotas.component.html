@@ -165,10 +165,14 @@
 							<div class="col-12 col-md-6">
 								<!-- Ajusta el valor de 'col-md-6' según el tamaño deseado -->
 								<div class="p-inputgroup">
+									<button type="button" pButton pRipple icon="pi pi-filter-slash"
+										styleClass="p-button-success" [disabled]="valueAtributeCI ? false : true"
+										pTooltip="Quitar busqueta" tooltipPosition="bottom"></button>
+
 									<input type="text" pInputText placeholder="Cédula.." [(ngModel)]="valueAtributeCI">
 									<button type="button" pButton pRipple icon="pi pi-search" styleClass="p-button-warn"
-										[disabled]="valueAtributeCI ? false : true"
-										(click)="findByAtributeName(2)"></button>
+										[disabled]="valueAtributeCI ? false : true" (click)="findByAtributeName(2)"
+										pTooltip="Buscar" tooltipPosition="bottom"></button>
 								</div>
 							</div>
 						</div>
@@ -218,8 +222,8 @@
 								<div class="p-inputgroup">
 									<input type="text" [(ngModel)]="animal.nombreAnimal"
 										[class]="submitted && (!animal.nombreAnimal) ? 'ng-invalid ng-dirty':''"
-										id="nombreAnimal" name="nombreAnimal" pInputText placeholder="Nombre.."
-										required />
+										id="nombreAnimal" name="nombreAnimal" pInputText placeholder="Nombre.." required
+										pTooltip="Nombre Animal" tooltipPosition="bottom" />
 								</div>
 							</span>
 							<small class="p-error" *ngIf="submitted && !animal.nombreAnimal">Name is required.</small>
@@ -230,13 +234,14 @@
 							<label for="nombreRaza"><strong>Placa Animal</strong></label>
 
 							<div class="p-inputgroup">
+
 								<input type="text" [(ngModel)]="animal.placaAnimal"
 									[class]="submitted && (!animal.placaAnimal || errorUnique) ? 'ng-invalid ng-dirty':''"
 									id="placaAnimal" name="placaAnimal" pInputText placeholder="Placa.." readonly
-									required>
+									required pTooltip="Placa Animal" tooltipPosition="bottom">
 								<button type="button" pButton pRipple
 									[icon]="'pi ' + (animal.placaAnimal ? 'pi-refresh' : 'pi-key')"
-									styleClass="p-button-warn" (click)="generatePlacaAnimal()"
+									styleClass="p-button-warn" (click)="generatePlacaAnimal(8)"
 									[disabled]="animal.idAnimal ? true : false"></button>
 							</div>
 							<small class="p-error" *ngIf="submitted && !animal.placaAnimal">Placa is required.</small>
@@ -254,7 +259,8 @@
 								<p-inputNumber [(ngModel)]="animal.edadAnimal" [showButtons]="true"
 									inputId="minmax-buttons" [min]="0" [max]="15"
 									[class]="submitted && (!animal.edadAnimal) ? 'ng-invalid ng-dirty':''"
-									id="edadAnimal" name="edadAnimal" placeholder="Edad..">
+									id="edadAnimal" name="edadAnimal" placeholder="Edad.." pTooltip="Edad"
+									tooltipPosition="bottom">
 								</p-inputNumber>
 
 							</div>
@@ -271,7 +277,7 @@
 								<p-dropdown [options]="listTipoAnimal" [(ngModel)]="tipoAnimal" optionLabel="nombreTipo"
 									(ngModelChange)="eventCatchTipoFilter($event)" [filter]="true" filterBy="nombreTipo"
 									[showClear]="true" placeholder="Seleccione tipo" appendTo="body"
-									[style]="{'overflow-y': 'auto'}">
+									[style]="{'overflow-y': 'auto'}" pTooltip="Tipo Animal" tooltipPosition="bottom">
 									<ng-template pTemplate="selectedItem">
 
 										<div class="flex align-items-center gap-2" *ngIf="tipoAnimal">
@@ -297,7 +303,8 @@
 								<p-dropdown [options]="listRazaFiltered" [(ngModel)]="razaAnimal"
 									optionLabel="nombreRaza" [filter]="true" filterBy="nombreRaza" [showClear]="true"
 									placeholder="Raza Animal" appendTo="body" [style]="{'overflow-y': 'auto'}"
-									[disabled]="isEmpty(tipoAnimal) ? true : false">
+									[disabled]="isEmpty(tipoAnimal) ? true : false" pTooltip="Raza Animal"
+									tooltipPosition="bottom">
 									<ng-template pTemplate="selectedItem">
 
 										<div class="flex align-items-center gap-2" *ngIf="razaAnimal">
@@ -332,14 +339,16 @@
 										<input type="file" #fileInput style="display: none;"
 											accept="image/jpeg, image/jpg, image/png" (change)="onBasicUpload($event)">
 
-										<button type="button" class="boton-avatar">
+										<button type="button" class="boton-avatar" pTooltip="Foto Animal"
+											tooltipPosition="bottom">
 
 											<i class="fas fa-camera" style="font-size: 1.3rem"
 												(click)="fileInput.click()"></i>
 										</button>
 									</div>
 									<div class="text-center">
-										<small class="p-error" *ngIf="submitted"><strong style="font-size: 14px;">Foto
+										<small class="p-error" *ngIf="submitted && !avatarURL"><strong
+												style="font-size: 14px;">Foto
 												es
 												requerido.</strong></small>
 									</div>
@@ -366,7 +375,7 @@
 						<p-dropdown [options]="listIncomeSituation" [(ngModel)]="catchIncomeSituation"
 							optionLabel="nombreSituacionIngreso" [filter]="true" filterBy="nombreSituacionIngreso"
 							[showClear]="true" placeholder="Situación Ingreso" appendTo="body"
-							[style]="{'overflow-y': 'auto'}">
+							[style]="{'overflow-y': 'auto'}" pTooltip="Situación ingreso" tooltipPosition="bottom">
 							<ng-template pTemplate="selectedItem">
 
 								<div class="flex align-items-center gap-2" *ngIf="catchIncomeSituation">
@@ -402,7 +411,8 @@
 							<textarea id="descripcionFichaRegistro" name="descripcionFichaRegistro"
 								[class]="submitted && (!fichaRegister.descripcionFichaRegistro) ? 'ng-invalid ng-dirty':''"
 								pInputTextarea rows="3" cols="20" [(ngModel)]="fichaRegister.descripcionFichaRegistro"
-								required placeholder="Ingrese descripcion."></textarea>
+								required placeholder="Ingrese descripcion." pTooltip="Descripción"
+								tooltipPosition="bottom"></textarea>
 
 							<small class="p-error"
 								*ngIf="submitted && !fichaRegister.descripcionFichaRegistro">Descripción
