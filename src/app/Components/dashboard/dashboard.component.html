@@ -41,17 +41,21 @@
         </div>
     </div>
 </div>
-<div class="data">
-    <div class="card flex justify-content-center">
+<div class="card-container">
+    <div class="card inline-block font-bold text-center p-4 border-round">
         <p class="pc">Adopciones Por raza</p>
         <p-chart class="m-3" type="doughnut" [data]="data" [options]="options" width="30vw" height="80vh"></p-chart>
     </div>
-    <div class="card">
-        <p class="pc m-8">Adopciones Por Año</p>
-        <p-chart class="m-4" type="bar" [data]="basicData" [options]="basicOptions" width="40vw" height="80vh"></p-chart>
-    </div>
-    <div class="card flex justify-content-center">
-        <p class="pc">Adopciones Por raza</p>
-        <p>jsalkdjalskndalksdalsklkdajdlasdjsssssss</p>
+    <div class="card inline-block font-bold text-center p-4 border-round mx-4">
+        <p class="pc">Adopciones Por Año</p>
+        <p-chart class="m-3" type="bar" [data]="basicData" [options]="basicOptions" width="40vw" height="80vh"></p-chart>
     </div>
 </div>
+<!-- <div class="card">
+    <p class="pc">Adopciones Por raza</p>
+    <p-chart class="m-3" type="doughnut" [data]="data" [options]="options" width="30vw" height="80vh"></p-chart>
+</div> -->
+<!-- <div class="card">
+    <p class="pc m-8">Adopciones Por Año</p>
+    <p-chart class="m-4" type="bar" [data]="basicData" [options]="basicOptions" width="40vw" height="80vh"></p-chart>
+</div> -->
