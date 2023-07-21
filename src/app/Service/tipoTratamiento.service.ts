@@ -31,7 +31,7 @@ export class TipoTratamientoService {
   }
 
   public saveTipoTratamiento(tipoTratamiento: TipoTratamiento):Observable<TipoTratamiento>{
-    return this.http.post<TipoTratamiento>(environment.apiuriPublic+'/tipoTratamiento/save', tipoTratamiento);
+    return this.http.post<TipoTratamiento>(environment.apiuri+'/tipoTratamiento/save', tipoTratamiento);
   }
 
 }

@@ -14,10 +14,13 @@
 	--dark: #000;
 	--green: #81D43A;
 	--light-green: #E3FFCB;
-	--blue: #52a4b7;
+	--blue: #65b2cc;
 	--light-blue: #f7fafb;
 	--dark-blue: #0C5FCD;
 	--red: #FC3B56;
+
+	/**/
+	--btn-primary: #52a4b7;
 }
 
 html {
@@ -53,7 +56,7 @@ p {
 
 /*BUTTONS*/
 .btn-primarys {
-	background: #52a4b7;
+	background: #65b2cc;
 	border: none;
 	outline: none;
 	color: white;
@@ -63,12 +66,12 @@ p {
 }
 
 .btn-primarys:hover {
-	background: #52a5b7bf;
+	background: #65b2cce4;
 	color: white;
 
 }
 
 .btn-primarys:active {
-	background: #52a5b7bf;
+	background: #65b2cce4;
 	color: white;
 }

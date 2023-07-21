@@ -1,6 +1,6 @@
 export class AlergiaAnimales{
     estadoAlergia!:  string;
-    fechaAlergia!:   Date;
+    fechaAlergias!:   Date;
     nombreAlergia!:  string;
     observaciones!: string;
 }
