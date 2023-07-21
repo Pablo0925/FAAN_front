@@ -16,4 +16,8 @@ export class RolService {
     return this.http.get<Rol[]>(environment.apiuri + '/rol/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
   }
 
+  public getAllRolesFull(): Observable<Rol[]> {
+    return this.http.get<Rol[]>(environment.apiuri + '/rol/list');
+  }
+
 }

@@ -1,0 +1,241 @@
+<div class="card p-3">
+
+    <p-toolbar styleClass="mb-3 gap-2">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-primary mr-2"
+                (click)="openNewUsuario()"></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="listUsuarios" [lazy]="true" (onLazyLoad)="loadUsuarioLazy($event)" dataKey="idUsuario"
+        [tableStyle]="{ 'min-width': '75rem' }" [paginator]="true" [rows]="size" [totalRecords]="totalRecords"
+        [rowHover]="true" currentPageReportTemplate="Mostrando {first} to {last} of {totalRecords}  Usuarios"
+        [showCurrentPageReport]="true" [loading]="loading"
+        [globalFilterFields]="['idUsuario', 'username', 'usuario.persona.identificacion']">
+
+        <ng-template pTemplate="caption">
+
+            <div class="grid p-fluid align-items-center">
+                <div class="col-12 md:col-8">
+                    <div class="p-inputgroup">
+                        <h5 class="m-0"><strong>REGISTRO DE USUARIOS</strong></h5><br>
+                    </div>
+                </div>
+            </div>
+
+        </ng-template>
+
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="idUsuario" style="min-width:15rem"><strong>ID</strong> <p-sortIcon
+                        field="idUsuario"></p-sortIcon></th>
+
+                <th pSortableColumn="fotoPerfil" style="min-width:15rem"><strong>FOTO</strong> <p-sortIcon
+                        field="fotoPerfil"></p-sortIcon>
+                </th>
+
+                <th pSortableColumn="username" style="min-width:15rem"><strong>USERNAME</strong> <p-sortIcon
+                        field="username"></p-sortIcon></th>
+
+                <th pSortableColumn="usuario.persona.identificacion" style="min-width:15rem">
+                    <strong>IDENTIFICACION</strong> <p-sortIcon field="usuario.persona.identificacion"></p-sortIcon>
+                </th>
+
+                <th pSortableColumn="estadoUsuario" style="min-width:15rem"><strong>ESTADO</strong> <p-sortIcon
+                        field="estadoUsuario"></p-sortIcon>
+                </th>
+                <th></th>
+
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-usuario>
+            <tr>
+
+                <td>{{ usuario.idUsuario }}</td>
+                <td><img [src]="'https://bucketgtmt.s3.amazonaws.com/'+ usuario.fotoPerfil" width="100" height="60"
+                        class="shadow-6" /></td>
+                <td>{{ usuario.username }}</td>
+                <td>{{ usuario.persona.identificacion }}</td>
+                <td>{{ usuario.estadoUsuario }}</td>
+
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" (click)="editUsuario(usuario)"
+                        class="p-button-rounded p-button-success p-button-outlined mr-2"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">En total son {{ listUsuarios ?
+                totalRecords : 0 }} Usuarios.</div>
+        </ng-template>
+    </p-table>
+</div>
+
+
+<p-dialog [(visible)]="userDialog"
+    [style]="{ width: screenWidth < 700 ? '100%' : '80%', padding: screenWidth < 700 ? '2%' : '' }"
+    header="REGISTRO USUARIO" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+
+        <!-- USUARIO REGISTER -->
+        <p-panel header="Datos Animal" [toggleable]="true" styleClass="mt-4">
+
+            <div class="grid p-fluid align-items-center">
+                <div class="col-12 md:col-8">
+                    <div class="grid p-fluid align-items-center">
+                        <div class="col-12 md:col-6">
+                            <label for="nombreRaza"><strong>Identificacion</strong></label>
+                            <span class="p-input-icon-right ">
+                                <i class="pi pi-info-circle"
+                                    [style.color]="submitted && !persona.identificacion ? 'red':''"></i>
+                                <div class="p-inputgroup">
+                                    <input type="text" pTooltip="Identificación" [(ngModel)]="persona.identificacion"
+                                        [class]="submitted && (!persona.identificacion) ? 'ng-invalid ng-dirty':''"
+                                        id="identificacion" name="identificacion" pInputText
+                                        placeholder="identificacion.." required />
+                                </div>
+                            </span>
+                            <small class="p-error" *ngIf="submitted && !persona.identificacion">Identificacion es
+                                obligatotia.</small>
+                        </div>
+                        <div class="col-12 md:col-6">
+                            <label for="nombreRaza"><strong>Nombres/Apellidos</strong></label>
+                            <span class="p-input-icon-right ">
+                                <i class="pi pi-info-circle" [style.color]="submitted && !fullname ? 'red':''"></i>
+                                <div class="p-inputgroup">
+                                    <input pTooltip="Nombres y Apellidos" type="text" [(ngModel)]="fullname"
+                                        [class]="submitted && !fullname ? 'ng-invalid ng-dirty':''" id="fullname"
+                                        name="fullname" pInputText placeholder="Nombres y Apellidos.." required />
+                                </div>
+                            </span>
+                            <small class="p-error" *ngIf="submitted && !fullname">Nombres y Apellidos
+                                requeridos.</small>
+                        </div>
+                    </div>
+
+                    <div class="grid p-fluid align-items-center">
+                        <div class="col-12 md:col-6">
+                            <label for="nombreRaza"><strong>Celular</strong></label>
+                            <span class="p-input-icon-right ">
+                                <div class="p-inputgroup">
+                                    <input type="text" pTooltip="Celular" [(ngModel)]="persona.celular"
+                                        [class]="submitted && (!persona.celular) ? 'ng-invalid ng-dirty':''"
+                                        id="celular" name="celular" pInputText placeholder="celular.." />
+                                </div>
+                            </span>
+                        </div>
+
+                        <div class="col-12 md:col-6">
+                            <label for="nombreRaza"><strong>Correo</strong></label>
+                            <span class="p-input-icon-right ">
+                                <div class="p-inputgroup">
+                                    <input pTooltip="Correo" type="text" [(ngModel)]="persona.correo"
+                                        [class]="submitted && !persona.correo ? 'ng-invalid ng-dirty':''" id="correo"
+                                        name="correo" pInputText placeholder="Correo electronico.." required />
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="grid p-fluid align-items-center">
+                        <div class="col-12 md:col-6">
+                            <label for="nombreRaza"><strong>Username</strong></label>
+                            <span class="p-input-icon-right ">
+                                <i class="pi pi-info-circle"
+                                    [style.color]="submitted && !usuario.username ? 'red':''"></i>
+                                <div class="p-inputgroup">
+                                    <input type="text" pTooltip="Username" [(ngModel)]="usuario.username"
+                                        [class]="submitted && (!usuario.username) ? 'ng-invalid ng-dirty':''"
+                                        id="username" name="username" pInputText placeholder="username.." required />
+                                </div>
+                            </span>
+                            <small class="p-error" *ngIf="submitted && !usuario.username">Username es
+                                obligatotia.</small>
+                        </div>
+                        <div class="col-12 md:col-6">
+                            <label for="nombreRaza"><strong>Password</strong></label>
+                            <span class="p-input-icon-right ">
+                                <i class="pi pi-info-circle"
+                                    [style.color]="submitted && !usuario.password ? 'red':''"></i>
+                                <div class="p-inputgroup">
+                                    <input type="password" pTooltip="Contraseña" [(ngModel)]="usuario.password"
+                                        [class]="submitted && (!usuario.password) ? 'ng-invalid ng-dirty':''"
+                                        id="password" name="password" pPassword placeholder="password.." required />
+                                </div>
+                            </span>
+                            <small class="p-error" *ngIf="submitted && !usuario.password">Contraseña es
+                                obligatoria.</small>
+                        </div>
+                    </div>
+
+                    <div class="col-12 md:col-12">
+                        <p-table [value]="listRoles" class="role-table" [style]="{width: '100%'}">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th class="header-cell"><strong>NOMBRE ROL</strong></th>
+                                    <th class="header-cell"><strong>ROL ASIGNADO</strong></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rol>
+                                <tr>
+                                    <td class="data-cell"><strong>{{ rol.nombreRol }}</strong></td>
+                                    <td class="data-cell">
+                                        <button *ngIf="isRoleAssigned(rol)" pButton label="Asignado" icon="pi pi-check"
+                                            class="assign-button assigned-role" type="button"
+                                            (click)="asignarRolesUsuario(rol)"></button>
+
+                                        <button *ngIf="!isRoleAssigned(rol)" type="button" pButton pRipple
+                                            label="No asignado" icon="pi pi-times" class="w-full custom-button"
+                                            (click)="asignarRolesUsuario(rol)"></button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+
+                </div>
+
+                <div class="col-12 md:col-4">
+                    <p-panel header="Foto Usuario">
+                        <section class="seccion-perfil-usuario mb-5 mt-3">
+                            <div class="perfil-usuario-header">
+                                <div class="perfil-usuario-portada">
+                                    <div class="perfil-usuario-avatar">
+                                        <img [src]="avatarURL ? avatarURL: usuario.fotoPerfil? 'https://bucketgtmt.s3.amazonaws.com/' + usuario.fotoPerfil: 'https://us.123rf.com/450wm/dervish37/dervish371805/dervish37180500017/101552833-icono-de-vector-gato-y-perro.jpg?ver=6'"
+                                            alt="img-avatar" height="165px">
+                                        <input type="file" #fileInput style="display: none;"
+                                            accept="image/jpeg, image/jpg, image/png" (change)="onBasicUpload($event)">
+
+                                        <button type="button" class="boton-avatar">
+
+                                            <i class="fas fa-camera" style="font-size: 1.3rem"
+                                                (click)="fileInput.click()"></i>
+                                        </button>
+                                    </div>
+                                    <div class="text-center">
+                                        <small class="p-error" *ngIf="submitted"><strong style="font-size: 14px;">Foto
+                                                es
+                                                requerido.</strong></small>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+                    </p-panel>
+
+                </div>
+            </div>
+        </p-panel>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple [label]=" usuario.idUsuario ? 'Actualizar': 'Guardar'" icon="pi pi-save"
+            class="p-button-text" (click)="saveAndUpdateUsuario()"></button>
+    </ng-template>
+</p-dialog>
