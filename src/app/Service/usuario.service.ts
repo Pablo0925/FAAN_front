@@ -14,10 +14,10 @@ export class UsuarioService {
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
   public saveUsuario(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(environment.apiuri + '/save', usuario);
+    return this.http.post<Usuario>(environment.apiuri + '/usuario/save', usuario);
   }
 
-  public getAllUsuario(page:number,size:number,sort:string): Observable<Usuario[]> {
+  public getAllUsuario(page:number,size:number,sort:string[]): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(environment.apiuri + '/usuario/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
   }
 
