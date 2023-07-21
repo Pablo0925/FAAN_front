@@ -204,15 +204,19 @@
                     optionLabel="nombreVacuna"></p-dropdown>
             </div>
         </div>
+
         <div class="grid p-fluid m-2">
-            <div class="col-12 md:col-6 mt-1">
+            <div class="col-12 md:col-12 mt-1">
                 <div class="p-inputgroup">
-                    <p-calendar inputId="edad" class="ng-dirty" [showIcon]="true" placeholder="Fecha Vacunacion"
-                        id="fechaVacuna" name="fechaVacuna" class="w-full mb-3"
-                        [(ngModel)]="vacuna.fechaVacuna"></p-calendar>
+                    <p-calendar [style]="{ 'position': 'relative', 'z-index': '1000' }" inputId="edad"
+                        class="ng-dirty" [showIcon]="true" placeholder="Fecha Vacunacion" id="fechaVacuna"
+                        name="fechaVacuna" [(ngModel)]="vacuna.fechaVacuna"></p-calendar>
                 </div>
             </div>
-            <div class="col-12 md:col-6 mt-1">
+        </div>
+
+        <div class="grid p-fluid m-2">
+            <div class="col-12 md:col-12 mt-1">
                 <div class="p-inputgroup">
                     <span class="p-float-label">
                         <input type="text" pInputText id="observaciones" name="observaciones"
@@ -223,6 +227,8 @@
                 </div>
             </div>
         </div>
+
+
         <div class="text-center">
             <button type="submit" class="btn btn-primarys">Agregar vacuna</button>
         </div>
@@ -260,9 +266,9 @@
     <form (ngSubmit)="saveEnfermedad()" ngNativeValidate style="padding: 15px;">
         <div class="grid p-fluid m-2">
             <div class="col-12 md:col-12 mt-1 justify-content-center">
-                <p-dropdown appendTo="body" id="selectedEnfermedad" name="selectedEnfermedad" [options]="listTipoEnfermedad"
-                    (onChange)="beta2()" [(ngModel)]="selectedEnfermedad" placeholder="Seleccione una Enfermedad"
-                    optionLabel="nombreEnfermedad"></p-dropdown>
+                <p-dropdown appendTo="body" id="selectedEnfermedad" name="selectedEnfermedad"
+                    [options]="listTipoEnfermedad" (onChange)="beta2()" [(ngModel)]="selectedEnfermedad"
+                    placeholder="Seleccione una Enfermedad" optionLabel="nombreEnfermedad"></p-dropdown>
             </div>
         </div>
         <div class="grid p-fluid m-2">
@@ -352,8 +358,8 @@
 
 
 <!-- MODAL TRATAMIENTO -->
-<p-dialog header="Crear nueva tratamiento" [(visible)]="visibleTipoTratamiento" [modal]="true" [style]="{ width: '30vw' }"
-    [draggable]="false" [resizable]="false">
+<p-dialog header="Crear nueva tratamiento" [(visible)]="visibleTipoTratamiento" [modal]="true"
+    [style]="{ width: '30vw' }" [draggable]="false" [resizable]="false">
     <form (ngSubmit)="saveTipoTratamiento()" ngNativeValidate style="padding: 15px;">
         <div class="grid p-fluid m-2">
             <div class="col-12 md:col-12 mt-1">
@@ -380,9 +386,9 @@
     <form (ngSubmit)="saveTratamiento()" ngNativeValidate style="padding: 15px;">
         <div class="grid p-fluid m-2">
             <div class="col-12 md:col-12 mt-1 justify-content-center">
-                <p-dropdown appendTo="body" id="selectedTratamiento" name="selectedTratamiento" [options]="listTipoTratamiento"
-                    (onChange)="beta3()" [(ngModel)]="selectedTratamiento" placeholder="Seleccione una Tratamiento"
-                    optionLabel="nombreTratamiento"></p-dropdown>
+                <p-dropdown appendTo="body" id="selectedTratamiento" name="selectedTratamiento"
+                    [options]="listTipoTratamiento" (onChange)="beta3()" [(ngModel)]="selectedTratamiento"
+                    placeholder="Seleccione una Tratamiento" optionLabel="nombreTratamiento"></p-dropdown>
             </div>
         </div>
         <div class="grid p-fluid m-2">
@@ -455,7 +461,8 @@
                 <div class="p-inputgroup">
                     <span class="p-float-label">
                         <input type="text" pInputText id="ojosrojos" name="ojosrojos" [(ngModel)]="ojosrojosExa" />
-                        <label htmlFor="ojosrojos" class="bx bx-eye"> Ojos Rojos <span class="red-asterisk"></span></label>
+                        <label htmlFor="ojosrojos" class="bx bx-eye"> Ojos Rojos <span
+                                class="red-asterisk"></span></label>
                     </span>
                 </div>
             </div>
@@ -470,16 +477,20 @@
             <div class="col-12 md:col-12 mt-1">
                 <div class="p-inputgroup">
                     <span class="p-float-label">
-                        <input type="text" pInputText id="sistemaUrinario" name="sistemaUrinario" [(ngModel)]="sistemaUrinarioExa" />
-                        <label htmlFor="sistemaUrinario" class="bx bx-water"> Sistema Urinario <span class="red-asterisk"></span></label>
+                        <input type="text" pInputText id="sistemaUrinario" name="sistemaUrinario"
+                            [(ngModel)]="sistemaUrinarioExa" />
+                        <label htmlFor="sistemaUrinario" class="bx bx-water"> Sistema Urinario <span
+                                class="red-asterisk"></span></label>
                     </span>
                 </div>
             </div>
             <div class="col-12 md:col-12 mt-1">
                 <div class="p-inputgroup">
                     <span class="p-float-label">
-                        <input type="text" pInputText id="sistemaDigestivo" name="sistemaDigestivo" [(ngModel)]="sistemaDigestivoExa" />
-                        <label htmlFor="sistemaDigestivo" class="bx bx-food-menu"> Sistema Digestivo <span class="red-asterisk"></span></label>
+                        <input type="text" pInputText id="sistemaDigestivo" name="sistemaDigestivo"
+                            [(ngModel)]="sistemaDigestivoExa" />
+                        <label htmlFor="sistemaDigestivo" class="bx bx-food-menu"> Sistema Digestivo <span
+                                class="red-asterisk"></span></label>
                     </span>
                 </div>
             </div>
@@ -533,4 +544,3 @@
     </p-card>
 
 </p-dialog>
-
