@@ -215,7 +215,6 @@ export class RegistroMascotasComponent implements OnInit {
 
 	}
 
-
 	public isEmpty(obj: any) {
 		// return Object.keys(obj).length === 0;
 		return obj ? Object.keys(obj).length === 0 : true;
@@ -228,7 +227,6 @@ export class RegistroMascotasComponent implements OnInit {
 		} catch (error) {
 			throw new Error()
 		}
-
 	}
 
 	public fundacion = { idFudacion: 1 } as Fundacion; //Objeto de la fundacion..
