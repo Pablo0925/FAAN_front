@@ -16,6 +16,7 @@ export class TipoVacunaService {
   public getAllTipoVacuna(page:number,size:number,sort:string): Observable<TipoVacuna[]> {
     return this.http.get<TipoVacuna[]>(environment.apiuri + '/tipoVacuna/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
   }
+  
 
 
   public getListaTipoVacuna():Observable<TipoVacuna[]>{

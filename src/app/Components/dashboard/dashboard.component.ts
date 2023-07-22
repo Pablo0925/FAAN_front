@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { NumeroAnimalTipo } from 'src/app/Payloads/PayloadNumeroAnimalTipo';
 import { PeyloadNumeroAdopcionFecha } from 'src/app/Payloads/peyloadNumeroAdopcionFecha';
 import { PeyloadNumeroAdopcionRaza } from 'src/app/Payloads/peyloadNumeroAdopcionRaza';
 import { CargarScrpitsService } from 'src/app/Service/cargar-scrpits.service';
@@ -8,7 +9,7 @@ import { PayloadService } from 'src/app/Service/peyloads.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss','./dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
 
@@ -21,6 +22,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDatas();
+    this.cargarAnimalesPorTipo(); 
   }
 
 
@@ -132,5 +134,29 @@ export class DashboardComponent implements OnInit {
       }
     };
   }
+  animalesPorTipo!: NumeroAnimalTipo[];
+  cargarAnimalesPorTipo() {
+    this.payloadService.getAllPeyloadNumeroAnimalTipo().subscribe(
+      (data: NumeroAnimalTipo[]) => {
+        this.animalesPorTipo = data;
+      },
+      error => {
+        console.error('Error al obtener datos de animales por tipo', error);
+      }
+    );
+  }
+
+
+  slickCarouselConfig = {
+    slidesToShow: 3, // Cantidad de slides a mostrar a la vez
+    slidesToScroll: 1, // Cantidad de slides a mover al hacer clic en las flechas de navegación
+    arrows: true, // Mostrar flechas de navegación
+    prevArrow: '<button type="button" class="slick-prev">Previous</button>', // Texto personalizado para flecha previa
+    nextArrow: '<button type="button" class="slick-next">Next</button>', // Texto personalizado para flecha siguiente
+    verticalSwiping: false, // Deshabilita el desplazamiento vertical para que el carrusel sea horizontal
+    vertical: false, // Deshabilita la orientación vertical para que el carrusel sea horizontal
+    infinite: false, // Deshabilita el desplazamiento infinito para que el carrusel no se repita
+    centerMode: false // Deshabilita el modo centrado para que los slides se muestren a la izquierda
+  };
 
 }
