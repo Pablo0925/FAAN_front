@@ -98,11 +98,11 @@ export class ControlUsuariosComponent implements OnInit {
     this.personaService.savePersona(this.persona).subscribe((data) => {
       this.persona = data
       console.log(this.persona)
+      this.usuario.idUsuario = 0;
       this.usuario.persona = this.persona;
       this.usuario.roles = this.selectedRoles;
       this.usuario.estadoUsuario = true;
       this.usuario.fotoPerfil = key;
-      this.usuario.tokenPassword = '';
       this.usuarioService.saveUsuario(this.usuario).subscribe((data) => {
         this.usuario = data;
         alert('SUCESSFULL')
