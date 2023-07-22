@@ -12,29 +12,26 @@ import { UsuarioService } from 'src/app/Service/usuario.service';
 })
 export class PerfilUsuarioComponent implements OnInit {
 
-
   constructor(
     private usuarioService: UsuarioService,
     private fundacionService: FundacionService,
     private toastrService: ToastrService,
-    private personaService:PersonaService
+    private personaService: PersonaService
 
   ) { }
 
   public idUsuarioLoggin?: any;
-  public usuLoginRol?: any;
 
   ngOnInit(): void {
     this.idUsuarioLoggin = localStorage.getItem('id_username');
-    this.usuLoginRol = localStorage.getItem('rol');
     this.getDataUser(this.idUsuarioLoggin);
   }
 
   // GET DATA FOR USER-CONNECT
   usuario?: Usuario;
   roles: string[] = [];
-  public classPersona = new Persona();
   persona = new Persona();
+
 
   public getDataUser(idUsername: number): void {
     this.usuarioService.getUsuarioById(idUsername).subscribe((data) => {
@@ -58,32 +55,24 @@ export class PerfilUsuarioComponent implements OnInit {
   // MODAL
   visible: boolean = false;
   showDialog() {
-    this.classPersona = { ...this.persona };
-    console.log(this.classPersona);
-    console.log(this.persona);
     this.visible = true;
   }
-
-  reloadPage() {
-    this.classPersona = { ...this.persona };
-  }
-  
 
   // UPDATE DATA - USER
   public updatePerfilById() {
     // Verificar si hay campos vacíos en Persona
     if (
-      !this.classPersona.identificacion ||
-      !this.classPersona.nombre1 ||
-      !this.classPersona.nombre2 ||
-      !this.classPersona.apellido1 ||
-      !this.classPersona.apellido2 ||
-      !this.classPersona.fechaNacimiento ||
-      !this.classPersona.direccion ||
-      !this.classPersona.telefono ||
-      !this.classPersona.celular ||
-      !this.classPersona.correo ||
-      !this.classPersona.genero
+
+      !this.persona.nombre1 ||
+      !this.persona.nombre2 ||
+      !this.persona.apellido1 ||
+      !this.persona.apellido2 ||
+      !this.persona.fechaNacimiento ||
+      !this.persona.direccion ||
+      !this.persona.telefono ||
+      !this.persona.celular ||
+      !this.persona.correo ||
+      !this.persona.genero
     ) {
       this.toastrService.warning(
         'Uno o más campos vacíos',
@@ -93,7 +82,7 @@ export class PerfilUsuarioComponent implements OnInit {
     }
   
     // Verificar si persona está definido
-    if (this.classPersona.idPersona === undefined) {
+    if (this.persona.idPersona === undefined) {
       this.toastrService.warning(
         'ID de la persona no definido',
         'Error en la actualización'
@@ -102,7 +91,7 @@ export class PerfilUsuarioComponent implements OnInit {
     }
   
     // Realizar actualización de la persona
-    this.personaService.updatePersona(this.classPersona.idPersona, this.classPersona)
+    this.personaService.updatePersona(this.persona.idPersona, this.persona)
       .subscribe(
         (data) => {
           if (data != null) {
@@ -132,6 +121,8 @@ export class PerfilUsuarioComponent implements OnInit {
 
 
 
+
+  
 
   // IMAGEN SELECT
   selectedFile!: File;
