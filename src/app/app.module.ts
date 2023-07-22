@@ -18,6 +18,7 @@ import { RegisterTipoAnimalComponent } from './Modules/Administrador/animal/regi
 import { RegisterRazaAnimalComponent } from './Modules/Administrador/animal/register-raza-animal/register-raza-animal.component';
 import { ControlAnimalComponent } from './Modules/Administrador/control-animal/control-animal.component';
 import { ControlUsuariosComponent } from './Modules/SuperAdministrador/control-usuarios/control-usuarios.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel'; 
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ControlUsuariosComponent } from './Modules/SuperAdministrador/control-u
     FormsModule,
     CommonModule,
     BrowserAnimationsModule,
+    SlickCarouselModule,
     ToastrModule.forRoot()
   ],
   providers: [],

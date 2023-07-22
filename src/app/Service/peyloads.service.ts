@@ -12,6 +12,7 @@ import { TratamientoAnimales } from '../Payloads/payloadTratamientoAnimal';
 import { VacunasAnimales } from '../Payloads/payloadVacunasAnimal';
 import { ExamenFisico } from '../Models/examenFisico';
 import { ExamenFisicoAnimales } from '../Payloads/payloadExamenFisicoAnimal';
+import { NumeroAnimalTipo } from '../Payloads/PayloadNumeroAnimalTipo';
 
 
 @Injectable({
@@ -28,6 +29,10 @@ export class PayloadService {
 
   public getAllPeyloadNumeroAdopcionFecha(): Observable<PeyloadNumeroAdopcionFecha[]>{
     return this.http.get<PeyloadNumeroAdopcionFecha[]>(environment.apiuri + `/animal/lista/PeyloadNumeroAdopcionFecha`);
+  }
+
+  public getAllPeyloadNumeroAnimalTipo(): Observable<NumeroAnimalTipo[]>{
+    return this.http.get<NumeroAnimalTipo[]>(environment.apiuri + `/tipoanimal/numeroAnimalesTipo`);
   }
 
   public getPeyloadEnfermedadAnimalById(idFichaMedica: number):Observable<EnfermedadAnimales[]>{

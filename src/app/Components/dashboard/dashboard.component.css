@@ -1,0 +1,31 @@
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .carousel-slide {
+    display: flex; /* Hace que los slides se muestren en línea horizontal */
+    justify-content: space-between; /* Alinea los slides en la misma fila y distribuye el espacio entre ellos */
+  }
+  
+  /* Estilos para el contenido de los slides */
+  .col-12 {
+    flex: 0 0 auto; /* Asegura que cada slide ocupe el ancho deseado */
+    padding: 0 10px; /* Espaciado entre los slides */
+  }
+  
+  /* Estilos personalizados para las flechas del carrusel */
+.slick-prev,
+.slick-next {
+  color: red; /* Cambiar el color a rojo */
+  font-size: 24px; /* Tamaño de fuente (ajusta según tus necesidades) */
+  background-color: transparent; /* Fondo transparente */
+  border: none; /* Sin borde */
+}
+
+/* Estilos adicionales para las flechas si se desean iconos personalizados, como en tu ejemplo */
+.slick-prev:before,
+.slick-next:before {
+  content: "\f104"; /* Código del icono de la flecha previa (ajusta según el ícono que desees) */
+  font-family: "FontAwesome"; /* Familia de fuentes para el icono (asegúrate de tener la fuente cargada) */
+}
