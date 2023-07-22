@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Alergias } from 'src/app/Models/alergias';
-import { Animal, Enfermedad, ExamenFisico, FichaMedica, TipoAlergias, TipoAnimal, TipoEnfermedad, TipoTratamiento, TipoVacuna, Tratamiento, Vacuna } from 'src/app/Models/models';
+import { Animal, Enfermedad, ExamenFisico, FichaMedica, Notificacion, TipoAlergias, TipoAnimal, TipoEnfermedad, TipoTratamiento, TipoVacuna, Tratamiento, Vacuna } from 'src/app/Models/models';
 import { AlergiaAnimales } from 'src/app/Payloads/payloadAlergiaAnimal';
 import { EnfermedadAnimales } from 'src/app/Payloads/payloadEnfermedadAnimal';
 import { ExamenFisicoAnimales } from 'src/app/Payloads/payloadExamenFisicoAnimal';
@@ -10,6 +10,7 @@ import { AlergiasService } from 'src/app/Service/alergias.service';
 import { AnimalService } from 'src/app/Service/animal.service';
 import { EnfermedadService } from 'src/app/Service/enfermedad.service';
 import { ExamenFisicoService } from 'src/app/Service/exmen-fisico.service';
+import { NotifacionesService } from 'src/app/Service/notifaciones.service';
 import { PayloadService } from 'src/app/Service/peyloads.service';
 import { TipoAlergiasService } from 'src/app/Service/tipoAlergias.service';
 import { TipoEnfermedadService } from 'src/app/Service/tipoEnfermedad.service';
@@ -38,7 +39,8 @@ export class ControlAnimalComponent implements OnInit {
     private tipoExamenFisicoService: ExamenFisicoService,
     private tratamientoService: TratamientoService,
     private alergiasService: AlergiasService,
-    private examenfisicoservice: ExamenFisicoService
+    private examenfisicoservice: ExamenFisicoService,
+    private notificacionService: NotifacionesService
   ) { }
 
 
@@ -282,26 +284,6 @@ export class ControlAnimalComponent implements OnInit {
     });
   }
 
-  beta() {
-    console.log(this.selectedVacuna);
-  }
-
-  beta2() {
-    console.log(this.selectedEnfermedad);
-  }
-
-  beta3() {
-    console.log(this.selectedTratamiento);
-  }
-
-  beta4() {
-    console.log(this.selectedAlergias);
-  }
-
-  beta5() {
-    console.log(this.selectedExamenFisico);
-  }
-
 
   // MODAl ADD VACUNA FOR ANIMAL
   vacuna = new Vacuna();
@@ -350,6 +332,8 @@ export class ControlAnimalComponent implements OnInit {
     this.examenfisicos = {} as ExamenFisico;
   }
 
+  //CREATENOTIFICATION
+  notificacion = new Notificacion();
   saveVacuna() {
     this.vacuna.tipoVacuna = this.selectedVacuna;
     this.vacuna.fichaMedica = this.isFichaMedica;
@@ -357,6 +341,17 @@ export class ControlAnimalComponent implements OnInit {
     this.vacunaService.saveVacuna(this.vacuna).subscribe((data) => {
       alert('SUCESSFULL');
       this.getListaVacunasByIdFichaMedica(this.isFichaMedica.idFichaMedica!)
+      // NOTIFICACION
+      // this.notificacion.fechaCreacion = Date.now();
+      // this.notificacion.idUsuario = this.vacuna.idVacuna;
+      this.notificacion.fullName = "HOLA"
+      this.notificacion.cuerpoMensaje = "Haz ingresado una nueva vacuna a " 
+      this.notificacion.idMascota = this.isIdAnimal
+      // this.notificacion.proximaFechaVacunacion = Date.now();
+      this.notificacionService.saveNotificacion(this.notificacion).subscribe((data) =>{
+        alert('notificacion creada')
+      });
+       // NOTIFICACION
       this.vacuna = {} as Vacuna;
       this.isFichaMedica = {} as FichaMedica;
       this.selectedVacuna = {} as TipoVacuna;

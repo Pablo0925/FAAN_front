@@ -199,8 +199,7 @@
     <form (ngSubmit)="saveVacuna()" ngNativeValidate style="padding: 15px;">
         <div class="grid p-fluid m-2">
             <div class="col-12 md:col-12 mt-1 justify-content-center">
-                <p-dropdown appendTo="body" id="selectedVacuna" name="selectedVacuna" [options]="listTipoVacuna"
-                    (onChange)="beta()" [(ngModel)]="selectedVacuna" placeholder="Seleccione una vacuna"
+                <p-dropdown appendTo="body" id="selectedVacuna" name="selectedVacuna" [options]="listTipoVacuna" [(ngModel)]="selectedVacuna" placeholder="Seleccione una vacuna"
                     optionLabel="nombreVacuna"></p-dropdown>
             </div>
         </div>
@@ -267,7 +266,7 @@
         <div class="grid p-fluid m-2">
             <div class="col-12 md:col-12 mt-1 justify-content-center">
                 <p-dropdown appendTo="body" id="selectedEnfermedad" name="selectedEnfermedad"
-                    [options]="listTipoEnfermedad" (onChange)="beta2()" [(ngModel)]="selectedEnfermedad"
+                    [options]="listTipoEnfermedad" [(ngModel)]="selectedEnfermedad"
                     placeholder="Seleccione una Enfermedad" optionLabel="nombreEnfermedad"></p-dropdown>
             </div>
         </div>
@@ -327,7 +326,7 @@
         <div class="grid p-fluid m-2">
             <div class="col-12 md:col-12 mt-1 justify-content-center">
                 <p-dropdown appendTo="body" id="selectedAlergias" name="selectedAlergia" [options]="listTipoAlergia"
-                    (onChange)="beta4()" [(ngModel)]="selectedAlergias" placeholder="Seleccione una Alergia"
+                   [(ngModel)]="selectedAlergias" placeholder="Seleccione una Alergia"
                     optionLabel="nombreAlergia"></p-dropdown>
             </div>
         </div>
@@ -387,7 +386,7 @@
         <div class="grid p-fluid m-2">
             <div class="col-12 md:col-12 mt-1 justify-content-center">
                 <p-dropdown appendTo="body" id="selectedTratamiento" name="selectedTratamiento"
-                    [options]="listTipoTratamiento" (onChange)="beta3()" [(ngModel)]="selectedTratamiento"
+                    [options]="listTipoTratamiento" [(ngModel)]="selectedTratamiento"
                     placeholder="Seleccione una Tratamiento" optionLabel="nombreTratamiento"></p-dropdown>
             </div>
         </div>
