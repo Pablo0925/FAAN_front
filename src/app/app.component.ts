@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CargarScrpitsService } from './Service/cargar-scrpits.service';
 import { Router } from '@angular/router';
 import { StorageService } from './Service/storage.service';
+import { NotifacionesService } from './Service/notifaciones.service';
 declare var navBar: any;
+
+import { WebSocketService } from './Service/web-socket.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,17 +20,48 @@ export class AppComponent implements OnInit {
 
   public isLogginPresent: boolean = false;
 
+  //ImplementSocket
+  private messageSubscription!: Subscription;
+  public receivedMessage!: string;
+
+
+
+  title = 'WebSocketClient';
+  stock: any = {};
+
+  private webSocket!: WebSocket;
+
+
   constructor(
     private _CargarScript: CargarScrpitsService,
     private router: Router,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private notificacionService: NotifacionesService,
+    private webSocketService: WebSocketService
   ) {
     _CargarScript.Cargar(["dashboard"]);
+
+
   }
 
   ngOnInit(): void {
     this.isLogginPresent = this.storageService.isLoggedIn();
+
+    // this.webSocket = new WebSocket('ws://localhost:8080/my-websocket-endpoint');
+    // this.webSocket.onmessage = (event) => {
+    //   console.log(event.data);
+
+    //   this.stock = JSON.parse(event.data)
+    // };
+
+    this.messageSubscription = this.webSocketService.getMessageObservable()
+      .subscribe((message: string) => {
+        console.log("--------------------------------");
+        console.log(message);
+        this.receivedMessage = message;
+      });
   }
+
 
   // LOGOUT
   public logOut() {
@@ -41,7 +76,7 @@ export class AppComponent implements OnInit {
   isSuperAdministrador: boolean = false;
   isAdministrador: boolean = false;
 
-  public checkRolesUserLogin(nombreRol:string): void {
+  public checkRolesUserLogin(nombreRol: string): void {
     switch (nombreRol) {
       case 'SUPERADMINISTRADOR':
         this.isSuperAdministrador = true;

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { environment } from 'src/environment/enviroment';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Notificacion } from '../Models/notificacion';
 
 @Injectable({
@@ -14,6 +14,17 @@ export class NotifacionesService {
 
   public saveNotificacion(notifiacion: Notificacion): Observable<Notificacion> {
     return this.http.post<Notificacion>(environment.apiuri + '/notificaciones/save', notifiacion);
+  }
+
+  // public getNotificacion(): Observable<Notificacion[]> {
+  //   return this.http.get<Notificacion[]>(environment.apiuri + '/notificaciones');
+  // }
+  public getNotificacion(): Observable<Notificacion[]> {
+    return this.http.get<Notificacion[]>(environment.apiuri + '/notificaciones').pipe(
+      tap((notificaciones: Notificacion[]) => {
+        console.log('Notificaciones obtenidas:', notificaciones);
+      })
+    );
   }
 
 }
