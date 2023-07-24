@@ -54,12 +54,12 @@ export class AppComponent implements OnInit {
     //   this.stock = JSON.parse(event.data)
     // };
 
-    this.messageSubscription = this.webSocketService.getMessageObservable()
-      .subscribe((message: string) => {
-        console.log("--------------------------------");
-        console.log(message);
-        this.receivedMessage = message;
-      });
+    // this.messageSubscription = this.webSocketService.getMessageObservable()
+    //   .subscribe((message: string) => {
+    //     console.log("--------------------------------");
+    //     console.log(message);
+    //     this.receivedMessage = message;
+    //   });
   }
 
 

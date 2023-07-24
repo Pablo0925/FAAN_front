@@ -18,7 +18,8 @@ import { RegisterTipoAnimalComponent } from './Modules/Administrador/animal/regi
 import { RegisterRazaAnimalComponent } from './Modules/Administrador/animal/register-raza-animal/register-raza-animal.component';
 import { ControlAnimalComponent } from './Modules/Administrador/control-animal/control-animal.component';
 import { ControlUsuariosComponent } from './Modules/SuperAdministrador/control-usuarios/control-usuarios.component';
-import { SlickCarouselModule } from 'ngx-slick-carousel'; 
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { RecoverPasswordComponent } from './Models/recover-password/recover-password.component'; 
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     RegisterTipoAnimalComponent,
     RegisterRazaAnimalComponent,
     ControlAnimalComponent,
-    ControlUsuariosComponent
+    ControlUsuariosComponent,
+    RecoverPasswordComponent
   ],
   imports: [
     BrowserModule,
