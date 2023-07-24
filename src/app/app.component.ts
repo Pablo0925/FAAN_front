@@ -5,9 +5,10 @@ import { StorageService } from './Service/storage.service';
 import { NotifacionesService } from './Service/notifaciones.service';
 import { Notificaciones } from './Models/notificacion';
 import { Message } from 'primeng/api';
-declare var navBar: any;
-import { webSocket } from 'rxjs/webSocket';
 
+
+import { WebSocketService } from './Service/web-socket.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -21,19 +22,50 @@ export class AppComponent implements OnInit {
 
   public isLogginPresent: boolean = false;
 
+  //ImplementSocket
+  private messageSubscription!: Subscription;
+  public receivedMessage!: string;
+
+
+
+  title = 'WebSocketClient';
+  stock: any = {};
+
+  private webSocket!: WebSocket;
+
+
   constructor(
     private _CargarScript: CargarScrpitsService,
     private router: Router,
     private storageService: StorageService,
-    private notificacionesService: NotifacionesService
+    private notificacionService: NotifacionesService,
+    private webSocketService: WebSocketService
   ) {
     _CargarScript.Cargar(["dashboard"]);
+
+
   }
 
   ngOnInit(): void {
     this.isLogginPresent = this.storageService.isLoggedIn();
-    this.getAllNotificaciones();
+
+
+    // this.webSocket = new WebSocket('ws://localhost:8080/my-websocket-endpoint');
+    // this.webSocket.onmessage = (event) => {
+    //   console.log(event.data);
+
+    //   this.stock = JSON.parse(event.data)
+    // };
+
+    this.messageSubscription = this.webSocketService.getMessageObservable()
+      .subscribe((message: string) => {
+        console.log("--------------------------------");
+        console.log(message);
+        this.receivedMessage = message;
+      });
+
   }
+
 
   // LOGOUT
   public logOut() {
