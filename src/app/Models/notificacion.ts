@@ -1,4 +1,4 @@
-export class Notificacion {
+export class Notificaciones {
     get_id?: string;
     fechaCreacion?: Date;
     idUsuario?: number;

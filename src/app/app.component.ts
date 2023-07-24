@@ -3,7 +3,9 @@ import { CargarScrpitsService } from './Service/cargar-scrpits.service';
 import { Router } from '@angular/router';
 import { StorageService } from './Service/storage.service';
 import { NotifacionesService } from './Service/notifaciones.service';
-declare var navBar: any;
+import { Notificaciones } from './Models/notificacion';
+import { Message } from 'primeng/api';
+
 
 import { WebSocketService } from './Service/web-socket.service';
 import { Subscription } from 'rxjs';
@@ -47,6 +49,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.isLogginPresent = this.storageService.isLoggedIn();
 
+
     // this.webSocket = new WebSocket('ws://localhost:8080/my-websocket-endpoint');
     // this.webSocket.onmessage = (event) => {
     //   console.log(event.data);
@@ -60,6 +63,7 @@ export class AppComponent implements OnInit {
         console.log(message);
         this.receivedMessage = message;
       });
+
   }
 
 
@@ -90,6 +94,15 @@ export class AppComponent implements OnInit {
         this.isLogginPresent = false;
         break;
     };
+  }
+
+  // NOTIFICACIONES
+  msgs!: Message[];
+  viewNotificacionesPanle: boolean = false;
+  listNotificaciones: Notificaciones[] = [];
+  countNotificaciones: number = 0;
+  public getAllNotificaciones() {
+   
   }
 
 }
