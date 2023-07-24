@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CargarScrpitsService } from './Service/cargar-scrpits.service';
 import { Router } from '@angular/router';
 import { StorageService } from './Service/storage.service';
+import { NotifacionesService } from './Service/notifaciones.service';
+import { Notificaciones } from './Models/notificacion';
+import { Message } from 'primeng/api';
 declare var navBar: any;
+import { webSocket } from 'rxjs/webSocket';
+
 
 @Component({
   selector: 'app-root',
@@ -19,13 +24,15 @@ export class AppComponent implements OnInit {
   constructor(
     private _CargarScript: CargarScrpitsService,
     private router: Router,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private notificacionesService: NotifacionesService
   ) {
     _CargarScript.Cargar(["dashboard"]);
   }
 
   ngOnInit(): void {
     this.isLogginPresent = this.storageService.isLoggedIn();
+    this.getAllNotificaciones();
   }
 
   // LOGOUT
@@ -41,7 +48,7 @@ export class AppComponent implements OnInit {
   isSuperAdministrador: boolean = false;
   isAdministrador: boolean = false;
 
-  public checkRolesUserLogin(nombreRol:string): void {
+  public checkRolesUserLogin(nombreRol: string): void {
     switch (nombreRol) {
       case 'SUPERADMINISTRADOR':
         this.isSuperAdministrador = true;
@@ -55,6 +62,15 @@ export class AppComponent implements OnInit {
         this.isLogginPresent = false;
         break;
     };
+  }
+
+  // NOTIFICACIONES
+  msgs!: Message[];
+  viewNotificacionesPanle: boolean = false;
+  listNotificaciones: Notificaciones[] = [];
+  countNotificaciones: number = 0;
+  public getAllNotificaciones() {
+   
   }
 
 }
