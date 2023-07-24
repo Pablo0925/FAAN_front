@@ -57,14 +57,6 @@ export class AppComponent implements OnInit {
     //   this.stock = JSON.parse(event.data)
     // };
 
-<<<<<<< HEAD
-    // this.messageSubscription = this.webSocketService.getMessageObservable()
-    //   .subscribe((message: string) => {
-    //     console.log("--------------------------------");
-    //     console.log(message);
-    //     this.receivedMessage = message;
-    //   });
-=======
     this.messageSubscription = this.webSocketService.getMessageObservable()
       .subscribe((message: string) => {
         console.log("--------------------------------");
@@ -72,7 +64,6 @@ export class AppComponent implements OnInit {
         this.receivedMessage = message;
       });
 
->>>>>>> 28eb13079dd31dbdbb2586237444c86b7619c75e
   }
 
 
@@ -111,7 +102,7 @@ export class AppComponent implements OnInit {
   listNotificaciones: Notificaciones[] = [];
   countNotificaciones: number = 0;
   public getAllNotificaciones() {
-   
+
   }
 
 }
