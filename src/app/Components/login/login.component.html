@@ -30,11 +30,13 @@
                     </div>
                     <div class="input-group mb-5 d-flex justify-content-between">
                         <div class="forgot">
-                            <small><a href="#">Olvido su contraseña?</a></small>
+
+                            <small><a (click)="openDialogRecoverPassword()">Olvido su contraseña?</a></small>
                         </div>
                     </div>
                     <div class="input-group mb-1">
-                        <button type="submit" (click)="singIn()" class="btn btn-lg btn-primarys w-100 fs-6">Login</button>
+                        <button type="submit" (click)="singIn()"
+                            class="btn btn-lg btn-primarys w-100 fs-6">Login</button>
                     </div>
                 </div>
             </div>
@@ -42,3 +44,42 @@
     </div>
 
 </div>
+
+<!-- IMPLEMENT RECOVER PASSWORD -->
+<p-dialog [(visible)]="dialogRecoverPassword" [style]="{ width: '450px', padding: screenWidth < 600 ? '10px' : '' }"
+    header="Recuperación de Contraseña" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <form [formGroup]="formulario">
+            <div class="field">
+                <label for="email"><strong>Ingrese su correo electrónico.</strong></label>
+                <input type="email" pInputText id="email" name="email" placeholder="Dirección de correo electrónico"
+                    formControlName="email"
+                    [class.is-invalid]="formulario.get('email')!.invalid && formulario.get('email')!.touched"
+                    class="form-control" formcontrolname="email" required autofocus />
+
+                <div
+                    *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched || formulario.get('email')?.dirty">
+                    <small class="text-danger" *ngIf="formulario.get('email')?.errors?.['required']">Correo es
+                        requerido.</small>
+                    <small class="text-danger" *ngIf="formulario.get('email')?.errors?.['pattern']">Dirección de correo
+                        invalido </small>
+                </div>
+
+                <div class="flex justify-content-center mt-4" *ngIf="!isEmpty(responseServer)">
+                    <p-message
+                        [severity]="responseServer.status === 200 ? 'success': responseServer.status === 404 ? 'warn':'error' "
+                        [text]="responseServer.message"></p-message>
+
+                </div>
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"
+            [disabled]="submitted ? true : false"></button>
+        <button pButton pRipple [label]="submitted ? 'Validando': 'Envíar'"
+            [icon]="'pi '+(submitted ? 'pi-spin pi-spinner':'pi-check')" [disabled]="submitted ? true : false"
+            class="p-button-text" (click)="sendRecoverPassword()"></button>
+    </ng-template>
+</p-dialog>

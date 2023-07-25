@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Alergias } from 'src/app/Models/alergias';
-import { Animal, Enfermedad, ExamenFisico, FichaMedica, Notificacion, TipoAlergias, TipoAnimal, TipoEnfermedad, TipoTratamiento, TipoVacuna, Tratamiento, Vacuna } from 'src/app/Models/models';
+import { Animal, Enfermedad, ExamenFisico, FichaMedica, Notificaciones, TipoAlergias, TipoAnimal, TipoEnfermedad, TipoTratamiento, TipoVacuna, Tratamiento, Vacuna } from 'src/app/Models/models';
 import { AlergiaAnimales } from 'src/app/Payloads/payloadAlergiaAnimal';
 import { EnfermedadAnimales } from 'src/app/Payloads/payloadEnfermedadAnimal';
 import { ExamenFisicoAnimales } from 'src/app/Payloads/payloadExamenFisicoAnimal';
@@ -368,7 +368,7 @@ export class ControlAnimalComponent implements OnInit {
   }
 
   //CREATENOTIFICATION
-  notificacion = new Notificacion();
+  notificacion = new Notificaciones();
   saveVacuna() {
     this.vacuna.tipoVacuna = this.selectedVacuna;
     this.vacuna.fichaMedica = this.isFichaMedica;
