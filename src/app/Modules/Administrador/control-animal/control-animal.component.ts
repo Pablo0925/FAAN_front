@@ -367,8 +367,6 @@ export class ControlAnimalComponent implements OnInit {
     this.examenfisicos = {} as ExamenFisico;
   }
 
-  //CREATENOTIFICATION
-  notificacion = new Notificaciones();
   saveVacuna() {
     this.vacuna.tipoVacuna = this.selectedVacuna;
     this.vacuna.fichaMedica = this.isFichaMedica;
@@ -376,17 +374,6 @@ export class ControlAnimalComponent implements OnInit {
     this.vacunaService.saveVacuna(this.vacuna).subscribe((data) => {
       alert('SUCESSFULL');
       this.getListaVacunasByIdFichaMedica(this.isFichaMedica.idFichaMedica!)
-      // NOTIFICACION
-      // this.notificacion.fechaCreacion = Date.now();
-      // this.notificacion.idUsuario = this.vacuna.idVacuna;
-      this.notificacion.fullName = "HOLA"
-      this.notificacion.cuerpoMensaje = "Haz ingresado una nueva vacuna a " 
-      this.notificacion.idMascota = this.isIdAnimal
-      // this.notificacion.proximaFechaVacunacion = Date.now();
-      this.notificacionService.saveNotificacion(this.notificacion).subscribe((data) =>{
-        alert('notificacion creada')
-      });
-       // NOTIFICACION
       this.vacuna = {} as Vacuna;
       this.isFichaMedica = {} as FichaMedica;
       this.selectedVacuna = {} as TipoVacuna;
