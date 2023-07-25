@@ -10,16 +10,24 @@ import { RegisterTipoAnimalComponent } from './Modules/Administrador/animal/regi
 import { ControlAnimalComponent } from './Modules/Administrador/control-animal/control-animal.component';
 import { RegisterRazaAnimalComponent } from './Modules/Administrador/animal/register-raza-animal/register-raza-animal.component';
 import { ControlUsuariosComponent } from './Modules/SuperAdministrador/control-usuarios/control-usuarios.component';
+import { RecoverPasswordComponent } from './Components/recover-password/recover-password.component';
+import { ControlPersonComponent } from './Modules/Administrador/control-person/control-person.component';
 
 const routes: Routes = [
 
+  //Password recover..
+  { path: 'recover/password/:token', component: RecoverPasswordComponent },
+  // { path: 'recover-password', component: RecoverPasswordComponent },
+
+  { path: 'person/gestion', component: ControlPersonComponent },
+
   // MASCOTAS
-  { path: 'registro-mascota', component: RegistroMascotasComponent},
-  { path: 'control-animal', component: ControlAnimalComponent},
+  { path: 'registro-mascota', component: RegistroMascotasComponent },
+  { path: 'control-animal', component: ControlAnimalComponent },
 
   //REGISTRO DE TIPO DE ANIMAL-----------------------------------------------------
-  {path:'animal-tipo', component: RegisterTipoAnimalComponent  },
-  {path:'animal-raza', component: RegisterRazaAnimalComponent  },
+  { path: 'animal-tipo', component: RegisterTipoAnimalComponent },
+  { path: 'animal-raza', component: RegisterRazaAnimalComponent },
 
   // SHARED
   { path: 'dashboard', component: DashboardComponent },
@@ -28,8 +36,8 @@ const routes: Routes = [
 
 
   // SUPERADMIN
-  { path: 'control-usuario', component: ControlUsuariosComponent},
-  
+  { path: 'control-usuario', component: ControlUsuariosComponent },
+
   // PUBLIC
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: 'login' }

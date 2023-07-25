@@ -16,7 +16,7 @@ export class RecoverPasswordService {
     return this.http.get<String>(environment.apiuriPublic + '/auth/email/sendRecuperacionPassword/' + email);
   }
 
-  public changePasswordFindUser(recoverPassword: RecoverPassword): Observable<Usuario> {
-    return this.http.post<Usuario>(environment.apiuriPublic + '/auth/cambiarContraseniaUsuario', recoverPassword);
+  public changePasswordFindUser(recoverPassword: RecoverPassword): Observable<String> {
+    return this.http.post<String>(environment.apiuriPublic + '/auth/cambiarContraseniaUsuario', recoverPassword);
   }
 }
