@@ -284,6 +284,19 @@
                 </div>
             </div>
         </div>
+        <p-panel header="Proxima Vacuna" [toggleable]="true">
+            <div class="grid p-fluid m-2">
+                <div class="col-12 md:col-12 mt-1">
+                    <div class="p-inputgroup">
+                        <p-calendar [inline]="true" [style]="{ 'position': 'relative', 'z-index': '1000' }" inputId="edad"
+                            class="ng-dirty" [showIcon]="true" placeholder="Fecha Proxima Vacuna" id="fechaProximaVacuna"
+                            name="fechaProximaVacuna" [(ngModel)]="vacuna.fechaProximaVacuna"></p-calendar>
+                    </div>
+                </div>
+            </div>
+        </p-panel>
+
+
 
         <div class="grid p-fluid m-2">
             <div class="col-12 md:col-12 mt-1">

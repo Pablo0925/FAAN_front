@@ -393,6 +393,8 @@ export class ControlAnimalComponent implements OnInit {
       this.visibleVacuna = false;
     })
   }
+  mostrarPanel: boolean = false;
+
 
   // SELECT ANIMAL
   isIdAnimal!: number
