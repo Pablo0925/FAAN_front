@@ -96,6 +96,7 @@ export class AppComponent implements OnInit {
       this.listNotificaciones.push(notificacion);
       console.log("------------------>" + this.listNotificaciones[0].cuerpoMensaje)
     });
+
   }
 
 }
