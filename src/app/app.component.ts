@@ -5,8 +5,6 @@ import { StorageService } from './Service/storage.service';
 import { NotifacionesService } from './Service/notifaciones.service';
 import { Notificaciones } from './Models/notificacion';
 import { Message } from 'primeng/api';
-
-
 import { WebSocketService } from './Service/web-socket.service';
 import { Subscription } from 'rxjs';
 
@@ -48,22 +46,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLogginPresent = this.storageService.isLoggedIn();
-
-
-    // this.webSocket = new WebSocket('ws://localhost:8080/my-websocket-endpoint');
-    // this.webSocket.onmessage = (event) => {
-    //   console.log(event.data);
-
-    //   this.stock = JSON.parse(event.data)
-    // };
-
-    this.messageSubscription = this.webSocketService.getMessageObservable()
-      .subscribe((message: string) => {
-        console.log("--------------------------------");
-        console.log(message);
-        this.receivedMessage = message;
-      });
-
+    if (this.isLogginPresent === true) {
+      this.getAllNotificaciones();
+    }
   }
 
 
@@ -97,11 +82,20 @@ export class AppComponent implements OnInit {
   }
 
   // NOTIFICACIONES
-  msgs!: Message[];
   viewNotificacionesPanle: boolean = false;
   listNotificaciones: Notificaciones[] = [];
   countNotificaciones: number = 0;
   public getAllNotificaciones() {
+    console.log("Connected notifications request..");
+    this.messageSubscription = this.webSocketService.getMessageObservable()
+    .subscribe((message: string) => {
+      console.log("--------------------------------");
+      console.log("--------------" +message);
+      this.receivedMessage = message;
+      const notificacion = JSON.parse(message) as Notificaciones;
+      this.listNotificaciones.push(notificacion);
+      console.log("------------------>" + this.listNotificaciones[0].cuerpoMensaje)
+    });
 
   }
 
