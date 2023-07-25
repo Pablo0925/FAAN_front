@@ -43,3 +43,58 @@
 p {
     text-align: center;
 }
+
+
+
+
+
+/* Common styles for tabs */
+.tabs {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .tabs a {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .tabs a:hover {
+    background-color: #ddd;
+  }
+  
+  /* Add the active class to the selected tab */
+  .tabs a.active {
+    background-color: #70b8d0;
+    color: #fff;
+  }
+  
+  .tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+  }
+  
+  .tab-content:target {
+    display: block;
+  }
+  
+  /* Responsive styles */
+  @media screen and (max-width: 768px) {
+    .tabs {
+      flex-direction: column;
+    }
+  
+    .tabs a {
+      margin-bottom: 5px;
+    }
+  }
+  

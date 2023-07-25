@@ -8,6 +8,7 @@ import { TratamientoAnimales } from 'src/app/Payloads/payloadTratamientoAnimal';
 import { VacunasAnimales } from 'src/app/Payloads/payloadVacunasAnimal';
 import { AlergiasService } from 'src/app/Service/alergias.service';
 import { AnimalService } from 'src/app/Service/animal.service';
+import { CargarScrpitsService } from 'src/app/Service/cargar-scrpits.service';
 import { EnfermedadService } from 'src/app/Service/enfermedad.service';
 import { ExamenFisicoService } from 'src/app/Service/exmen-fisico.service';
 import { NotifacionesService } from 'src/app/Service/notifaciones.service';
@@ -28,6 +29,7 @@ export class ControlAnimalComponent implements OnInit {
 
 
   constructor(
+    private _CargarScript: CargarScrpitsService,
     private animalesService: AnimalService,
     private tipoVacunaService: TipoVacunaService,
     private tipoEnfermedadService: TipoEnfermedadService,
@@ -41,7 +43,7 @@ export class ControlAnimalComponent implements OnInit {
     private alergiasService: AlergiasService,
     private examenfisicoservice: ExamenFisicoService,
     private notificacionService: NotifacionesService
-  ) { }
+  ) {_CargarScript.Cargar(["controlanimal"]); }
   tipoVacunaSeleccionada: TipoVacuna = new TipoVacuna();
   tipoEnfermedadSeleccionada: TipoEnfermedad = new TipoEnfermedad();
   tipoTratamientoSeleccionada: TipoTratamiento = new TipoTratamiento();
