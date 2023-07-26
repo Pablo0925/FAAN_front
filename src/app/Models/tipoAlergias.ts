@@ -1,5 +1,5 @@
 export class TipoAlergias {
     idTipoAlergia!: number;
-    nombreAlergias!: string;
+    nombreAlergia!: string;
     estado!:        number;
 }

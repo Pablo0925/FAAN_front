@@ -11,163 +11,189 @@
     </div>
 </p-card>
 
-<p-card header="" class="m-2">
-    <h1 class="title">Vacunas</h1>
-    <div class="d-flex align-items-center">
-        <button type="button" (click)="showModalVacuna()" class="btn btn-primarys m-2" style="flex: 80%;">Añadir
-            vacuna</button>
-        <button type="button" (click)="showModalTipoVacuna()" class="btn btn-primarys m-2" style="flex: 10%;">Crear
-            Vacuna</button>
-    </div>
-    <div class="card">
-        <p-table [value]="vacunasAnimales" responsiveLayout="scroll">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Fecha Vacunacion</th>
-                    <th>Nombre Vacuna</th>
-                    <th>Observaciones</th>
-                    <th>Estado</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-columns="columns" let-data>
-                <tr>
-                    <td>{{ data.fechaVacuna }}</td>
-                    <td>{{ data.nombreVacuna }}</td>
-                    <td>{{ data.observaciones }}</td>
-                    <td>{{ data.estadoVacuna }}</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-</p-card>
+<div class="tabs">
+    <a href="#tab1" id="tab1Link">Vacunas</a>
+    <a href="#tab2" id="tab2Link">Enfermedades</a>
+    <a href="#tab3" id="tab3Link">Tratamientos</a>
+    <a href="#tab4" id="tab4Link">Alergias</a>
+    <a href="#tab5" id="tab5Link">Examenes Fisicos</a>
+  </div>
+  <div class="tab-content" id="tab1">
+    <p-card header="" class="m-2">
+        <h1 class="title">Vacunas</h1>
+        <div class="d-flex align-items-center">
+            <button type="button" (click)="showModalVacuna()" class="btn btn-primarys m-2" style="flex: 80%;">Añadir
+                vacuna</button>
+            <button type="button" (click)="showModalTipoVacuna()" class="btn btn-primarys m-2" style="flex: 10%;">Crear
+                Vacuna</button>
+        </div>
+        <div class="card">
+            <p-table [value]="vacunasAnimales" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Fecha Vacunacion</th>
+                        <th>Nombre Vacuna</th>
+                        <th>Observaciones</th>
+                        <th>Estado</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-columns="columns" let-data>
+                    <tr>
+                        <td>{{ data.fechaVacuna }}</td>
+                        <td>{{ data.nombreVacuna }}</td>
+                        <td>{{ data.observaciones }}</td>
+                        <td>{{ data.estadoVacuna }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </p-card>
+  </div>
+  
+  <div class="tab-content" id="tab2">
+    <p-card header="" class="m-2">
+        <h1 class="title">Efermedades</h1>
+        <div class="d-flex align-items-center">
+            <button type="button" (click)="showModalEnfermedad()" class="btn btn-primarys m-2" style="flex: 80%;">Añadir
+                Efermedades</button>
+            <button type="button" (click)="showModalTipoEnfermedad()" class="btn btn-primarys m-2" style="flex: 10%;">Crear
+                Efermedades</button>
+        </div>
+        <div class="card">
+            <p-table [value]="enfermedadAnimales">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Fecha Enfermedad</th>
+                        <th>Nombre Efnermedad</th>
+                        <th>Observaciones</th>
+                        <th>Estado</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-columns="columns" let-data2>
+                    <tr>
+                        <td>{{ data2.fechaEnfermedad }}</td>
+                        <td>{{ data2.nombreEnfermedad}}</td>
+                        <td>{{ data2.observaciones}}</td>
+                        <td>{{ data2.estadoEnfermedad}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </p-card>
+  </div>
+  
+  <div class="tab-content" id="tab3">
+    <p-card header="" class="m-2">
+        <h1 class="title">Tratamientos</h1>
+        <div class="d-flex align-items-center">
+            <button type="button" (click)="showModalTratamiento()" class="btn btn-primarys m-2" style="flex: 80%;">Añadir
+                Tratamientos</button>
+            <button type="button" (click)="showModalTipoTratamiento()" class="btn btn-primarys m-2" style="flex: 10%;">Crear
+                Tratamientos</button>
+        </div>
+        <div class="card">
+            <p-table [value]="tratamientoAnimales">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Fecha Tratamiento</th>
+                        <th>Nombre Tratamiento</th>
+                        <th>Observaciones</th>
+                        <th>Estado</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-columns="columns" let-data3>
+                    <tr>
+                        <td>{{ data3.fechaTratamiento }}</td>
+                        <td>{{ data3.nombreTratamiento }}</td>
+                        <td>{{ data3.observaciones }}</td>
+                        <td>{{ data3.estadoTratamiento }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </p-card>
+  </div>
+  
+  <div class="tab-content" id="tab4">
+    <p-card header="" class="m-2">
+        <h1 class="title">Alergias</h1>
+        <div class="d-flex align-items-center">
+            <button type="button" (click)="showModalAlergia()" class="btn btn-primarys m-2" style="flex: 80%;">Añadir
+                Alergias</button>
+            <button type="button" (click)="showModalTipoAlergia()" class="btn btn-primarys m-2" style="flex: 10%;">Crear
+                Alergias</button>
+        </div>
+        <div class="card">
+            <p-table [value]="alergiasAnimales" >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Fecha Alergias</th>
+                        <th>Nombre Alergias</th>
+                        <th>Observaciones</th>
+                        <th>Estado</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-columns="columns" let-data4>
+                    <tr>
+                        <td>{{ data4.fechaAlergias}}</td>
+                        <td>{{ data4.nombreAlergias}}</td>
+                        <td>{{ data4.observaciones}}</td>
+                        <td>{{ data4.estado}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </p-card>
+  </div>
+  
+  <div class="tab-content" id="tab5">
+    <p-card header="" class="m-2">
+        <h1 class="title">Examenes Fisicos</h1>
+        <div class="d-flex align-items-center">
+            <button type="button" (click)="showModalExamenFisico()" class="btn btn-primarys m-2" style="flex: 10%;">Crear
+                Examenes Fisicos</button>
+        </div>
+        <div class="card">
+            <p-table [value]="examenfisicoli">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Fecha Examene Fisico</th>
+                        <th>Frecuencia Cardica</th>
+                        <th>Mucosa</th>
+                        <th>Ojos rojos</th>
+                        <th>Piel</th>
+                        <th>Sistema Urinario</th>
+                        <th>Sistema Digestivo</th>
+                        <th>Abdomen</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-columns="columns" let-data5>
+                    <tr>
+                        <td>{{ data5.fechaRevisionFisisca }}</td>
+                        <td>{{ data5.frecuenciaCardiaca }}</td>
+                        <td>{{ data5.mucosa }}</td>
+                        <td>{{ data5.ojosrojos }}</td>
+                        <td>{{ data5.piel }}</td>
+                        <td>{{ data5.sistemaUrinario }}</td>
+                        <td>{{ data5.sistemaDigestivo }}</td>
+                        <td>{{ data5.abdomen }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </p-card>
+  </div>
+  
 
-<p-card header="" class="m-2">
-    <h1 class="title">Efermedades</h1>
-    <div class="d-flex align-items-center">
-        <button type="button" (click)="showModalEnfermedad()" class="btn btn-primarys m-2" style="flex: 80%;">Añadir
-            Efermedades</button>
-        <button type="button" (click)="showModalTipoEnfermedad()" class="btn btn-primarys m-2" style="flex: 10%;">Crear
-            Efermedades</button>
-    </div>
-    <div class="card">
-        <p-table [value]="enfermedadAnimales">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Fecha Enfermedad</th>
-                    <th>Nombre Efnermedad</th>
-                    <th>Observaciones</th>
-                    <th>Estado</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-columns="columns" let-data2>
-                <tr>
-                    <td>{{ data2.fechaEnfermedad }}</td>
-                    <td>{{ data2.nombreEnfermedad}}</td>
-                    <td>{{ data2.observaciones}}</td>
-                    <td>{{ data2.estadoEnfermedad}}</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-</p-card>
 
-<p-card header="" class="m-2">
-    <h1 class="title">Tratamientos</h1>
-    <div class="d-flex align-items-center">
-        <button type="button" (click)="showModalTratamiento()" class="btn btn-primarys m-2" style="flex: 80%;">Añadir
-            Tratamientos</button>
-        <button type="button" (click)="showModalTipoTratamiento()" class="btn btn-primarys m-2" style="flex: 10%;">Crear
-            Tratamientos</button>
-    </div>
-    <div class="card">
-        <p-table [value]="tratamientoAnimales">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Fecha Tratamiento</th>
-                    <th>Nombre Tratamiento</th>
-                    <th>Observaciones</th>
-                    <th>Estado</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-columns="columns" let-data3>
-                <tr>
-                    <td>{{ data3.fechaTratamiento }}</td>
-                    <td>{{ data3.nombreTratamiento }}</td>
-                    <td>{{ data3.observaciones }}</td>
-                    <td>{{ data3.estadoTratamiento }}</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-</p-card>
 
-<p-card header="" class="m-2">
-    <h1 class="title">Alergias</h1>
-    <div class="d-flex align-items-center">
-        <button type="button" (click)="showModalAlergia()" class="btn btn-primarys m-2" style="flex: 80%;">Añadir
-            Alergias</button>
-        <button type="button" (click)="showModalTipoAlergia()" class="btn btn-primarys m-2" style="flex: 10%;">Crear
-            Alergias</button>
-    </div>
-    <div class="card">
-        <p-table [value]="alergiasAnimales" >
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Fecha Alergias</th>
-                    <th>Nombre Alergias</th>
-                    <th>Observaciones</th>
-                    <th>Estado</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-columns="columns" let-data4>
-                <tr>
-                    <td>{{ data4.fechaAlergias}}</td>
-                    <td>{{ data4.nombreAlergias}}</td>
-                    <td>{{ data4.observaciones}}</td>
-                    <td>{{ data4.estado}}</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-</p-card>
 
-<p-card header="" class="m-2">
-    <h1 class="title">Examenes Fisicos</h1>
-    <div class="d-flex align-items-center">
-        <button type="button" (click)="showModalExamenFisico()" class="btn btn-primarys m-2" style="flex: 80%;">Añadir
-            Examenes Fisicos</button>
-        <button type="button" (click)="showModalExamenFisico()" class="btn btn-primarys m-2" style="flex: 10%;">Crear
-            Examenes Fisicos</button>
-    </div>
-    <div class="card">
-        <p-table [value]="examenfisicoli">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Fecha Examene Fisico</th>
-                    <th>Frecuencia Cardica</th>
-                    <th>Mucosa</th>
-                    <th>Ojos rojos</th>
-                    <th>Piel</th>
-                    <th>Sistema Urinario</th>
-                    <th>Sistema Digestivo</th>
-                    <th>Abdomen</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-columns="columns" let-data5>
-                <tr>
-                    <td>{{ data5.fechaRevisionFisisca }}</td>
-                    <td>{{ data5.frecuenciaCardiaca }}</td>
-                    <td>{{ data5.mucosa }}</td>
-                    <td>{{ data5.ojosrojos }}</td>
-                    <td>{{ data5.piel }}</td>
-                    <td>{{ data5.sistemaUrinario }}</td>
-                    <td>{{ data5.sistemaDigestivo }}</td>
-                    <td>{{ data5.abdomen }}</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-</p-card>
+
+
+
+
+
+
 
 
 <!-- MODAL VACUNA -->
@@ -284,6 +310,19 @@
                 </div>
             </div>
         </div>
+        <p-panel header="Proxima Vacuna" [toggleable]="true">
+            <div class="grid p-fluid m-2">
+                <div class="col-12 md:col-12 mt-1">
+                    <div class="p-inputgroup">
+                        <p-calendar [inline]="true" [style]="{ 'position': 'relative', 'z-index': '1000' }" inputId="edad"
+                            class="ng-dirty" [showIcon]="true" placeholder="Fecha Proxima Vacuna" id="fechaProximaVacuna"
+                            name="fechaProximaVacuna" [(ngModel)]="vacuna.fechaProximaVacuna"></p-calendar>
+                    </div>
+                </div>
+            </div>
+        </p-panel>
+
+
 
         <div class="grid p-fluid m-2">
             <div class="col-12 md:col-12 mt-1">
@@ -446,7 +485,7 @@
                 <div class="p-inputgroup">
                     <span class="p-float-label">
                         <input type="text" pInputText id="nombreAlergia" name="nombreAlergia"
-                            [(ngModel)]="tipoAlergia.nombreAlergias" />
+                            [(ngModel)]="tipoAlergia.nombreAlergia" />
                         <label htmlFor="nombreAlergia" class="bx bx-plus-medical"> Nombre Alergia <span
                                 class="red-asterisk"></span></label>
                     </span>
@@ -471,7 +510,7 @@
 
                                 <div class="col">
                                     <label><strong>Nombre Alergia: </strong></label>
-                                    <span> <input [(ngModel)]="tipoAlergiaSeleccionada.nombreAlergias" name="nombreAlergia"
+                                    <span> <input [(ngModel)]="tipoAlergiaSeleccionada.nombreAlergia" name="nombreAlergia"
                                             class="form-control" required></span>
                                 </div>
                             </div>
