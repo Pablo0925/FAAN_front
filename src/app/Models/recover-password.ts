@@ -1,5 +1,5 @@
 export class RecoverPassword {
     password?: string;
-    confirmPassword?: string;
-    tokenPassword?: string;
+    passwordr?: string;
+    token?: string;
 }
