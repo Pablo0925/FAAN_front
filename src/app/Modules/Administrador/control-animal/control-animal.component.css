@@ -47,54 +47,41 @@ p {
 
 
 
-
-/* Common styles for tabs */
-.tabs {
+/* Estilo para el contenedor de la paleta */
+.paleta-container {
+    width: 100%;
+  }
+  
+  /* Style for the paleta (checkboxes) */
+  .paleta {
     display: flex;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
+    flex-wrap: wrap;
+    gap: 10px;
   }
   
-  .tabs a {
-    flex: 1;
-    text-align: center;
+  .paleta-label {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
     padding: 10px;
-    background-color: #f1f1f1;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    text-decoration: none;
-    color: #333;
+    transition: background-color 0.3s ease;
   }
   
-  .tabs a:hover {
-    background-color: #ddd;
+  .paleta-label:hover {
+    background-color: #e0e0e0;
   }
   
-  /* Add the active class to the selected tab */
-  .tabs a.active {
+  /* Cambiar el estilo del checkbox predeterminado */
+  .paleta input[type="checkbox"] {
+    display: none;
+  }
+  
+  /* Cambiar el estilo del checkbox cuando está marcado */
+  .paleta input[type="checkbox"]:checked + .paleta-label {
     background-color: #70b8d0;
     color: #fff;
-  }
-  
-  .tab-content {
-    display: none;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-top: none;
-  }
-  
-  .tab-content:target {
-    display: block;
-  }
-  
-  /* Responsive styles */
-  @media screen and (max-width: 768px) {
-    .tabs {
-      flex-direction: column;
-    }
-  
-    .tabs a {
-      margin-bottom: 5px;
-    }
   }
   
