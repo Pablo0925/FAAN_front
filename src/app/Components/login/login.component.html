@@ -42,8 +42,9 @@
             </div>
         </div>
     </div>
-
 </div>
+
+
 
 <!-- IMPLEMENT RECOVER PASSWORD -->
 <p-dialog [(visible)]="dialogRecoverPassword" [style]="{ width: '450px', padding: screenWidth < 600 ? '10px' : '' }"
@@ -70,8 +71,6 @@
                         [severity]="responseServer.status === 200 ? 'success': responseServer.status === 404 ? 'warn':'error' "
                         [text]="responseServer.message"></p-message>
                 </div>
-
-
             </div>
         </form>
     </ng-template>
