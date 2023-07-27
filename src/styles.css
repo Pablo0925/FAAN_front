@@ -1,23 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
 
 * {
-	font-family: 'Open Sans', sans-serif;
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 
+
 :root {
-	--grey: #F1F0F6;
-	--dark-grey: #8D8D8D;
+	--grey: #f7fafb;
+	--dark-grey: #000506;
 	--light: #fff;
 	--dark: #000;
 	--green: #81D43A;
 	--light-green: #E3FFCB;
-	--blue: #1775F1;
-	--light-blue: #D0E4FF;
+	--blue: #65b2cc;
+	--light-blue: #f7fafb;
 	--dark-blue: #0C5FCD;
 	--red: #FC3B56;
+
+	/**/
+	--btn-primary: #52a4b7;
 }
 
 html {
@@ -31,25 +34,44 @@ body {
 	overflow-x: hidden;
 }
 
+/*TITLE*/
+.title {
+	color: #000;
+	margin: 5px;
+	text-align: center;
+	align-items: center;
+	font-weight: bold;
+}
 
+p {
+	text-align: justify;
+}
+
+/*AVATAR*/
+.img-avatar {
+	height: 120px;
+	width: 120px;
+	margin: -60px auto 0 auto;
+}
 
 /*BUTTONS*/
 .btn-primarys {
-	background: #2e6db0;
+	background: #65b2cc;
 	border: none;
 	outline: none;
 	color: white;
-	height: 70px;
+	height: 50px;
 	margin-top: 5px;
+
 }
 
 .btn-primarys:hover {
-	background: #2e6db0f0;
+	background: #65b2cce4;
 	color: white;
 
 }
 
 .btn-primarys:active {
-	background: #2e6db0;
+	background: #65b2cce4;
 	color: white;
 }
