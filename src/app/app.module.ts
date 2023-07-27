@@ -21,6 +21,7 @@ import { ControlUsuariosComponent } from './Modules/SuperAdministrador/control-u
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { RecoverPasswordComponent } from './Components/recover-password/recover-password.component';
 import { ControlPersonComponent } from './Modules/Administrador/control-person/control-person.component';
+import { HomeComponent } from './Components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ControlPersonComponent } from './Modules/Administrador/control-person/c
     ControlAnimalComponent,
     ControlUsuariosComponent,
     RecoverPasswordComponent,
-    ControlPersonComponent
+    ControlPersonComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

@@ -29,7 +29,6 @@ export class ControlAnimalComponent implements OnInit {
 
 
   constructor(
-    private _CargarScript: CargarScrpitsService,
     private animalesService: AnimalService,
     private tipoVacunaService: TipoVacunaService,
     private tipoEnfermedadService: TipoEnfermedadService,
@@ -43,7 +42,7 @@ export class ControlAnimalComponent implements OnInit {
     private alergiasService: AlergiasService,
     private examenfisicoservice: ExamenFisicoService,
     private notificacionService: NotifacionesService
-  ) {_CargarScript.Cargar(["controlanimal"]); }
+  ) {}
   tipoVacunaSeleccionada: TipoVacuna = new TipoVacuna();
   tipoEnfermedadSeleccionada: TipoEnfermedad = new TipoEnfermedad();
   tipoTratamientoSeleccionada: TipoTratamiento = new TipoTratamiento();
@@ -54,6 +53,24 @@ export class ControlAnimalComponent implements OnInit {
     this.getAllTiposAlergias();
     this.getAllTiposTratamiento();
     this.getAllTiposEfermedades();
+  }
+
+  selectedSections: number[] = [];
+  showVacunas: boolean = false;
+  showEnfermedades: boolean = false;
+  showTratamientos: boolean = false;
+  showAlergias: boolean = false;
+  showExamenesFisicos: boolean = false;
+
+  showCard(section: number) {
+    const index = this.selectedSections.indexOf(section);
+    if (index === -1) {
+      // If the section is not already selected, add it to the array.
+      this.selectedSections.push(section);
+    } else {
+      // If the section is already selected, remove it from the array.
+      this.selectedSections.splice(index, 1);
+    }
   }
 
   // GET ANIMALES FOR PARAMETERS
