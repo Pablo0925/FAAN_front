@@ -23,12 +23,8 @@ export class AppComponent implements OnInit {
   //ImplementSocket
   private messageSubscription!: Subscription;
   public receivedMessage!: string;
-
-
-
   title = 'WebSocketClient';
   stock: any = {};
-
   private webSocket!: WebSocket;
 
 
@@ -40,8 +36,6 @@ export class AppComponent implements OnInit {
     private webSocketService: WebSocketService
   ) {
     _CargarScript.Cargar(["dashboard"]);
-
-
   }
 
   ngOnInit(): void {

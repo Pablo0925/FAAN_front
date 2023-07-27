@@ -33,13 +33,14 @@ export class WebSocketService {
 
   }
 
+  public getMessageObservable(): Observable<string> {
+    return this.messageSubject.asObservable();
+  }
 
   private handleMessage(event: MessageEvent): void {
     const message = event.data;
     this.messageSubject.next(message);
   }
 
-  public getMessageObservable(): Observable<string> {
-    return this.messageSubject.asObservable();
-  }
+
 }
