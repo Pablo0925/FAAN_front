@@ -12,8 +12,11 @@ import { RegisterRazaAnimalComponent } from './Modules/Administrador/animal/regi
 import { ControlUsuariosComponent } from './Modules/SuperAdministrador/control-usuarios/control-usuarios.component';
 import { RecoverPasswordComponent } from './Components/recover-password/recover-password.component';
 import { ControlPersonComponent } from './Modules/Administrador/control-person/control-person.component';
+import { HomeComponent } from './Components/home/home.component';
 
 const routes: Routes = [
+  //Public
+  { path: 'home', component: HomeComponent },
 
   //Password recover..
   { path: 'recover/password/:token', component: RecoverPasswordComponent },
@@ -34,19 +37,16 @@ const routes: Routes = [
   { path: 'fundacion', component: FundacionComponent },
   { path: 'peril-usuario', component: PerfilUsuarioComponent },
 
-
   // SUPERADMIN
   { path: 'control-usuario', component: ControlUsuariosComponent },
 
   // PUBLIC
   { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: 'login' }
+  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}
