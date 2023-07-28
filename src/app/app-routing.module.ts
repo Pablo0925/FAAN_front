@@ -10,12 +10,14 @@ import { RegisterTipoAnimalComponent } from './Modules/Administrador/animal/regi
 import { ControlAnimalComponent } from './Modules/Administrador/control-animal/control-animal.component';
 import { RegisterRazaAnimalComponent } from './Modules/Administrador/animal/register-raza-animal/register-raza-animal.component';
 import { ControlUsuariosComponent } from './Modules/SuperAdministrador/control-usuarios/control-usuarios.component';
+import { AdopcionAnimalComponent } from './Modules/Administrador/adopcion-animal/adopcion-animal.component';
 
 const routes: Routes = [
 
   // MASCOTAS
   { path: 'registro-mascota', component: RegistroMascotasComponent},
   { path: 'control-animal', component: ControlAnimalComponent},
+  { path: 'adopcion-animal', component: AdopcionAnimalComponent},
 
   //REGISTRO DE TIPO DE ANIMAL-----------------------------------------------------
   {path:'animal-tipo', component: RegisterTipoAnimalComponent  },

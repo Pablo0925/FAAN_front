@@ -1,0 +1,274 @@
+<div class="card p-3">
+    <p-card header="" class="m-2">
+        <h1 class="title">Adopcion del Animal </h1>
+        <div class="d-flex align-items-center">
+            <p-dropdown styleClass="mb-2 md:mb-0"></p-dropdown>
+            <span class="p-input-icon-left" style="flex: 70%;">
+                <i class="pi pi-search"></i>
+                <input placeholder="Buscar Mascota" type="text" id="isTextDigit" name="isTextDigit" pInputText
+                    style="width: 100%;" />
+            </span>
+            <button type="button" class="btn btn-primarys m-2" style="flex: 30%;">Seleccionar
+                Animal</button>
+        </div>
+    </p-card>
+
+    <p-dataView #dv [value]="listAnimal" [paginator]="true" [rows]="12" filterBy="nombreAnimal" layout="grid">
+        <ng-template let-animal pTemplate="gridItem">
+            <div class="col-12 md:col-3 ">
+                <div class="animal-grid-item card">
+                    <div class="animal-grid-item-content">
+                        <img [src]="'https://bucketgtmt.s3.amazonaws.com/'+ animal.fotoAnimal"
+                            [alt]="animal.nombreAnimal" />
+                        <div class="animal-nombreAnimal">{{animal.nombreAnimal}}</div>
+                        <div class="animal-placaAnimal">{{animal.placaAnimal}}</div>
+                    </div>
+                    <p-divider></p-divider>
+
+                    <div class="animal-grid-item-top">
+                        <div>
+                            <span class="animal-raza">Raza: </span>
+                            <span>{{animal.razaAnimal.nombreRaza}}</span>
+                        </div>
+                        <div>
+                            <!-- <i class="pi pi-tag animal-category-icon"></i> -->
+                            <span class="animal-tipo">Tipo: </span>
+                            <span>{{animal.razaAnimal.tipoAnimal.nombreTipo}}</span>
+                        </div>
+                        <div>
+                            <!-- <i class="pi pi-tag animal-category-icon"></i> -->
+                            <span class="animal-edad">Edad: </span>
+                            <span>{{animal.edadAnimal}}</span>
+                        </div>
+                    </div>
+                    <p-divider></p-divider>
+
+                    <div class="animal-grid-item-bottom">
+                        <!-- <span class="animal-edadAnimal">{{animal.edadAnimal}}</span> -->
+                        <p-button class="btnsize" icon="pi pi-plus" (onClick)="showDialog(animal)"></p-button>
+                    </div>
+
+
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+
+    <p-dialog [(visible)]="adopcionAnimalDialog"
+        [style]="{ width: screenWidth < 700 ? '100%' : '80%', padding: screenWidth < 700 ? '2%' : '' }"
+        header="REGISTRO ANIMAL" [modal]="true" styleClass="p-fluid">
+        <ng-template pTemplate="content">
+            <p-panel header="Adoptante" [toggleable]="true">
+                <div class="text-center">
+                    <div *ngIf="!isEmpty(persona); else notSubmittedContent">
+                        <div class="">
+                            <div class="card persona-card">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Información del Adoptante</h5>
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <label><strong>Identificación: </strong></label>
+                                            <span> {{ persona.identificacion }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-1">
+                                        <div class="col">
+                                            <label><strong>Nombres:</strong> </label>
+                                            <span><span> {{ persona.apellido1 }} {{ persona.apellido2 }}</span> {{
+                                                persona.nombre1 }} {{ persona.nombre2 }} </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-1">
+                                        <div class="col">
+                                            <label><strong>Fecha de Nacimiento:</strong></label>
+                                            <span> {{ persona.fechaNacimiento | date }}</span>
+                                        </div>
+                                        <div class="col">
+                                            <label><strong>Dirección:</strong></label>
+                                            <span> {{ persona.direccion }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center mt-2">
+                                        <button pButton type="button" label="Editar" icon="pi pi-pencil"
+                                            (click)="emptySelectedPerson()"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ng-template #notSubmittedContent>
+                        <div class="text-center">
+                            <small class="p-error" *ngIf="submitted && isEmpty(persona)"><strong
+                                    style="font-size: 14px;">Adoptante es
+                                    requerido.</strong></small>
+                        </div>
+
+                        <div class=" container">
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-md-6">
+                                    <!-- Ajusta el valor de 'col-md-6' según el tamaño deseado -->
+                                    <div class="p-inputgroup">
+                                        <button type="button" pButton pRipple icon="pi pi-filter-slash"
+                                            styleClass="p-button-success" [disabled]="valueAtributeCI ? false : true"
+                                            pTooltip="Quitar busqueta" tooltipPosition="bottom"></button>
+
+                                        <input type="text" pInputText placeholder="Cédula.."
+                                            [(ngModel)]="valueAtributeCI">
+
+                                        <button type="button" pButton pRipple icon="pi pi-search"
+                                            styleClass="p-button-warn" [disabled]="valueAtributeCI ? false : true"
+                                            (click)="findByAtributeName(2)" pTooltip="Buscar"
+                                            tooltipPosition="bottom"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p-table [value]="lisPersona" selectionMode="single" responsiveLayout="scroll"
+                            [paginator]="true" [rows]="3" [responsive]="true" [rowHover]="true"
+                            (onRowSelect)="onRowSelect($event.data)" [lazy]="true"
+                            (onLazyLoad)="loadPersonalLazy($event)" dataKey="idPersona" [totalRecords]="totalPersons"
+                            [showCurrentPageReport]="true" [loading]="loadingPerson">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Nombres </th>
+                                    <th>CI </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowData let-person>
+                                <tr [pSelectableRow]="rowData">
+                                    <td>{{person.nombre1}} {{person.apellido1}}</td>
+                                    <td>{{person.identificacion}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
+                    </ng-template>
+                </div>
+            </p-panel>
+
+            <p-panel header="Adopcion" [toggleable]="true" styleClass="mt-4">
+                <div class="grid p-fluid align-items-center">
+                    <div class="col-12 md:col-12">
+                        <div class="grid p-fluid align-items-center">
+
+                            <div class="col-12 md:col-6">
+                                <p-panel header="Datos Animal" [toggleable]="true" styleClass="mt-4">
+                                    <label for="nombreAnimal"><strong>Nombre Animal</strong></label>
+                                    <span class="p-input-icon-right">
+                                        <div class="p-inputgroup">
+                                            <input value="{{animalSelect.nombreAnimal}}" id="nombreAnimal" pInputText
+                                                disabled="true" />
+                                        </div>
+                                    </span>
+
+                                    <label for="placaAnimal"><strong>Placa Animal</strong></label>
+                                    <span class="p-input-icon-right ">
+                                        <div class="p-inputgroup">
+                                            <input value="{{animalSelect.placaAnimal}}" id="placaAnimal" pInputText
+                                                disabled="true" />
+                                        </div>
+                                    </span>
+
+                                    <label for="edadAnimal"><strong>Edad del Animal</strong></label>
+                                    <span class="p-input-icon-right ">
+                                        <div class="p-inputgroup">
+                                            <input value="{{animalSelect.edadAnimal}}" id="placaAnimal" pInputText
+                                                disabled="true" />
+                                        </div>
+                                    </span>
+
+                                    <label for="tipoAnimal"><strong>Tipo del Animal</strong></label>
+                                    <span class="p-input-icon-right ">
+                                        <div class="p-inputgroup">
+                                            <input value="{{tipoAnimalSelect}}" id="placaAnimal" pInputText
+                                                disabled="true" />
+                                        </div>
+                                    </span>
+
+                                    <label for="razaAnimal"><strong>Raza del Animal</strong></label>
+                                    <span class="p-input-icon-right ">
+                                        <div class="p-inputgroup">
+                                            <input value="{{razaAnimalSelect}}" id="placaAnimal" pInputText
+                                                disabled="true" />
+                                        </div>
+                                    </span>
+
+                                    <label for="fotoAnimal"><strong>Foto del Animal</strong></label>
+                                    <p-panel header="Foto Animal">
+                                        <section class="seccion-animal-foto mb-5 mt-3">
+                                          <div class="imagen-container">
+                                            <img [src]="'https://bucketgtmt.s3.amazonaws.com/'+ animalSelect.fotoAnimal"
+                                                 [alt]="animalSelect.nombreAnimal" width="40%" />
+                                          </div>
+                                        </section>
+                                      </p-panel>
+                                </p-panel>
+                            </div>
+
+
+                            <div class="col-12 md:col-6">
+                                <p-panel header="Datos Adopcion" [toggleable]="true" styleClass="mt-4">
+                                    <label for="fechaAnimal"><strong>Fecha de Adopcion</strong></label>
+                                    <span class="p-input-icon-right ">
+                                        <div class="p-inputgroup">
+                                            <input id="fechaAnimal" value="{{fechaAdoption}}" pInputText disabled="true"  />
+                                        </div>
+                                    </span>
+
+                                    <label for="observacionesAdopcion"><strong>Observaciones</strong></label>
+                                    <span class="p-input-icon-right ">
+                                        <textarea rows="5" cols="30" id="observacionesAdopcion" pInputTextarea [(ngModel)]="encabezadoAdopcionObject.observacion" ></textarea>
+                                    </span>
+                                    <small class="p-error" *ngIf="submitted && !animal.placaAnimal">Observaciones is
+                                        required.</small>
+
+                                    <p-divider></p-divider>
+
+                                    <label for="observacionesAdopcionDetalle"><strong>Observaciones Detalle</strong></label>
+                                    <span class="p-input-icon-right ">
+                                        <textarea rows="5" cols="30" id="observacionesAdopcionDetalle" pInputTextarea [(ngModel)]="detalleEncabesadoObject.observacion" ></textarea>
+                                    </span>
+                                    <small class="p-error" *ngIf="submitted && !animal.placaAnimal">Observaciones Detalle is
+                                        required.</small>
+
+                                    <p-panel header="Foto Animal">
+                                        <section class="seccion-perfil-usuario mb-5 mt-3">
+                                            <div class="perfil-usuario-header">
+                                                <div class="perfil-usuario-portada">
+                                                    <div class="perfil-usuario-avatar">
+                                                        <img [src]="avatarURL ? avatarURL: animal.fotoAnimal ? 'https://bucketgtmt.s3.amazonaws.com/' +animal.fotoAnimal: 'https://us.123rf.com/450wm/dervish37/dervish371805/dervish37180500017/101552833-icono-de-vector-gato-y-perro.jpg?ver=6'"
+                                                            alt="img-avatar" height="165px">
+                                                        <input type="file" #fileInput style="display: none;"
+                                                            accept="application/pdf, image/jpeg, image/jpg, image/png"
+                                                            (change)="onBasicUpload($event)">
+
+                                                        <button type="button" class="boton-avatar"
+                                                            pTooltip="Foto Animal" tooltipPosition="bottom">
+
+                                                            <i class="fas fa-camera" style="font-size: 1.3rem"
+                                                                (click)="fileInput.click()"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <small class="p-error" *ngIf="submitted && !avatarURL"><strong
+                                                                style="font-size: 14px;">Foto
+                                                                es
+                                                                requerido.</strong></small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </p-panel>
+                                </p-panel>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <p-button class="btnsize" icon="pi pi-plus" (click)="saveAdopcion()"></p-button>
+            </p-panel>
