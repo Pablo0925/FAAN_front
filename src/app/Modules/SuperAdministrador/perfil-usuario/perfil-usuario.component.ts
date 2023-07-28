@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Fundacion, Persona, Rol, Usuario } from 'src/app/Models/models';
 import { FundacionService } from 'src/app/Service/fundacion.service';
+import { PersonaService } from 'src/app/Service/persona.service';
 import { UsuarioService } from 'src/app/Service/usuario.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class PerfilUsuarioComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private fundacionService: FundacionService,
-    private toastService: ToastrService
+    private toastrService: ToastrService,
+    private personaService: PersonaService
 
   ) { }
 
@@ -29,6 +31,7 @@ export class PerfilUsuarioComponent implements OnInit {
   usuario?: Usuario;
   roles: string[] = [];
   persona = new Persona();
+
 
   public getDataUser(idUsername: number): void {
     this.usuarioService.getUsuarioById(idUsername).subscribe((data) => {
@@ -56,9 +59,70 @@ export class PerfilUsuarioComponent implements OnInit {
   }
 
   // UPDATE DATA - USER
-  public updatePerfilById():void{
+  public updatePerfilById() {
+    // Verificar si hay campos vacíos en Persona
+    if (
 
+      !this.persona.nombre1 ||
+      !this.persona.nombre2 ||
+      !this.persona.apellido1 ||
+      !this.persona.apellido2 ||
+      !this.persona.fechaNacimiento ||
+      !this.persona.direccion ||
+      !this.persona.telefono ||
+      !this.persona.celular ||
+      !this.persona.correo ||
+      !this.persona.genero
+    ) {
+      this.toastrService.warning(
+        'Uno o más campos vacíos',
+        'Por favor complete todos los campos'
+      );
+      return;
+    }
+  
+    // Verificar si persona está definido
+    if (this.persona.idPersona === undefined) {
+      this.toastrService.warning(
+        'ID de la persona no definido',
+        'Error en la actualización'
+      );
+      return;
+    }
+  
+    // Realizar actualización de la persona
+    this.personaService.updatePersona(this.persona.idPersona, this.persona)
+      .subscribe(
+        (data) => {
+          if (data != null) {
+            this.toastrService.success(
+              'Actualización exitosa de los datos de la persona',
+              '¡Bien hecho!'
+            );
+  
+            // Implementación de la carga (este código hará una recarga de la página después de 1 segundo)
+            setTimeout(() => {
+              location.reload();
+            }, 1000);
+          }
+        },
+        (error) => {
+          console.error(error);
+          this.toastrService.error(
+            'Error al actualizar los datos de la persona',
+            'Por favor intenta más tarde'
+          );
+        }
+      );
   }
+  
+    
+
+
+
+
+
+  
 
   // IMAGEN SELECT
   selectedFile!: File;
@@ -67,7 +131,7 @@ export class PerfilUsuarioComponent implements OnInit {
     this.selectedFile = event.target.files[0];
     console.log(this.selectedFile.size)
     if (this.selectedFile && this.selectedFile.size > 1000000) {
-      this.toastService.warning(
+      this.toastrService.warning(
         'El archivo seleccionado es demasiado grande',
         ' Por favor, seleccione un archivo menor a 1000 KB.',
         {
@@ -77,7 +141,7 @@ export class PerfilUsuarioComponent implements OnInit {
       event.target.value = null;
 
     } else {
-      this.toastService.success(
+      this.toastrService.success(
         'Foto seleccionada',
         'Correctamente',
         {

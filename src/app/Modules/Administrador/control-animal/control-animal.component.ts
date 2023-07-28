@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Alergias } from 'src/app/Models/alergias';
-import { Animal, Enfermedad, ExamenFisico, FichaMedica, TipoAlergias, TipoAnimal, TipoEnfermedad, TipoTratamiento, TipoVacuna, Tratamiento, Vacuna } from 'src/app/Models/models';
+import { Animal, Enfermedad, ExamenFisico, FichaMedica, Notificaciones, TipoAlergias, TipoAnimal, TipoEnfermedad, TipoTratamiento, TipoVacuna, Tratamiento, Vacuna } from 'src/app/Models/models';
 import { AlergiaAnimales } from 'src/app/Payloads/payloadAlergiaAnimal';
 import { EnfermedadAnimales } from 'src/app/Payloads/payloadEnfermedadAnimal';
 import { ExamenFisicoAnimales } from 'src/app/Payloads/payloadExamenFisicoAnimal';
@@ -8,8 +8,10 @@ import { TratamientoAnimales } from 'src/app/Payloads/payloadTratamientoAnimal';
 import { VacunasAnimales } from 'src/app/Payloads/payloadVacunasAnimal';
 import { AlergiasService } from 'src/app/Service/alergias.service';
 import { AnimalService } from 'src/app/Service/animal.service';
+import { CargarScrpitsService } from 'src/app/Service/cargar-scrpits.service';
 import { EnfermedadService } from 'src/app/Service/enfermedad.service';
 import { ExamenFisicoService } from 'src/app/Service/exmen-fisico.service';
+import { NotifacionesService } from 'src/app/Service/notifaciones.service';
 import { PayloadService } from 'src/app/Service/peyloads.service';
 import { TipoAlergiasService } from 'src/app/Service/tipoAlergias.service';
 import { TipoEnfermedadService } from 'src/app/Service/tipoEnfermedad.service';
@@ -38,11 +40,37 @@ export class ControlAnimalComponent implements OnInit {
     private tipoExamenFisicoService: ExamenFisicoService,
     private tratamientoService: TratamientoService,
     private alergiasService: AlergiasService,
-    private examenfisicoservice: ExamenFisicoService
-  ) { }
-
+    private examenfisicoservice: ExamenFisicoService,
+    private notificacionService: NotifacionesService
+  ) {}
+  tipoVacunaSeleccionada: TipoVacuna = new TipoVacuna();
+  tipoEnfermedadSeleccionada: TipoEnfermedad = new TipoEnfermedad();
+  tipoTratamientoSeleccionada: TipoTratamiento = new TipoTratamiento();
+  tipoAlergiaSeleccionada: TipoAlergias = new TipoAlergias();
 
   ngOnInit(): void {
+    this.getAllTiposVacunas();
+    this.getAllTiposAlergias();
+    this.getAllTiposTratamiento();
+    this.getAllTiposEfermedades();
+  }
+
+  selectedSections: number[] = [];
+  showVacunas: boolean = false;
+  showEnfermedades: boolean = false;
+  showTratamientos: boolean = false;
+  showAlergias: boolean = false;
+  showExamenesFisicos: boolean = false;
+
+  showCard(section: number) {
+    const index = this.selectedSections.indexOf(section);
+    if (index === -1) {
+      // If the section is not already selected, add it to the array.
+      this.selectedSections.push(section);
+    } else {
+      // If the section is already selected, remove it from the array.
+      this.selectedSections.splice(index, 1);
+    }
   }
 
   // GET ANIMALES FOR PARAMETERS
@@ -133,6 +161,34 @@ export class ControlAnimalComponent implements OnInit {
       console.log(data5)
     })
   }
+  public loadingVacuna: boolean = false;
+  public loadingEnfermedad: boolean = false;
+  public loadingTratamiento: boolean = false;
+  public loadingAlergia: boolean = false;
+  public isEmpty(obj: any) {
+		// return Object.keys(obj).length === 0;
+		return obj ? Object.keys(obj).length === 0 : true;
+	}
+
+  public onRowSelect(event: any) {
+		this.tipoVacuna = event;
+    this.tipoVacunaSeleccionada = event;
+	}
+
+  public onRowSelectEnfermedad(event: any) {
+		this.tipoEnfermedad = event;
+    this.tipoEnfermedadSeleccionada = event;
+	}
+
+  public onRowSelectTratamiento(event: any) {
+		this.tipoTratamiento = event;
+    this.tipoTratamientoSeleccionada = event;
+	}
+
+  public onRowSelectAlergia(event: any) {
+		this.tipoAlergia = event;
+    this.tipoAlergiaSeleccionada = event;
+	}
 
   // TEXT FOR INPUT SEARCH
   public isTextDigit: string = ""
@@ -282,26 +338,6 @@ export class ControlAnimalComponent implements OnInit {
     });
   }
 
-  beta() {
-    console.log(this.selectedVacuna);
-  }
-
-  beta2() {
-    console.log(this.selectedEnfermedad);
-  }
-
-  beta3() {
-    console.log(this.selectedTratamiento);
-  }
-
-  beta4() {
-    console.log(this.selectedAlergias);
-  }
-
-  beta5() {
-    console.log(this.selectedExamenFisico);
-  }
-
 
   // MODAl ADD VACUNA FOR ANIMAL
   vacuna = new Vacuna();
@@ -363,6 +399,8 @@ export class ControlAnimalComponent implements OnInit {
       this.visibleVacuna = false;
     })
   }
+  mostrarPanel: boolean = false;
+
 
   // SELECT ANIMAL
   isIdAnimal!: number
@@ -456,4 +494,59 @@ export class ControlAnimalComponent implements OnInit {
     }
 
 
+    actualizarVacuna() {
+
+      if (this.tipoVacunaSeleccionada) {
+        this.tipoVacunaService.updateTipoVacuna(this.tipoVacunaSeleccionada.idTipoVacuna, this.tipoVacunaSeleccionada)
+          .subscribe((updatedVacuna: TipoVacuna) => {
+
+            console.log('Tipo de vacuna actualizado:', updatedVacuna);
+            this.visibleTipoVacuna = false;
+          }, (error) => {
+            console.error('Error al actualizar el tipo de vacuna:', error);
+          });
+      }
+    }
+
+    actualizarEnfermedad() {
+
+      if (this.tipoEnfermedadSeleccionada) {
+        this.tipoEnfermedadService.updateTipoEnfermedad(this.tipoEnfermedadSeleccionada.idTipoEnfermedad, this.tipoEnfermedadSeleccionada)
+          .subscribe((updateEnfermedad: TipoEnfermedad) => {
+
+            console.log('Tipo de enfermedad actualizado:', updateEnfermedad);
+            this.visibleTipoEnfermedad = false;
+          }, (error) => {
+            console.error('Error al actualizar el tipo de enfermedad:', error);
+          });
+      }
+    }
+
+    actualizarTratamiento() {
+
+      if (this.tipoTratamientoSeleccionada) {
+        this.tipoTratamientoService.updateTipoTratamiento(this.tipoTratamientoSeleccionada.idTipoTratamiento, this.tipoTratamientoSeleccionada)
+          .subscribe((updatedTratamiento: TipoTratamiento) => {
+
+            console.log('Tipo de Tratamiento actualizado:', updatedTratamiento);
+            this.visibleTipoTratamiento = false;
+          }, (error) => {
+            console.error('Error al actualizar el tipo de Tratamiento:', error);
+          });
+      }
+    }
+
+    actualizarAlergia() {
+
+      if (this.tipoAlergiaSeleccionada) {
+        this.tipoAlergiaService.updateTipoAlergias(this.tipoAlergiaSeleccionada.idTipoAlergia, this.tipoAlergiaSeleccionada)
+          .subscribe((updatedAlergia: TipoAlergias) => {
+
+            console.log('Tipo de Alergia actualizado:', updatedAlergia);
+            this.visibleTipoAlergia = false;
+          }, (error) => {
+            console.error('Error al actualizar el tipo de Alergia:', error);
+          });
+      }
+    }
 }

@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CargarScrpitsService } from './Service/cargar-scrpits.service';
 import { Router } from '@angular/router';
 import { StorageService } from './Service/storage.service';
-declare var navBar: any;
+import { NotifacionesService } from './Service/notifaciones.service';
+import { Notificaciones } from './Models/notificacion';
+import { Message } from 'primeng/api';
+import { WebSocketService } from './Service/web-socket.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,17 +20,31 @@ export class AppComponent implements OnInit {
 
   public isLogginPresent: boolean = false;
 
+  //ImplementSocket
+  private messageSubscription!: Subscription;
+  public receivedMessage!: string;
+  title = 'WebSocketClient';
+  stock: any = {};
+  private webSocket!: WebSocket;
+
+
   constructor(
     private _CargarScript: CargarScrpitsService,
     private router: Router,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private notificacionService: NotifacionesService,
+    private webSocketService: WebSocketService
   ) {
     _CargarScript.Cargar(["dashboard"]);
   }
 
   ngOnInit(): void {
     this.isLogginPresent = this.storageService.isLoggedIn();
+    if (this.isLogginPresent === true) {
+      this.getAllNotificaciones();
+    }
   }
+
 
   // LOGOUT
   public logOut() {
@@ -41,7 +59,7 @@ export class AppComponent implements OnInit {
   isSuperAdministrador: boolean = false;
   isAdministrador: boolean = false;
 
-  public checkRolesUserLogin(nombreRol:string): void {
+  public checkRolesUserLogin(nombreRol: string): void {
     switch (nombreRol) {
       case 'SUPERADMINISTRADOR':
         this.isSuperAdministrador = true;
@@ -55,6 +73,24 @@ export class AppComponent implements OnInit {
         this.isLogginPresent = false;
         break;
     };
+  }
+
+  // NOTIFICACIONES
+  viewNotificacionesPanle: boolean = false;
+  listNotificaciones: Notificaciones[] = [];
+  countNotificaciones: number = 0;
+  public getAllNotificaciones() {
+    console.log("Connected notifications request..");
+    this.messageSubscription = this.webSocketService.getMessageObservable()
+    .subscribe((message: string) => {
+      console.log("--------------------------------");
+      console.log("--------------" +message);
+      this.receivedMessage = message;
+      const notificacion = JSON.parse(message) as Notificaciones;
+      this.listNotificaciones.push(notificacion);
+      console.log("------------------>" + this.listNotificaciones[0].cuerpoMensaje)
+    });
+
   }
 
 }

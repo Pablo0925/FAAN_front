@@ -42,7 +42,7 @@ export class ControlUsuariosComponent implements OnInit {
   public listUsuarios: Usuario[] = [];
   public loading: boolean = false;
   public totalRecords!: number;
-  public size: number = 1;
+  public size: number = 3;
 
   public getAllUsuario(page: number, size: number, sort: string[]) {
     this.usuarioService.getAllUsuario(page, size, sort).subscribe((data: any) => {
@@ -65,24 +65,16 @@ export class ControlUsuariosComponent implements OnInit {
 
 
 
-  // listRoles
-  isRoleAssigned(role: Rol): boolean {
-    return this.listRoleAsignarUser.some(
-      (assignedRole) => assignedRole.idRol === role.idRol
-    );
-  }
-
   // ADD UPDATE
   public editUsuario(usuario: Usuario) {
     this.usuario = { ...usuario };
     this.persona = this.usuario.persona;
-    this.listRoleAsignarUser = [...this.usuario.roles];
     this.userDialog = true;
   }
 
   // GET ALL ROLES
   public listRoles: Rol[] = [];
-  
+
   public getAllRolesFull() {
     this.rolesService.getAllRolesFull().subscribe((data) => {
       this.listRoles = data;
@@ -93,22 +85,7 @@ export class ControlUsuariosComponent implements OnInit {
 
 
   //ASIGNAR ROLES A USUARIO
-  public listRoleAsignarUser: Rol[] = [];
-
-  public asignarRolesUsuario(rol: Rol) {
-    const index = this.listRoleAsignarUser.findIndex(
-      (item) => item.idRol === rol.idRol
-    );
-    if (index !== -1) {
-      // Si el rol ya existe, lo eliminamos del arreglo
-      this.listRoleAsignarUser.splice(index, 1);
-    } else {
-      // Si el rol no existe, lo agregamos al arreglo
-      this.listRoleAsignarUser.push(rol);
-    }
-    console.log(this.listRoleAsignarUser);
-  }
-
+  public selectedRoles: Rol[] = [];
 
   // ADD NEW USUARIO
   public submitted: boolean = false;
@@ -121,14 +98,14 @@ export class ControlUsuariosComponent implements OnInit {
     this.personaService.savePersona(this.persona).subscribe((data) => {
       this.persona = data
       console.log(this.persona)
-      this.usuario.persona = this.persona
-      this.usuario.roles = this.listRoleAsignarUser
+      this.usuario.idUsuario = 0;
+      this.usuario.persona = this.persona;
+      this.usuario.roles = this.selectedRoles;
       this.usuario.estadoUsuario = true;
       this.usuario.fotoPerfil = key;
-      this.usuario.tokenPassword = '';
       this.usuarioService.saveUsuario(this.usuario).subscribe((data) => {
-          this.usuario = data;
-          alert('SUCESSFULL')
+        this.usuario = data;
+        alert('SUCESSFULL')
       }, (error) => {
         console.log('2', error)
       })
@@ -140,7 +117,7 @@ export class ControlUsuariosComponent implements OnInit {
 
   // UPDATE USUARIO
   public updateUsuario() {
-    this.usuario.roles = this.listRoleAsignarUser
+    this.usuario.roles = this.selectedRoles
     this.usuarioService.saveUsuario(this.usuario).subscribe((data) => {
       this.usuario = data;
     }, (error) => {
@@ -169,7 +146,6 @@ export class ControlUsuariosComponent implements OnInit {
     this.usuario = {} as Usuario;
     this.userDialog = true;
     this.fullname = '';
-    this.listRoleAsignarUser = [];
   }
 
   // TABLE
@@ -222,8 +198,18 @@ export class ControlUsuariosComponent implements OnInit {
     this.submitted = false;
     this.persona = {} as Persona;
     this.usuario = {} as Usuario;
-    this.userDialog = true;
+    this.userDialog = false;
     this.fullname = '';
   }
 
+  getSeverity(status: boolean) {
+    switch (status) {
+      case true:
+        return 'success';
+      case false:
+        return 'warning';
+      default:
+        return 'danger';
+    }
+  }
 }

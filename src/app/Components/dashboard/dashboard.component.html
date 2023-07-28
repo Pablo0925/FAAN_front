@@ -1,57 +1,45 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-xl-3">
-            <div class="card bg-c-blue order-card">
-                <div class="card-block">
-                    <h6 class="m-b-20">Orders Received</h6>
-                    <h2 class="text-right"><i class="bx bx-pie-chart f-left"></i><span>486</span></h2>
-                    <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-md-4 col-xl-3">
-            <div class="card bg-c-green order-card">
-                <div class="card-block">
-                    <h6 class="m-b-20">Orders Received</h6>
-                    <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>486</span></h2>
-                    <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+<ngx-slick-carousel class="m-4" #slickCarousel="slick-carousel" [config]="slickCarouselConfig">
+  <div class="grid">
+  
+    <div class="col-12 md:col-6 lg:col-3"  *ngFor="let animal of animalesPorTipo">
+        <div class="surface-card shadow-2 p-3 border-round">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">{{ animal.nombreTipo }}</span>
+                    <div class="text-900 font-medium text-xl"></div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                    style="width:2.5rem;height:2.5rem">
+                    <i class="pi pi-chart-pie text-blue-500 text-xl"></i>
                 </div>
             </div>
+            <span class="text-green-500 font-medium">{{ animal.numerotipo }} </span>
+            <span class="text-500"> Total {{ animal.nombreTipo }}</span>
         </div>
+    </div>
 
-        <div class="col-md-4 col-xl-3">
-            <div class="card bg-c-yellow order-card">
-                <div class="card-block">
-                    <h6 class="m-b-20">Orders Received</h6>
-                    <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span>486</span></h2>
-                    <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
-                </div>
-            </div>
-        </div>
+</div>
+</ngx-slick-carousel>
+  
 
-        <div class="col-md-4 col-xl-3">
-            <div class="card bg-c-pink order-card">
-                <div class="card-block">
-                    <h6 class="m-b-20">Orders Received</h6>
-                    <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>486</span></h2>
-                    <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
-                </div>
-            </div>
-        </div>
+<div class="card-container">
+    <div class="card inline-block font-bold text-center p-4 border-round">
+        <p class="pc">Adopciones Por raza</p>
+        <p-chart class="m-3" type="doughnut" [data]="data" [options]="options" width="30vw" height="60vh"></p-chart>
+    </div>
+    <div class="card inline-block font-bold text-center p-4 border-round mx-4">
+        <p class="pc">Adopciones Por Año</p>
+        <p-chart class="m-3" type="bar" [data]="basicData" [options]="basicOptions" width="40vw"
+            height="60vh"></p-chart>
     </div>
 </div>
-<div class="data">
-    <div class="card flex justify-content-center">
-        <p class="pc">Adopciones Por raza</p>
-        <p-chart class="m-3" type="doughnut" [data]="data" [options]="options" style="width: 400px;"></p-chart>
-    </div>
-    <div class="card">
-        <p class="pc m-8">Adopciones Por Año</p>
-        <p-chart class="m-4" type="bar" [data]="basicData" [options]="basicOptions" style="width: 100%; height: 100%;"></p-chart>
-    </div>
-    <div class="card flex justify-content-center">
-        <p class="pc">Adopciones Por raza</p>
-        <p>jsalkdjalskndalksdalsklkdajdlasdjsssssss</p>
-    </div>
-</div>
+
+<!-- <div class="card">
+    <p class="pc">Adopciones Por raza</p>
+    <p-chart class="m-3" type="doughnut" [data]="data" [options]="options" width="30vw" height="80vh"></p-chart>
+</div> -->
+<!-- <div class="card">
+    <p class="pc m-8">Adopciones Por Año</p>
+    <p-chart class="m-4" type="bar" [data]="basicData" [options]="basicOptions" width="40vw" height="80vh"></p-chart>
+</div> -->

@@ -18,6 +18,10 @@ import { RegisterTipoAnimalComponent } from './Modules/Administrador/animal/regi
 import { RegisterRazaAnimalComponent } from './Modules/Administrador/animal/register-raza-animal/register-raza-animal.component';
 import { ControlAnimalComponent } from './Modules/Administrador/control-animal/control-animal.component';
 import { ControlUsuariosComponent } from './Modules/SuperAdministrador/control-usuarios/control-usuarios.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { RecoverPasswordComponent } from './Components/recover-password/recover-password.component';
+import { ControlPersonComponent } from './Modules/Administrador/control-person/control-person.component';
+import { HomeComponent } from './Components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,10 @@ import { ControlUsuariosComponent } from './Modules/SuperAdministrador/control-u
     RegisterTipoAnimalComponent,
     RegisterRazaAnimalComponent,
     ControlAnimalComponent,
-    ControlUsuariosComponent
+    ControlUsuariosComponent,
+    RecoverPasswordComponent,
+    ControlPersonComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +49,7 @@ import { ControlUsuariosComponent } from './Modules/SuperAdministrador/control-u
     FormsModule,
     CommonModule,
     BrowserAnimationsModule,
+    SlickCarouselModule,
     ToastrModule.forRoot()
   ],
   providers: [],

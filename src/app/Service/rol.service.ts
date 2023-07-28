@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
-import { environment } from '../environment/enviroment';
+import { environment } from '../../environment/enviroment';
 import { Rol } from '../Models/rol';
 
 @Injectable({
