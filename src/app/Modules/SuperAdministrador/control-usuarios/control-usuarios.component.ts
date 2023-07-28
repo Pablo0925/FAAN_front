@@ -72,6 +72,13 @@ export class ControlUsuariosComponent implements OnInit {
     this.userDialog = true;
   }
 
+  //CHANGE STATE
+  public inhaUser(usuario: Usuario){
+    this.usuario = {...usuario};
+    this.persona = this.usuario.persona;
+    this.desactivarUser = true;
+  }
+
   // GET ALL ROLES
   public listRoles: Rol[] = [];
 
@@ -119,11 +126,21 @@ export class ControlUsuariosComponent implements OnInit {
   public updateUsuario() {
     this.usuario.roles = this.selectedRoles
     this.usuarioService.saveUsuario(this.usuario).subscribe((data) => {
-      this.usuario = data;
+      if(data!=null){
+        this.usuario = {...this.usuario}
+
+        this.personaService.updatePersona(this.persona.idPersona!, this.persona)
+        .subscribe((data1)=> {
+          if(data1!=null){
+            alert('datos actualizados')
+          }
+        })
+      }
     }, (error) => {
       console.log('2', error)
     })
   }
+
 
   // UNIDO
 
@@ -139,6 +156,7 @@ export class ControlUsuariosComponent implements OnInit {
 
   // MODAL
   userDialog = false;
+  desactivarUser = false;
 
   public openNewUsuario() {
     this.getAllRolesFull();
@@ -194,6 +212,7 @@ export class ControlUsuariosComponent implements OnInit {
 
 
   public hideDialog() {
+    this.desactivarUser = false;
     this.userDialog = false;
     this.submitted = false;
     this.persona = {} as Persona;
