@@ -1,4 +1,4 @@
-export interface FichaMedica {
-    idFichaMedica: number;
-    descripcionFichaMedica: string;
+export class FichaMedica {
+    idFichaMedica?: number;
+    descripcionFichaMedica?: string;
 }

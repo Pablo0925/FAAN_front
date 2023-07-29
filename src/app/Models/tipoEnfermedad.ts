@@ -1,5 +1,5 @@
-export interface TipoEnfermedad {
-    idTipoEnfermedad: number;
-    nombreEnfermedad: string;
-    estado:           boolean;
+export class TipoEnfermedad {
+    idTipoEnfermedad!: number;
+    nombreEnfermedad!: string;
+    estado!:           boolean;
 }

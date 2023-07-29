@@ -10,12 +10,34 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegistroMascotasComponent } from './Modules/Administrador/registro-mascotas/registro-mascotas.component';
+import { FundacionComponent } from './Modules/SuperAdministrador/fundacion/fundacion.component';
+import { PerfilUsuarioComponent } from './Modules/SuperAdministrador/perfil-usuario/perfil-usuario.component';
+import { ToastrModule } from 'ngx-toastr';
+import { RegisterTipoAnimalComponent } from './Modules/Administrador/animal/register-tipo-animal/register-tipo-animal.component';
+import { RegisterRazaAnimalComponent } from './Modules/Administrador/animal/register-raza-animal/register-raza-animal.component';
+import { ControlAnimalComponent } from './Modules/Administrador/control-animal/control-animal.component';
+import { ControlUsuariosComponent } from './Modules/SuperAdministrador/control-usuarios/control-usuarios.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { RecoverPasswordComponent } from './Components/recover-password/recover-password.component';
+import { ControlPersonComponent } from './Modules/Administrador/control-person/control-person.component';
+import { HomeComponent } from './Components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    RegistroMascotasComponent,
+    FundacionComponent,
+    PerfilUsuarioComponent,
+    RegisterTipoAnimalComponent,
+    RegisterRazaAnimalComponent,
+    ControlAnimalComponent,
+    ControlUsuariosComponent,
+    RecoverPasswordComponent,
+    ControlPersonComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +48,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SlickCarouselModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

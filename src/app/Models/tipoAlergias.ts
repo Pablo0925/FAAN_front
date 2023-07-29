@@ -1,5 +1,5 @@
-export interface TipoAlergias {
-    idTipoAlergia: number;
-    nombreAlergia: string;
-    estado:        number;
+export class TipoAlergias {
+    idTipoAlergia!: number;
+    nombreAlergia!: string;
+    estado!:        number;
 }

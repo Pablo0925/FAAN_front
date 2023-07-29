@@ -12,6 +12,7 @@ import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { DataViewModule } from 'primeng/dataview';
+import { ChartModule } from 'primeng/chart';
 
 import { CarouselModule } from 'primeng/carousel';
 import { PanelModule } from 'primeng/panel';
@@ -104,7 +105,7 @@ import { FieldsetModule } from 'primeng/fieldset';
     CardModule,
     DialogModule,
     DataViewModule,
-
+    ChartModule,
     CarouselModule,
     PanelModule,
     AutoCompleteModule,

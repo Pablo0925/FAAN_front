@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
-import { environment } from '../environment/enviroment';
+import { environment } from '../../environment/enviroment';
 import { Rol } from '../Models/rol';
 
 @Injectable({
@@ -14,6 +14,10 @@ export class RolService {
 
   public getAllRoles(page:number,size:number,sort:string): Observable<Rol[]> {
     return this.http.get<Rol[]>(environment.apiuri + '/rol/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
+  }
+
+  public getAllRolesFull(): Observable<Rol[]> {
+    return this.http.get<Rol[]>(environment.apiuri + '/rol/list');
   }
 
 }
