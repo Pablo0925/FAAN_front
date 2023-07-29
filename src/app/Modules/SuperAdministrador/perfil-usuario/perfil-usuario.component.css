@@ -143,33 +143,7 @@ li p {
 }
 
 
-/*responsive*/
-/* CSS para el contenedor principal */
-.responsive-container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-  }
-  
-  /* Ajustes para el p-card en pantallas más pequeñas */
-  @media (max-width: 768px) {
-	.profile_container {
-	  flex-direction: column;
-	  align-items: center;
-	}
-  
-	.profile_img_section {
-	  margin-bottom: 20px;
-	}
-  }
-  
-  /* Ajustes para el p-dialog en pantallas más pequeñas */
-  @media (max-width: 768px) {
-	.p-dialog {
-	  width: 100% !important;
-	}
-  }
-  
+
 
   /* Estilos para el perfil del usuario */
 .profile-card {
