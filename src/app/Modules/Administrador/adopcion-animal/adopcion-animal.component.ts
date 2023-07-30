@@ -30,6 +30,9 @@ export class AdopcionAnimalComponent implements OnInit {
 	// card view
 	public listAnimal: Animal[] = [];
 	public submitted: boolean = false;
+	public mostrar: boolean = false;
+	public mostrarbusqueda: string = '';
+	public opcionesMostrar: string[] = ['ADOPTADOS', 'NO ADOPTADOS'];
 
 	// activar o desactivar dialog
 	adopcionAnimalDialog: boolean = false;
@@ -60,7 +63,9 @@ export class AdopcionAnimalComponent implements OnInit {
 	public lisPersona: Persona[] = [];
 	public totalPersons!: number;
 	public loadingPerson: boolean = false;
-	public valueAtributeCI: string = '';
+
+	public totalAnimal!: number;
+	public loadingAnimal: boolean = false;
 
 	//RAZA ANIMAL--------------------------------------
 	public razaAnimal = new RazaAnimal();
@@ -72,24 +77,35 @@ export class AdopcionAnimalComponent implements OnInit {
 		private personaService: PersonaService,
 		private screenSizeService: ScreenSizeService,
 		private encabezadoAdopcion: EncabezadoAdopcionService,
-		private detalleAdopcion: DetalleEncabezadoService
+		private detalleEncabezadoService: DetalleEncabezadoService
 	) { }
 
 	ngOnInit() {
-		this.findPageableAnimal(0, 10, ['idAnimal', 'asc']);
+		this.cargar();
+	}
+
+	public cargar() {
+		this.listAnimal = [];
+		this.findPageableAnimal(0, 10, ['nombreAnimal', 'asc']);
+
+	}
+
+	public loadAnimalLazy(event: any = null) {
+		this.loadingAnimal = true;
+		const page = event ? event.first / event.rows : 0;
+		const size = event ? event.rows : 4;
+		this.findPageableAnimal(page, size, ['nombreAnimal', 'asc']);
 	}
 
 	public findPageableAnimal(page: number, size: number, sort: string[]) {
 		try {
-			this.animalService.getAllAnimalesPages(page, size, sort).subscribe(
+			this.animalService.findByAdoptadoOrNoAdoptado(page, size, this.mostrar, this.mostrarbusqueda, sort).subscribe(
 				(data: any) => {
 					if (data != null) {
 						console.log(data);
 						this.listAnimal = data.content;
-						console.log('ddddddddddddddddddddd');
-						console.log(this.listAnimal);
-						// this.totalRecords = data.totalElements;
-						// this.loading = false;
+						this.totalAnimal = data.totalElements;
+						this.loadingAnimal = false;
 					}
 				},
 				(error) => {
@@ -102,14 +118,39 @@ export class AdopcionAnimalComponent implements OnInit {
 		}
 	}
 
-	showDialog(animalse: Animal) {
+	openAllDialog(animalse: Animal) {
+		if (this.mostrar) {
+			this.OpenDialogView(animalse);
+		} else {
+			this.OpenDialog(animalse);
+		}
+	}
+
+	closeAllDialog() {
+		if (this.mostrar) {
+			this.CloseDialogView();
+		} else {
+			this.CloseDialog();
+		}
+	}
+
+	OpenDialog(animalse: Animal) {
 		this.animalSelect = animalse;
 		this.tipoAnimalSelect = animalse.razaAnimal?.tipoAnimal?.nombreTipo || '';
 		this.razaAnimalSelect = animalse.razaAnimal?.nombreRaza || '';
-		
+
 		this.fechaAdoption = new Date();
-		// this.fechaAdoption = fechaAct.toLocaleDateString();
 		this.adopcionAnimalDialog = true;
+	}
+
+	CloseDialog() {
+		this.animalSelect = {} as Animal;
+		this.tipoAnimalSelect = '';
+		this.razaAnimalSelect = '';
+
+		this.submitted = false;
+		this.adopcionAnimalDialog = false;
+		this.cargar();
 	}
 
 	public onRowSelect(event: any) {
@@ -172,69 +213,70 @@ export class AdopcionAnimalComponent implements OnInit {
 		this.persona = {} as Persona;
 	}
 
-	public findByAtributeName(code: number) {
-		if (code === 1) {
-			this.loading = true;
-			this.submitFindAtribute = true;
-			this.razaAnimalService
-				.getAllRazaAnimalAtribute(
-					0,
-					4,
-					['idRazaAnimal', 'asc'],
-					'nombreRaza',
-					this.valueAtribute
-				)
-				.subscribe((data: any) => {
-					if (data !== null) {
-						this.listRazaAnimal = data.content;
-						this.loading = false;
-					}
-				});
-		} else {
-			this.loadingPerson = true;
-			this.submitFindAtribute = true;
-			this.personaService
-				.getListaPersonasAtribute(
-					0,
-					3,
-					['identificacion', 'asc'],
-					'identificacion',
-					this.valueAtributeCI
-				)
-				.subscribe((data: any) => {
-					if (data !== null) {
-						this.lisPersona = data.content;
-						this.loadingPerson = false;
-					}
-				});
-		}
-	}
 
 	saveAdopcion() {
-		console.log(this.persona)
-		console.log(this.encabezadoAdopcionObject)
-		console.log(this.detalleEncabesadoObject)
-		console.log(this.animal)
+		this.submitted = true;
 
-				this.encabezadoAdopcionObject.fechaAdopcion = this.fechaAdoption;
-				this.encabezadoAdopcionObject.persona = this.persona;
-				this.encabezadoAdopcion.saveEncabezadoAdopcion(this.encabezadoAdopcionObject)
-					.subscribe((data1) => {
-						this.detalleEncabesadoObject.encabezadoAdopcion = data1;
-						this.detalleEncabesadoObject.animal = this.animalSelect;
-						console.log("sssssssssssssssssssssssssssssssssssss")
-						console.log(this.detalleEncabesadoObject)
-						console.log("sssssssssssssssssssssssssssssssssssss")
-						this.detalleAdopcion.saveDetalleAdopcion(this.detalleEncabesadoObject).subscribe((data2) => {
-							if (data2 != null) {
-								alert('succesfull created..');
-								// this.listAnimal.push(data);
-								// this.closeDialog();
-							} else {
-								alert('succesfull no created..');
-							}
-						});
+		if (this.detalleEncabesadoObject.observacion?.trim() && this.encabezadoAdopcionObject.observacion?.trim()
+			&& !this.isEmpty(this.animalSelect) && !this.isEmpty(this.persona)) {
+
+			this.encabezadoAdopcionObject.fechaAdopcion = this.fechaAdoption;
+			this.encabezadoAdopcionObject.persona = this.persona;
+			this.encabezadoAdopcion.saveEncabezadoAdopcion(this.encabezadoAdopcionObject)
+				.subscribe((data1) => {
+					this.detalleEncabesadoObject.encabezadoAdopcion = data1;
+					this.detalleEncabesadoObject.animal = this.animalSelect;
+					console.log("sssssssssssssssssssssssssssssssssssss")
+					console.log(this.detalleEncabesadoObject)
+					console.log("sssssssssssssssssssssssssssssssssssss")
+					this.detalleEncabezadoService.saveDetalleAdopcion(this.detalleEncabesadoObject).subscribe((data2) => {
+						if (data2 != null) {
+							alert('succesfull created..');
+							this.CloseDialog();
+							// this.listAnimal.push(data);
+							// this.closeDialog();
+						} else {
+							alert('succesfull no created..');
+						}
 					});
-			
+				});
+		} else {
+			alert('campos vacios..');
+		}
+
 	}
+
+	OpenDialogView(animalse: Animal) {
+		this.viewAdopcion(Number(animalse.idAnimal));
+		this.adopcionAnimalDialog = true;
+	}
+
+	CloseDialogView() {
+		this.emptySelectedPerson();
+		this.detalleEncabesadoObject = {} as DetalleAdopcion;
+		this.encabezadoAdopcionObject = {} as EncabezadoAdopcion;
+		this.animalSelect = {} as Animal;
+		this.tipoAnimalSelect = '';
+		this.razaAnimalSelect = '';
+		this.adopcionAnimalDialog = false;
+	}
+
+	viewAdopcion(idAnimal: number) {
+		this.detalleEncabezadoService.getfindByIdAnimal(idAnimal).subscribe(
+			(data) => {
+				this.detalleEncabesadoObject = data;
+				if (this.detalleEncabesadoObject.encabezadoAdopcion?.persona != null && this.detalleEncabesadoObject.animal != null
+					&& this.detalleEncabesadoObject.animal.razaAnimal?.nombreRaza != null && this.detalleEncabesadoObject.animal.razaAnimal?.tipoAnimal?.nombreTipo != null
+					&& this.detalleEncabesadoObject.encabezadoAdopcion != null) {
+					this.persona = this.detalleEncabesadoObject.encabezadoAdopcion?.persona;
+					this.animalSelect = this.detalleEncabesadoObject.animal;
+					this.razaAnimalSelect = this.detalleEncabesadoObject.animal.razaAnimal?.nombreRaza;
+					this.tipoAnimalSelect = this.detalleEncabesadoObject.animal.razaAnimal?.tipoAnimal?.nombreTipo;
+					this.encabezadoAdopcionObject = this.detalleEncabesadoObject.encabezadoAdopcion;
+				}
+			}
+		)
+	}
+
+
 }

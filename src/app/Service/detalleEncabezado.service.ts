@@ -18,7 +18,6 @@ export class DetalleEncabezadoService {
     return this.http.get<DetalleAdopcion[]>(environment.apiuri + '/detalleadopcion/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
   }
 
-
   public getListaDetalleAdopcion():Observable<DetalleAdopcion []>{
     return this.http.get<DetalleAdopcion []>(environment.apiuri+'/detalleadopcion/list');
   }
@@ -33,6 +32,11 @@ export class DetalleEncabezadoService {
 
   public saveDetalleAdopcion (detalleAdopcion : DetalleAdopcion ):Observable<DetalleAdopcion >{
     return this.http.post<DetalleAdopcion >(environment.apiuriPublic+'/api/detalleadopcion/save', detalleAdopcion);
+  }
+
+
+  public getfindByIdAnimal(idAnimal: number):Observable<DetalleAdopcion >{
+    return this.http.get<DetalleAdopcion >(environment.apiuri+'/detalleadopcion/findByIdAnimal/' + idAnimal);
   }
 
 }
