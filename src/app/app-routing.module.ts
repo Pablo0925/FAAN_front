@@ -35,7 +35,7 @@ const routes: Routes = [
   // SHARED
   { path: 'dashboard', component: DashboardComponent },
   { path: 'fundacion', component: FundacionComponent },
-  { path: 'peril-usuario', component: PerfilUsuarioComponent },
+  { path: 'perfil-usuario', component: PerfilUsuarioComponent },
 
   // SUPERADMIN
   { path: 'control-usuario', component: ControlUsuariosComponent },
