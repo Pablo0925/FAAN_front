@@ -1,10 +1,10 @@
 import { Animal } from "./animal";
 import { EncabezadoAdopcion } from "./encabezadoAdopcion";
 
-export interface DetalleAdopcion {
-    idAdopcion: number;
-    observacion: string;
-    documento: string;
-    encabezadoAdopcioin: EncabezadoAdopcion;
-    animal: Animal;
+export class DetalleAdopcion {
+    idAdopcion?: number;
+    observacion?: string;
+    documento?: string;
+    encabezadoAdopcion?: EncabezadoAdopcion;
+    animal?: Animal;
 }
