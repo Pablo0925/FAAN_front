@@ -35,6 +35,7 @@ export class ControlAnimalComponent implements OnInit {
     // this.getAllTiposAlergias();
     // this.getAllTiposTratamiento();
     // this.getAllTiposEfermedades();
+    this.getAllMascotas()
   }
 
   selectedSections: number[] = [];
@@ -66,11 +67,11 @@ export class ControlAnimalComponent implements OnInit {
   pageTotal: number = 0;
   isFirst: boolean = false;
   isLast: boolean = false;
-  isTextDigit:any;
+  isTextDigit:string="pegui";
 
   public getAllMascotas(): void {
     try {
-      this.animalesService.getAllAnimalesPagesOrPlacaOrName(this.isTextDigit!, this.isPage, this.isSize, this.isSosrt).subscribe((data: any) => {
+      this.animalesService.getAllAnimalesPagesOrPlacaOrName(this.isTextDigit, this.isPage, this.isSize, this.isSosrt).subscribe((data: any) => {
         if (data !== null) {
           this.ListAnimales = data.content;
           console.log(data.content)
