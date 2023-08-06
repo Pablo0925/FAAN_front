@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ControlAnimal } from 'src/app/Models/controlAnimal';
+import { ControlAnimal } from 'src/app/Models/controlAnimal'; 
 import { Animal, Notificaciones,TipoAnimal, TipoVacuna, Vacuna } from 'src/app/Models/models';
 import { VacunasAnimales } from 'src/app/Payloads/payloadVacunasAnimal';
 import { AnimalService } from 'src/app/Service/animal.service';
@@ -56,7 +56,7 @@ export class ControlAnimalComponent implements OnInit {
   pageTotal: number = 0;
   isFirst: boolean = false;
   isLast: boolean = false;
-  public loading: boolean = false;
+  public loadingVacuna: boolean = false;
 
   public isEmpty(obj: any) {
 		// return Object.keys(obj).length === 0;
