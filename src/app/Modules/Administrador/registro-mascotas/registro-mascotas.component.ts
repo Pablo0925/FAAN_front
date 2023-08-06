@@ -476,7 +476,8 @@ export class RegistroMascotasComponent implements OnInit {
 
 	public closeDialogIconmeSituation() {
 		this.incomeSituation = {} as SituacionIngreso;
-		this.dialogIncomeSituation = false;
+		this.dialogIncomeSituation = 
+		false;
 
 
 	}
