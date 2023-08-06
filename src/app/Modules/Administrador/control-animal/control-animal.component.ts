@@ -62,10 +62,11 @@ export class ControlAnimalComponent implements OnInit {
 		// return Object.keys(obj).length === 0;
 		return obj ? Object.keys(obj).length === 0 : true;
 	}
+  isTextDigit:string="pegui";
 
   public getAllMascotas(): void {
     try {
-      this.animalesService.getAllAnimalesPagesOrPlacaOrName(this.isTextDigit!, this.isPage, this.isSize, this.isSosrt).subscribe((data: any) => {
+      this.animalesService.getAllAnimalesPagesOrPlacaOrName(this.isTextDigit, this.isPage, this.isSize, this.isSosrt).subscribe((data: any) => {
         if (data !== null) {
           this.ListAnimales = data.content;
           console.log(data.content)
@@ -109,9 +110,6 @@ export class ControlAnimalComponent implements OnInit {
 	}
 
 
-
-  // TEXT FOR INPUT SEARCH
-  public isTextDigit: string = ""
 
   // MODAL
   visible: boolean = false;
