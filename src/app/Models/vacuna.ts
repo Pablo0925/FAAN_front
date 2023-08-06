@@ -1,6 +1,6 @@
-import { FichaMedica } from "./fichaMedica";
-import { TipoVacuna } from "./tipoVacuna";
 
+import { TipoVacuna } from "./tipoVacuna";
+import { ControlAnimal } from "./controlAnimal";
 export class Vacuna {
     idVacuna!: number;
     fechaVacuna!: Date;
@@ -8,5 +8,5 @@ export class Vacuna {
     observaciones?: string;
     estadoVacuna?: string;
     tipoVacuna?: TipoVacuna;
-    fichaMedica?: FichaMedica;
+    controlAnimal?: ControlAnimal;
 }
