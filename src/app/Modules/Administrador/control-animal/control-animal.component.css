@@ -43,3 +43,45 @@
 p {
     text-align: center;
 }
+
+
+
+
+/* Estilo para el contenedor de la paleta */
+.paleta-container {
+    width: 100%;
+  }
+  
+  /* Style for the paleta (checkboxes) */
+  .paleta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .paleta-label {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .paleta-label:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Cambiar el estilo del checkbox predeterminado */
+  .paleta input[type="checkbox"] {
+    display: none;
+  }
+  
+  /* Cambiar el estilo del checkbox cuando está marcado */
+  .paleta input[type="checkbox"]:checked + .paleta-label {
+    background-color: #70b8d0;
+    color: #fff;
+  }
+  

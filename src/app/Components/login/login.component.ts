@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
   ) {
     this.formulario = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]]
-
     });
+
   }
 
   ngOnInit(): void {
@@ -158,7 +158,6 @@ export class LoginComponent implements OnInit {
         error: err => {
           this.responseServer = { status: err.status, message: err.error }
           this.submitted = false;
-
         }
       });
 

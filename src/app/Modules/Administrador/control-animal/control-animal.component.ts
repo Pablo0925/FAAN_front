@@ -8,6 +8,7 @@ import { TratamientoAnimales } from 'src/app/Payloads/payloadTratamientoAnimal';
 import { VacunasAnimales } from 'src/app/Payloads/payloadVacunasAnimal';
 import { AlergiasService } from 'src/app/Service/alergias.service';
 import { AnimalService } from 'src/app/Service/animal.service';
+import { CargarScrpitsService } from 'src/app/Service/cargar-scrpits.service';
 import { EnfermedadService } from 'src/app/Service/enfermedad.service';
 import { ExamenFisicoService } from 'src/app/Service/exmen-fisico.service';
 import { NotifacionesService } from 'src/app/Service/notifaciones.service';
@@ -41,7 +42,7 @@ export class ControlAnimalComponent implements OnInit {
     private alergiasService: AlergiasService,
     private examenfisicoservice: ExamenFisicoService,
     private notificacionService: NotifacionesService
-  ) { }
+  ) {}
   tipoVacunaSeleccionada: TipoVacuna = new TipoVacuna();
   tipoEnfermedadSeleccionada: TipoEnfermedad = new TipoEnfermedad();
   tipoTratamientoSeleccionada: TipoTratamiento = new TipoTratamiento();
@@ -52,6 +53,24 @@ export class ControlAnimalComponent implements OnInit {
     this.getAllTiposAlergias();
     this.getAllTiposTratamiento();
     this.getAllTiposEfermedades();
+  }
+
+  selectedSections: number[] = [];
+  showVacunas: boolean = false;
+  showEnfermedades: boolean = false;
+  showTratamientos: boolean = false;
+  showAlergias: boolean = false;
+  showExamenesFisicos: boolean = false;
+
+  showCard(section: number) {
+    const index = this.selectedSections.indexOf(section);
+    if (index === -1) {
+      // If the section is not already selected, add it to the array.
+      this.selectedSections.push(section);
+    } else {
+      // If the section is already selected, remove it from the array.
+      this.selectedSections.splice(index, 1);
+    }
   }
 
   // GET ANIMALES FOR PARAMETERS
@@ -380,6 +399,8 @@ export class ControlAnimalComponent implements OnInit {
       this.visibleVacuna = false;
     })
   }
+  mostrarPanel: boolean = false;
+
 
   // SELECT ANIMAL
   isIdAnimal!: number
