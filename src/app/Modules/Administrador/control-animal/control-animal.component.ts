@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ControlAnimal } from 'src/app/Models/controlAnimal'; 
+import { EstadoAnimal } from 'src/app/Models/estadoAnimal';
 import { Animal, Notificaciones,TipoAnimal, TipoVacuna, Vacuna } from 'src/app/Models/models';
 import { VacunasAnimales } from 'src/app/Payloads/payloadVacunasAnimal';
 import { AnimalService } from 'src/app/Service/animal.service';
+import { ControlAnimalService } from 'src/app/Service/controlAnimal.service';
+import { EsatadoAnimalService } from 'src/app/Service/estadoAnimal.service';
 import { PayloadService } from 'src/app/Service/peyloads.service';
 import { TipoVacunaService } from 'src/app/Service/tipoVacuna.service';
 import { VacunaService } from 'src/app/Service/vacuna.service';
@@ -19,6 +22,8 @@ export class ControlAnimalComponent implements OnInit {
     private animalesService: AnimalService,
     private tipoVacunaService: TipoVacunaService,
     private vacunaService: VacunaService,
+    private controlAnimalService: ControlAnimalService,
+    private estadoAnimalService: EsatadoAnimalService,
     private payloadservice: PayloadService
   ) {}
   tipoVacunaSeleccionada: TipoVacuna = new TipoVacuna();
@@ -95,12 +100,22 @@ export class ControlAnimalComponent implements OnInit {
   // VER DATOS VACUNAS
   vacunasAnimales: VacunasAnimales[] = [];
 
+  controlesanimales: ControlAnimal[] = [];
+
   public getListaVacunasByIdControlAnimal(idControlAnimal: number) {
-    this.payloadservice.getPeyloadVacunasAnimalById(idControlAnimal).subscribe((data) => {
+    this.payloadservice.getPeyloadVacunasAnimalById(idControlAnimal).subscribe(data => {
       this.vacunasAnimales = data
     })
   }
 
+
+  public getListaControlAnimal(idAnimal: number) {
+    console.log(idAnimal);
+    this.payloadservice.getPeyloadControlAnimal(idAnimal).subscribe((data) => {
+      this.controlesanimales = data
+      console.log(data);
+    })
+  }
   
 
 
@@ -123,10 +138,17 @@ export class ControlAnimalComponent implements OnInit {
   tipoVacuna = new TipoVacuna();
   visibleTipoVacuna: boolean = false;
 
+  control = new   ControlAnimal();
+  visibleControl: boolean = false;
 
   showModalTipoVacuna() {
     this.visibleTipoVacuna = true;
     this.tipoVacuna = {} as TipoVacuna;
+  }
+
+  showModalControl() {
+    this.visibleControl= true;
+    this.control = {} as ControlAnimal;
   }
 
 
@@ -150,6 +172,13 @@ export class ControlAnimalComponent implements OnInit {
     });
   }
 
+  
+  getAllControlAnimal() {
+    this.tipoVacunaService.getListaTipoVacuna().subscribe((data) => {
+      this.listTipoVacuna = data;
+    });
+  }
+
 
 
 
@@ -157,11 +186,13 @@ export class ControlAnimalComponent implements OnInit {
   vacuna = new Vacuna();
   visibleVacuna: boolean = false;
 
+
   showModalVacuna() {
     this.getAllTiposVacunas();
     this.visibleVacuna = true;
     this.vacuna = {} as Vacuna;
   }
+
 
   
   saveVacuna() {
@@ -179,15 +210,35 @@ export class ControlAnimalComponent implements OnInit {
   }
   mostrarPanel: boolean = false;
 
+  estadoAnimal = new EstadoAnimal();
+  idestado?:any;
+
+  saveControl() {
+    this.control.animal =this.isIdAnimal;
+    console.log(this.control.animal);
+    this.estadoAnimalService.saveEstadoAnimal(this.estadoAnimal).subscribe((data)=> {
+      this.idestado = data.idEstadoAnimal 
+      this.control.estadoAnimal = this.idestado;
+      console.log(this.control.estadoAnimal);
+      this.controlAnimalService.saveControl(this.control).subscribe((data)=> {
+
+        alert('SUCESSFULL');
+        this.getListaVacunasByIdControlAnimal(this.isControlAnimal.idControlAnimal!)
+        this.control = {} as ControlAnimal;
+        this.isControlAnimal = {} as ControlAnimal;
+        this.visibleControl = false;
+      })
+    })
+  }
+
 
   // SELECT ANIMAL
-  isIdAnimal!: number
+  isIdAnimal!: any
   isControlAnimal = new ControlAnimal();
-  selectAnimal(idAnimal: number, controlAnimal: ControlAnimal) {
+  selectAnimal(idAnimal: number) {
     this.isIdAnimal = idAnimal;
-    this.isControlAnimal = controlAnimal;
     this.visible = false;
-    this.getListaVacunasByIdControlAnimal(controlAnimal.idControlAnimal!)
+    this.getListaControlAnimal(idAnimal);
   }
 
   

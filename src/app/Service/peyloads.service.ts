@@ -6,12 +6,10 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environment/enviroment';
 import { PeyloadNumeroAdopcionRaza } from '../Payloads/peyloadNumeroAdopcionRaza';
 import { PeyloadNumeroAdopcionFecha } from '../Payloads/peyloadNumeroAdopcionFecha';
-import { EnfermedadAnimales } from '../Payloads/payloadEnfermedadAnimal';
-import { AlergiaAnimales } from '../Payloads/payloadAlergiaAnimal';
-import { TratamientoAnimales } from '../Payloads/payloadTratamientoAnimal';
 import { VacunasAnimales } from '../Payloads/payloadVacunasAnimal';
-import { ExamenFisicoAnimales } from '../Payloads/payloadExamenFisicoAnimal';
 import { NumeroAnimalTipo } from '../Payloads/PayloadNumeroAnimalTipo';
+import { ControlAnimal } from '../Models/controlAnimal';
+import { PayloadControlAnimal } from '../Payloads/payloadControlPorAnimal';
 
 
 @Injectable({
@@ -34,21 +32,11 @@ export class PayloadService {
     return this.http.get<NumeroAnimalTipo[]>(environment.apiuri + `/tipoanimal/numeroAnimalesTipo`);
   }
 
-  public getPeyloadEnfermedadAnimalById(idFichaMedica: number):Observable<EnfermedadAnimales[]>{
-    return this.http.get<EnfermedadAnimales[]>(environment.apiuri+'/enfermedad/fichamedicaEnfermedad/'+idFichaMedica);
-  }
-  public getPeyloadAlergiaAnimalById(idFichaMedica: number):Observable<AlergiaAnimales[]>{
-    return this.http.get<AlergiaAnimales[]>(environment.apiuri+'/alergias/fichamedicaAlergias/'+idFichaMedica);
-  }
-  public getPeyloadPeyloadTratamientoAnimalById(idFichaMedica: number):Observable<TratamientoAnimales[]>{
-    return this.http.get<TratamientoAnimales[]>(environment.apiuri+'/tratamiento/fichamedicaTratamiento/'+idFichaMedica);
+  public getPeyloadControlAnimal(idControlAnimal: number):Observable<PayloadControlAnimal[]>{
+    return this.http.get<PayloadControlAnimal[]>(environment.apiuri+'/controlAnimal/peyload/controlanimal/'+idControlAnimal);
   }
   public getPeyloadVacunasAnimalById(idControlAnimal: number):Observable<VacunasAnimales[]>{
     return this.http.get<VacunasAnimales[]>(environment.apiuri+'/vacuna/fichamedicaVacuna/'+idControlAnimal);
-  }
-  public getPeyloadExamenFisicoAnimalById(idFichaMedica: number):Observable<ExamenFisicoAnimales[]>{
-    return this.http.get<ExamenFisicoAnimales[]>(environment.apiuri+'/examenFisico/fichamedicaExamenFisico/'+idFichaMedica);
-  }
-
+  } 
 
 }
