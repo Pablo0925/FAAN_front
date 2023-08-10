@@ -174,33 +174,7 @@
     </form>
 </p-dialog>
 
-
-<!-- MODAL VACUNA -->
-<p-dialog header="Crear nueva vacuna" [(visible)]="visibleTipoVacuna" [modal]="true" [style]="{ width: '30vw' }"
-    [draggable]="false" [resizable]="false">
-    <form (ngSubmit)="saveTipoVacuna()" ngNativeValidate style="padding: 15px;">
-        <div class="grid p-fluid m-2">
-            <div class="col-12 md:col-12 mt-1">
-                <div class="p-inputgroup">
-                    <span class="p-float-label">
-                        <input type="text" pInputText id="nombreVacuna" name="nombreVacuna"
-                            [(ngModel)]="tipoVacuna.nombreVacuna" />
-                        <label htmlFor="nombreVacuna" class="bx bx-plus-medical"> Nombre Vacuna <span
-                                class="red-asterisk"></span></label>
-                    </span>
-                </div>
-                
-            </div>
-        </div>
-        <div class="p-card-body">
-            <div class="text-center">
-                <button type="submit" class="btn btn-primarys">Crear nueva vacuna</button>
-            </div>
-        </div>
-    </form>
-
-
-  <p-card header="" class="m-2" *ngIf="selectedSections.includes(2)">
+<p-card header="" class="m-2" *ngIf="selectedSections.includes(2)">
     <h1 class="title">Vacunas</h1>
     <div class="d-flex align-items-center">
         <button type="button" (click)="showModalVacuna()" class="btn btn-primarys m-2" style="flex: 80%;">Añadir
@@ -234,6 +208,32 @@
   
 
 
+<!-- MODAL VACUNA -->
+<p-dialog header="Crear nueva vacuna" [(visible)]="visibleTipoVacuna" [modal]="true" [style]="{ width: '30vw' }"
+    [draggable]="false" [resizable]="false">
+    <form (ngSubmit)="saveTipoVacuna()" ngNativeValidate style="padding: 15px;">
+        <div class="grid p-fluid m-2">
+            <div class="col-12 md:col-12 mt-1">
+                <div class="p-inputgroup">
+                    <span class="p-float-label">
+                        <input type="text" pInputText id="nombreVacuna" name="nombreVacuna"
+                            [(ngModel)]="tipoVacuna.nombreVacuna" />
+                        <label htmlFor="nombreVacuna" class="bx bx-plus-medical"> Nombre Vacuna <span
+                                class="red-asterisk"></span></label>
+                    </span>
+                </div>
+                
+            </div>
+        </div>
+        <div class="p-card-body">
+            <div class="text-center">
+                <button type="submit" class="btn btn-primarys">Crear nueva vacuna</button>
+            </div>
+        </div>
+    </form>
+
+
+  
 
 <!-- MODAL VACUNA -->
 <p-dialog header="Crear nueva vacuna" [(visible)]="visibleTipoVacuna" [modal]="true" [style]="{ width: '30vw' }"

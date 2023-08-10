@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ControlAnimal } from 'src/app/Models/controlAnimal'; 
 import { EstadoAnimal } from 'src/app/Models/estadoAnimal';
 import { Animal, Notificaciones,TipoAnimal, TipoVacuna, Vacuna } from 'src/app/Models/models';
+import { PayloadControlAnimal } from 'src/app/Payloads/payloadControlPorAnimal';
 import { VacunasAnimales } from 'src/app/Payloads/payloadVacunasAnimal';
 import { AnimalService } from 'src/app/Service/animal.service';
 import { ControlAnimalService } from 'src/app/Service/controlAnimal.service';
@@ -67,7 +68,7 @@ export class ControlAnimalComponent implements OnInit {
 		// return Object.keys(obj).length === 0;
 		return obj ? Object.keys(obj).length === 0 : true;
 	}
-  isTextDigit:string="pegui";
+  isTextDigit!:string;
 
   public getAllMascotas(): void {
     try {
@@ -100,9 +101,10 @@ export class ControlAnimalComponent implements OnInit {
   // VER DATOS VACUNAS
   vacunasAnimales: VacunasAnimales[] = [];
 
-  controlesanimales: ControlAnimal[] = [];
+  controlesanimales: PayloadControlAnimal[] = [];
 
   public getListaVacunasByIdControlAnimal(idControlAnimal: number) {
+    console.log("entro")
     this.payloadservice.getPeyloadVacunasAnimalById(idControlAnimal).subscribe(data => {
       this.vacunasAnimales = data
     })
@@ -111,9 +113,9 @@ export class ControlAnimalComponent implements OnInit {
 
   public getListaControlAnimal(idAnimal: number) {
     console.log(idAnimal);
-    this.payloadservice.getPeyloadControlAnimal(idAnimal).subscribe((data) => {
-      this.controlesanimales = data
-      console.log(data);
+    this.payloadservice.getPeyloadControlAnimal(idAnimal).subscribe(data2=> {
+      console.log("entro");
+      console.log(data2);
     })
   }
   
@@ -204,7 +206,6 @@ export class ControlAnimalComponent implements OnInit {
       this.getListaVacunasByIdControlAnimal(this.isControlAnimal.idControlAnimal!)
       this.vacuna = {} as Vacuna;
       this.isControlAnimal = {} as ControlAnimal;
-      this.selectedVacuna = {} as TipoVacuna;
       this.visibleVacuna = false;
     })
   }
@@ -213,12 +214,15 @@ export class ControlAnimalComponent implements OnInit {
   estadoAnimal = new EstadoAnimal();
   idestado?:any;
 
+  objetoanimal= new Animal();
+  objetoestado= new EstadoAnimal();
   saveControl() {
-    this.control.animal =this.isIdAnimal;
+    this.objetoanimal.idAnimal = this.isIdAnimal;
+    this.control.animal = this.objetoanimal;
     console.log(this.control.animal);
     this.estadoAnimalService.saveEstadoAnimal(this.estadoAnimal).subscribe((data)=> {
-      this.idestado = data.idEstadoAnimal 
-      this.control.estadoAnimal = this.idestado;
+      this.objetoestado.idEstadoAnimal = data.idEstadoAnimal 
+      this.control.estadoAnimal = this.objetoestado;
       console.log(this.control.estadoAnimal);
       this.controlAnimalService.saveControl(this.control).subscribe((data)=> {
 
@@ -238,7 +242,7 @@ export class ControlAnimalComponent implements OnInit {
   selectAnimal(idAnimal: number) {
     this.isIdAnimal = idAnimal;
     this.visible = false;
-    this.getListaControlAnimal(idAnimal);
+    this.getListaControlAnimal(this.isIdAnimal);
   }
 
   

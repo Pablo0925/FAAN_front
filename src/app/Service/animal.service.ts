@@ -1,4 +1,4 @@
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { environment } from '../../environment/enviroment';
@@ -22,7 +22,13 @@ export class AnimalService {
   }
 
   public getAllAnimalesPagesOrPlacaOrName(filtro: string, page: number, size: number, sort: string[]): Observable<Animal[]> {
-    return this.http.get<Animal[]>(environment.apiuri + '/animal/findBynameOrplaca?' + `filter=${filtro}&page=${page}&size=${size}&sort=${sort}`);
+    let params = new HttpParams()
+      .set('page', page)
+      .set('size', size)
+      .set('sort', sort.join(','))
+      .set('filter', filtro)
+      console.log(params);
+    return this.http.get<Animal[]>(environment.apiuri + '/animal/findBynameOrplaca',{params});
   }
 
   public getListaAnimal(): Observable<Animal[]> {
