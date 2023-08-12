@@ -33,8 +33,11 @@ export class PayloadService {
   }
 
   public getPeyloadControlAnimal(idControlAnimal: number):Observable<PayloadControlAnimal[]>{
-    return this.http.get<PayloadControlAnimal[]>(environment.apiuri+'/controlAnimal/peyload/controlanimal/'+idControlAnimal);
+    console.log("entrooooooooo:"+ idControlAnimal);
+    console.log("entrooooooooo:"+ environment.apiuri+'/controlAnimal/peyload/controlanimal/'+idControlAnimal);
+    return this.http.get<PayloadControlAnimal[]>(environment.apiuri+'/controlAnimal/peyload/'+idControlAnimal);
   }
+
   public getPeyloadVacunasAnimalById(idControlAnimal: number):Observable<VacunasAnimales[]>{
     return this.http.get<VacunasAnimales[]>(environment.apiuri+'/vacuna/fichamedicaVacuna/'+idControlAnimal);
   } 

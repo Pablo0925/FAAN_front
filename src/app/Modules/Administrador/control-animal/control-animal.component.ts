@@ -10,11 +10,10 @@ import { EsatadoAnimalService } from 'src/app/Service/estadoAnimal.service';
 import { PayloadService } from 'src/app/Service/peyloads.service';
 import { TipoVacunaService } from 'src/app/Service/tipoVacuna.service';
 import { VacunaService } from 'src/app/Service/vacuna.service';
-
 @Component({
   selector: 'app-control-animal',
   templateUrl: './control-animal.component.html',
-  styleUrls: ['./control-animal.component.css']
+  styleUrls: ['./control-animal.component.css', './control-animal.component.scss']
 })
 export class ControlAnimalComponent implements OnInit {
 
@@ -31,6 +30,8 @@ export class ControlAnimalComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllTiposVacunas();
+    this.getListEstadoAnimal();
+    this.selectedTVacuna = [];
   }
 
   selectedSections: number[] = [];
@@ -39,7 +40,7 @@ export class ControlAnimalComponent implements OnInit {
   showTratamientos: boolean = false;
   showAlergias: boolean = false;
   showExamenesFisicos: boolean = false;
-
+  selectedEstado!: EstadoAnimal;
   showCard(section: number) {
     const index = this.selectedSections.indexOf(section);
     if (index === -1) {
@@ -58,7 +59,8 @@ export class ControlAnimalComponent implements OnInit {
   isPage: number = 0;
   isSize: number = 8
   isSosrt: string[] = ['nombreAnimal', 'asc']
-
+  selectedVacunatipo: TipoVacuna[] | undefined;
+  
   pageTotal: number = 0;
   isFirst: boolean = false;
   isLast: boolean = false;
@@ -103,23 +105,37 @@ export class ControlAnimalComponent implements OnInit {
 
   controlesanimales: PayloadControlAnimal[] = [];
 
-  public getListaVacunasByIdControlAnimal(idControlAnimal: number) {
+  estadosanimales: EstadoAnimal[] = [];
+
+  getListaVacunasByIdControlAnimal(idControlAnimal: number) {
     console.log("entro")
     this.payloadservice.getPeyloadVacunasAnimalById(idControlAnimal).subscribe(data => {
       this.vacunasAnimales = data
     })
   }
 
+  getListEstadoAnimal(){
+    this.estadoAnimalService.getListaEstadoAnimal().subscribe(data =>{
+      this.estadosanimales = data;
+    })
+  }
 
-  public getListaControlAnimal(idAnimal: number) {
-    console.log(idAnimal);
+
+  getListaControlAnimal(idAnimal: number) {
     this.payloadservice.getPeyloadControlAnimal(idAnimal).subscribe(data2=> {
-      console.log("entro");
+      console.log("entrooooooooo");
       console.log(data2);
+      this.controlesanimales = data2;
+      console.log(this.controlesanimales);
+
     })
   }
   
+  estadovisible: boolean=false;
 
+  showDialogToAddEstado(){
+  this.estadovisible =true;
+  }
 
   public onRowSelect(event: any) {
 		this.tipoVacuna = event;
@@ -171,6 +187,7 @@ export class ControlAnimalComponent implements OnInit {
   getAllTiposVacunas() {
     this.tipoVacunaService.getListaTipoVacuna().subscribe((data) => {
       this.listTipoVacuna = data;
+      this.availableTVacuna = data;
     });
   }
 
@@ -181,7 +198,13 @@ export class ControlAnimalComponent implements OnInit {
     });
   }
 
-
+  saveEstadoAnimal(){
+    this.estadoAnimalService.saveEstadoAnimal(this.estadoAnimal).subscribe(data =>{
+      alert('SUCESSFULL');
+      console.log(data);
+      this.getListEstadoAnimal();
+    })
+  }
 
 
   // MODAl ADD VACUNA FOR ANIMAL
@@ -242,7 +265,7 @@ export class ControlAnimalComponent implements OnInit {
   selectAnimal(idAnimal: number) {
     this.isIdAnimal = idAnimal;
     this.visible = false;
-    this.getListaControlAnimal(this.isIdAnimal);
+    this.getListaControlAnimal(idAnimal);
   }
 
   
@@ -261,6 +284,124 @@ export class ControlAnimalComponent implements OnInit {
       }
     }
 
+
+
+
+
+
+
+
+
+    data = [
+      {
+        id: '1000',
+        code: 'f230fh0g3',
+        name: 'Bamboo Watch',
+        description: 'Product Description',
+        image: 'bamboo-watch.jpg',
+        price: 65,
+        category: 'Accessories',
+        quantity: 24,
+        inventoryStatus: 'INSTOCK',
+        rating: 5
+      },
+      {
+        id: '1001',
+        code: 'nvklal433',
+        name: 'Black Watch',
+        description: 'Product Description',
+        image: 'black-watch.jpg',
+        price: 72,
+        category: 'Accessories',
+        quantity: 61,
+        inventoryStatus: 'OUTOFSTOCK',
+        rating: 4
+      },
+      {
+        id: '1002',
+        code: 'zz21cz3c1',
+        name: 'Blue Band',
+        description: 'Product Description',
+        image: 'blue-band.jpg',
+        price: 79,
+        category: 'Fitness',
+        quantity: 2,
+        inventoryStatus: 'LOWSTOCK',
+        rating: 3
+      },
+      {
+        id: '1003',
+        code: '244wgerg2',
+        name: 'Blue T-Shirt',
+        description: 'Product Description',
+        image: 'blue-t-shirt.jpg',
+        price: 29,
+        category: 'Clothing',
+        quantity: 25,
+        inventoryStatus: 'INSTOCK',
+        rating: 5
+      },
+      {
+        id: '1004',
+        code: 'h456wer53',
+        name: 'Bracelet',
+        description: 'Product Description',
+        image: 'bracelet.jpg',
+        price: 15,
+        category: 'Accessories',
+        quantity: 73,
+        inventoryStatus: 'INSTOCK',
+        rating: 4
+      },
+    ]
+  
+  
+    availableTVacuna: any[] | undefined;
+  
+    selectedTVacuna: any[] = [];
+  
+    draggedTVacuna: any | undefined | null;
+  
+  
+    dragStart(product: any) {
+      this.draggedTVacuna = product;
+    }
+  
+    drop() {
+      if (this.draggedTVacuna) {
+        let draggedProductIndex = this.findIndex(this.draggedTVacuna);
+        this.selectedTVacuna = [...(this.selectedTVacuna as any[]), this.draggedTVacuna];
+        this.availableTVacuna = this.availableTVacuna?.filter((val, i) => i != draggedProductIndex);
+        this.draggedTVacuna = null;
+      }
+    }
+  
+    dragEnd() {
+      this.draggedTVacuna = null;
+    }
+  
+    findIndex(product: any) {
+      let index = -1;
+      for (let i = 0; i < (this.availableTVacuna as any[]).length; i++) {
+        if (product.id === (this.availableTVacuna as any[])[i].id) {
+          index = i;
+          break;
+        }
+      }
+      return index;
+    }
+  
+    getSeverity(status: string) {
+      switch (status) {
+        case 'INSTOCK':
+          return 'success';
+        case 'LOWSTOCK':
+          return 'warning';
+        case 'OUTOFSTOCK':
+          return 'danger';
+        default: return '';
+      }
+    }
 
 
   
