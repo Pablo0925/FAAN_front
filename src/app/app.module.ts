@@ -22,6 +22,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { RecoverPasswordComponent } from './Components/recover-password/recover-password.component';
 import { ControlPersonComponent } from './Modules/Administrador/control-person/control-person.component';
 import { HomeComponent } from './Components/home/home.component';
+import { ForAdopcionComponent } from './Components/formAdopcion/for-adopcion/for-adopcion.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { HomeComponent } from './Components/home/home.component';
     ControlUsuariosComponent,
     RecoverPasswordComponent,
     ControlPersonComponent,
-    HomeComponent
+    HomeComponent,
+    ForAdopcionComponent
   ],
   imports: [
     BrowserModule,
