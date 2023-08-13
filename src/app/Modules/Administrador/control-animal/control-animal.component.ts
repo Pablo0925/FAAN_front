@@ -27,11 +27,12 @@ export class ControlAnimalComponent implements OnInit {
     private payloadservice: PayloadService
   ) {}
   tipoVacunaSeleccionada: TipoVacuna = new TipoVacuna();
-
+  originalAvailableTVacuna: any[] = [];
   ngOnInit(): void {
     this.getAllTiposVacunas();
     this.getListEstadoAnimal();
     this.selectedTVacuna = [];
+    this.originalAvailableTVacuna = [...this.availableTVacuna];
   }
 
   selectedSections: number[] = [];
@@ -60,7 +61,7 @@ export class ControlAnimalComponent implements OnInit {
   isSize: number = 8
   isSosrt: string[] = ['nombreAnimal', 'asc']
   selectedVacunatipo: TipoVacuna[] | undefined;
-  
+  selectedEstadoId!: number;
   pageTotal: number = 0;
   isFirst: boolean = false;
   isLast: boolean = false;
@@ -86,6 +87,13 @@ export class ControlAnimalComponent implements OnInit {
     }
   }
 
+  onEstadoSelected(event: any) {
+    this.selectedEstadoId = event.value.idEstadoAnimal;
+    console.log(this.selectedEstadoId); // Capturar el ID del estado seleccionado
+  }
+
+
+
   anteriorPage(): void {
     if (!this.isFirst) {
       this.isPage--;
@@ -106,6 +114,8 @@ export class ControlAnimalComponent implements OnInit {
   controlesanimales: PayloadControlAnimal[] = [];
 
   estadosanimales: EstadoAnimal[] = [];
+
+  
 
   getListaVacunasByIdControlAnimal(idControlAnimal: number) {
     console.log("entro")
@@ -192,6 +202,7 @@ export class ControlAnimalComponent implements OnInit {
   }
 
   
+
   getAllControlAnimal() {
     this.tipoVacunaService.getListaTipoVacuna().subscribe((data) => {
       this.listTipoVacuna = data;
@@ -284,79 +295,9 @@ export class ControlAnimalComponent implements OnInit {
       }
     }
 
-
-
-
-
-
-
-
-
-    data = [
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1001',
-        code: 'nvklal433',
-        name: 'Black Watch',
-        description: 'Product Description',
-        image: 'black-watch.jpg',
-        price: 72,
-        category: 'Accessories',
-        quantity: 61,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 4
-      },
-      {
-        id: '1002',
-        code: 'zz21cz3c1',
-        name: 'Blue Band',
-        description: 'Product Description',
-        image: 'blue-band.jpg',
-        price: 79,
-        category: 'Fitness',
-        quantity: 2,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3
-      },
-      {
-        id: '1003',
-        code: '244wgerg2',
-        name: 'Blue T-Shirt',
-        description: 'Product Description',
-        image: 'blue-t-shirt.jpg',
-        price: 29,
-        category: 'Clothing',
-        quantity: 25,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1004',
-        code: 'h456wer53',
-        name: 'Bracelet',
-        description: 'Product Description',
-        image: 'bracelet.jpg',
-        price: 15,
-        category: 'Accessories',
-        quantity: 73,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-      },
-    ]
   
   
-    availableTVacuna: any[] | undefined;
+    availableTVacuna!: any[];
   
     selectedTVacuna: any[] = [];
   
@@ -369,17 +310,22 @@ export class ControlAnimalComponent implements OnInit {
   
     drop() {
       if (this.draggedTVacuna) {
+        if (this.selectedTVacuna.includes(this.draggedTVacuna)) {
+          return; 
+        }
+    
         let draggedProductIndex = this.findIndex(this.draggedTVacuna);
-        this.selectedTVacuna = [...(this.selectedTVacuna as any[]), this.draggedTVacuna];
+        this.selectedTVacuna = [...this.selectedTVacuna, this.draggedTVacuna];
         this.availableTVacuna = this.availableTVacuna?.filter((val, i) => i != draggedProductIndex);
         this.draggedTVacuna = null;
       }
     }
-  
+    
     dragEnd() {
       this.draggedTVacuna = null;
     }
-  
+    
+
     findIndex(product: any) {
       let index = -1;
       for (let i = 0; i < (this.availableTVacuna as any[]).length; i++) {
@@ -403,6 +349,22 @@ export class ControlAnimalComponent implements OnInit {
       }
     }
 
+    selectedTipoVacunas: any[] = [];
 
+    addSelectedTipoVacunas() {
+      this.visibleVacuna = true;
+      this.selectedTipoVacunas = [...this.selectedTipoVacunas, ...this.selectedTVacuna];
+      console.log(this.selectedTipoVacunas);
+    }
+
+    resetTable() {
+      this.selectedTVacuna = []; 
+      this.tipoVacunaService.getListaTipoVacuna().subscribe((data) => {
+        this.listTipoVacuna = data;
+        this.availableTVacuna = data;
+      });
+  }
+  
+    
   
 }
