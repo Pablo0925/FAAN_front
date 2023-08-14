@@ -256,6 +256,7 @@ export class ControlAnimalComponent implements OnInit {
       this.vacuna = {} as Vacuna;
       this.isControlAnimal = {} as ControlAnimal;
       this.visibleVacuna = false;
+      this.getListaControlAnimal(this.isIdAnimal);
     })
   }
 
