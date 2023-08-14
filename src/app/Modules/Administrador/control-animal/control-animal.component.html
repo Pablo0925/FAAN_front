@@ -128,16 +128,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="grid p-fluid m-2">
-                        <div class="col-12 md:col-12 mt-1">
-                            <div class="p-inputgroup">
-                                <p-calendar [inline]="true" [style]="{ 'position': 'relative', 'z-index': '1000' }" inputId="edad"
-                                    class="ng-dirty" [showIcon]="true" placeholder="Fecha Vacunacion" id="fechaVacuna"
-                                    name="fechaVacuna" [(ngModel)]="vacuna.fechaVacuna"></p-calendar>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- <p-panel header="Proxima Vacuna" [toggleable]="true"> -->
+ 
                         <h5>Proxima vacuna</h5>
                         <div class="grid p-fluid m-2">
                             <div class="col-12 md:col-12 mt-1">
@@ -148,94 +139,13 @@
                                 </div>
                             </div>
                         </div>
-                    <!-- </p-panel> -->           
-                    <!-- <div class="text-center">
-                        <button type="submit" class="btn btn-primarys">Agregar vacuna</button>
-                    </div> -->
+
+                        
                 </form>
+                <button type="button" (click)="agregarVacuna()" class="btn btn-primarys m-2">Agregar Vacuna</button>
+                <button type="button" (click)="limpiarVacunasTemporales()" class="btn btn-primarys m-2">Cancelar Vacunas</button>
             </p-panel>
 
-
-            <!-- <div class="card grid grid-nogutter">
-                <h2 style="text-align: center;">Vacunas</h2>
-                <div class="text-right"> 
-                    <button class="btn btn-success" type="button" (click)="resetTable()">Reset</button>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-md-6 drag-column">
-
-                        <div *ngFor="let tipoVacuna of availableTVacuna">
-                            <div class="product-item" pDraggable="tipoVacuna" (onDragStart)="dragStart(tipoVacuna)"
-                                (onDragEnd)="dragEnd()">
-                                <div class="image-container">
-                                    <img src="https://www.aemps.gob.es/img/vacunas/vacunas-autorizacion.png"
-                                        [alt]="tipoVacuna.nombreVacuna" class="product-image" />
-                                </div>
-                                <div class="product-list-detail">
-                                    <h5 class="mb-2">{{tipoVacuna.nombreVacuna}}</h5>
-                                    <i class="pi pi-tag product-category-icon"></i>
-                                    <span class="product-category"></span>
-                                </div>
-                                <div class="product-list-action">
-                                    <h6 class="mb-2"></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 drop-column" pDroppable="tipoVacuna" (onDrop)="drop()">
-                        <p-table [value]="selectedTVacuna">
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th>ID</th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-tipoVacuna>
-                                <tr>
-                                    <td>{{tipoVacuna.nombreVacuna}}</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </div>
-            </div>
-            <p-panel header="Proxima Vacuna" [toggleable]="true">
-                <div class="grid p-fluid m-2">
-                    <div class="col-12 md:col-12 mt-1">
-                        <div class="p-inputgroup">
-                            <p-calendar [inline]="false" [style]="{ 'position': 'relative', 'z-index': '1000' }"
-                                inputId="edad" class="ng-dirty" [showIcon]="false" placeholder="Fecha Vacuna"
-                                id="fechaVacuna" name="fechaVacuna" [(ngModel)]="vacuna.fechaVacuna"></p-calendar>
-                        </div>
-                    </div>
-                </div>
-            </p-panel>
-            <p-panel header="Proxima Vacuna" [toggleable]="true">
-                <div class="grid p-fluid m-2">
-                    <div class="col-12 md:col-12 mt-1">
-                        <div class="p-inputgroup">
-                            <p-calendar [inline]="false" [style]="{ 'position': 'relative', 'z-index': '1000' }"
-                                inputId="edad" class="ng-dirty" [showIcon]="false" placeholder="Fecha Proxima Vacuna"
-                                id="fechaProximaVacuna" name="fechaProximaVacuna"
-                                [(ngModel)]="vacuna.fechaProximaVacuna"></p-calendar>
-                        </div>
-                    </div>
-                </div>
-            </p-panel> 
-
-
-
-            <div class="grid p-fluid m-2">
-                <div class="col-12 md:col-12 mt-1">
-                    <div class="p-inputgroup">
-                        <span class="p-float-label">
-                            <input type="text" pInputText id="observaciones" name="observaciones"
-                                [(ngModel)]="vacuna.observaciones" />
-                            <label htmlFor="observaciones"> Observacion <span class="red-asterisk"></span></label>
-                        </span>
-                    </div>
-                </div>
-            </div> -->
 
             <div class="d-flex align-items-center">
                 <button type="submit" class="btn btn-primarys m-2" style="flex: 10%;">Guardar Control</button>
@@ -243,11 +153,6 @@
         </form>
     </p-card>
 
-
-    <!-- <div class="d-flex align-items-center">
-        <button type="button" (click)="showModalControl()" class="btn btn-primarys m-2" style="flex: 10%;">Crear
-            Control</button>
-    </div> -->
 
     <div class="card m-5">
         <p-table [value]="controlesanimales" responsiveLayout="scroll">

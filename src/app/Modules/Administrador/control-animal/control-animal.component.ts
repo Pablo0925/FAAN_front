@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Toast } from 'ngx-toastr';
 import { ControlAnimal } from 'src/app/Models/controlAnimal';
 import { EstadoAnimal } from 'src/app/Models/estadoAnimal';
 import { Animal, Notificaciones, TipoAnimal, TipoVacuna, Vacuna } from 'src/app/Models/models';
@@ -228,9 +229,13 @@ export class ControlAnimalComponent implements OnInit {
   saveControl() {
     this.control.estadoAnimal = this.selectEstado;
     this.control.animal = this.objetoanimal;
+    this.control.estadoControl = true;
     this.controlAnimalService.saveControl(this.control).subscribe((data) => {
       this.control = data;
-      this.saveVacuna(this.control);
+      console.log(data);
+      for (const vacunaTemporal of this.vacunasTemporales) {
+        this.saveVacuna(this.control, vacunaTemporal);
+      }
       alert('SUCESSFULL');
       this.getListaVacunasByIdControlAnimal(this.isControlAnimal.idControlAnimal!)
       this.control = {} as ControlAnimal;
@@ -239,18 +244,59 @@ export class ControlAnimalComponent implements OnInit {
   }
 
 
-  saveVacuna(control: ControlAnimal) {
-    this.vacuna.tipoVacuna = this.selectedVacuna;
+  saveVacuna(control: ControlAnimal, vacunaTemporal: any)  {
+    this.vacuna.tipoVacuna = vacunaTemporal.tipoVacuna,
     this.vacuna.controlAnimal = control;
-    this.vacuna.fechaVacuna = control.fechaControlAnimal!;
+    this.vacuna.fechaVacuna = vacunaTemporal.fechaVacuna,
     this.vacuna.estadoVacuna = true;
     this.vacunaService.saveVacuna(this.vacuna).subscribe((data) => {
+      console.log(data);
       alert('SUCESSFULL');
       this.getListaVacunasByIdControlAnimal(this.isControlAnimal.idControlAnimal!)
       this.vacuna = {} as Vacuna;
       this.isControlAnimal = {} as ControlAnimal;
       this.visibleVacuna = false;
+      this.getListaControlAnimal(this.isIdAnimal);
     })
+  }
+
+  vacunasTemporales: any[] = [];
+
+  agregarVacuna() {
+    const existeVacuna = this.vacunasTemporales.some(vacuna => vacuna.tipoVacuna === this.selectedVacuna);
+  
+    if (existeVacuna) {
+      alert("Ingreso la misma vacuna");
+      return; 
+    }
+  
+    this.vacunasTemporales.push({
+      tipoVacuna: this.selectedVacuna,
+      observaciones: this.vacuna.observaciones,
+      fechaProximaVacuna: this.vacuna.fechaProximaVacuna,
+      estadoVacuna: true,
+      fechaVacuna: this.obtenerFechaActual()
+    });
+    alert("Vacuna Agregada");
+    this.limpiarCampos();
+    console.log(this.vacunasTemporales);
+  }
+
+  limpiarCampos() {
+    this.vacuna.observaciones = '';
+    this.vacuna.fechaProximaVacuna = new Date();
+  }
+
+  limpiarVacunasTemporales() {
+    alert("Vacunas canceladas");
+    this.vacunasTemporales = [];
+    console.log(this.vacunasTemporales);
+  }
+
+
+
+  obtenerFechaActual(): Date {
+    return new Date();
   }
 
   // SELECT ANIMAL
