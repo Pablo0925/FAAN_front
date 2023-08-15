@@ -102,6 +102,14 @@ export class ControlAnimalComponent implements OnInit {
   controlesanimales: PayloadControlAnimal[] = [];
   estadosanimales: EstadoAnimal[] = [];
 
+  VerDetalle(idControlAnimal: number){
+    console.log(idControlAnimal);
+    this.payloadservice.getPeyloadVacunasAnimalById(idControlAnimal).subscribe(data => {
+      this.vacunasAnimales = data
+      console.log(this.vacunasAnimales);
+      this.visibleVacuna = true;
+    })
+  }
   getListaVacunasByIdControlAnimal(idControlAnimal: number) {
     console.log("entro")
     this.payloadservice.getPeyloadVacunasAnimalById(idControlAnimal).subscribe(data => {

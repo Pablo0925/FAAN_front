@@ -163,31 +163,28 @@
                     <th>Peso Actual</th>
                     <th>Estado Animal</th>
                     <th>Descripción Estado</th>
-
+                    <th>Detalle Vacunas</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-columns="columns" let-data>
                 <tr>
+                    
                     <td>{{ data.fechaControlAnimal }}</td>
                     <td>{{ data.nombreVeterinario }}</td>
                     <td>{{ data.pesoActual }}</td>
                     <td>{{ data.tipoEstadoAnimal}}</td>
                     <td>{{ data.descripcion}}</td>
+                    <td>
+                        <button type="button" (click)="VerDetalle(data.idControlAnimal)" class="btn btn-primarys m-2">Ver</button>
+                    </td>
                 </tr>
             </ng-template>
         </p-table>
     </div>
 </p-card>
 
-<!-- 
-<p-card header="" class="m-2">
-    <h1 class="title">Vacunas</h1>
-    <div class="d-flex align-items-center">
-        <button type="button" (click)="showModalVacuna()" class="btn btn-primarys m-2" style="flex: 80%;">Añadir
-            vacuna</button>
-        <button type="button" (click)="showModalTipoVacuna()" class="btn btn-primarys m-2" style="flex: 10%;">Crear
-            Vacuna</button>
-    </div>
+<p-dialog header="Detalle Vacunas" [(visible)]="visibleVacuna" [modal]="true" [style]="{ width: '50vw'}"
+    [draggable]="false" [resizable]="false">
     <div class="card">
         <p-table [value]="vacunasAnimales" responsiveLayout="scroll">
             <ng-template pTemplate="header">
@@ -195,7 +192,6 @@
                     <th>Fecha Vacunacion</th>
                     <th>Nombre Vacuna</th>
                     <th>Observaciones</th>
-                    <th>Estado</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-columns="columns" let-data>
@@ -203,12 +199,11 @@
                     <td>{{ data.fechaVacuna }}</td>
                     <td>{{ data.nombreVacuna }}</td>
                     <td>{{ data.observaciones }}</td>
-                    <td>{{ data.estadoVacuna }}</td>
                 </tr>
             </ng-template>
         </p-table>
     </div>
-</p-card> -->
+</p-dialog>
 
 
 
