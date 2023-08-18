@@ -32,7 +32,7 @@ export class EncabezadoAdopcionService {
   }
 
   public saveEncabezadoAdopcion (detalleAdopcion : EncabezadoAdopcion ):Observable<EncabezadoAdopcion >{
-    return this.http.post<EncabezadoAdopcion >(environment.apiuriPublic+'/encabezadoadopcion/save', detalleAdopcion);
+    return this.http.post<EncabezadoAdopcion >(environment.apiuriPublic+'/api/encabezadoadopcion/save', detalleAdopcion);
   }
 
 }

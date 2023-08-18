@@ -19,9 +19,10 @@ import { RegisterRazaAnimalComponent } from './Modules/Administrador/animal/regi
 import { ControlAnimalComponent } from './Modules/Administrador/control-animal/control-animal.component';
 import { ControlUsuariosComponent } from './Modules/SuperAdministrador/control-usuarios/control-usuarios.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { RecoverPasswordComponent } from './Components/recover-password/recover-password.component';
+import { AdopcionAnimalComponent } from './Modules/Administrador/adopcion-animal/adopcion-animal.component';
 import { ControlPersonComponent } from './Modules/Administrador/control-person/control-person.component';
 import { HomeComponent } from './Components/home/home.component';
+import { RecoverPasswordComponent } from './Components/recover-password/recover-password.component';
 import { ForAdopcionComponent } from './Components/formAdopcion/for-adopcion/for-adopcion.component';
 
 @NgModule({
@@ -36,9 +37,10 @@ import { ForAdopcionComponent } from './Components/formAdopcion/for-adopcion/for
     RegisterRazaAnimalComponent,
     ControlAnimalComponent,
     ControlUsuariosComponent,
-    RecoverPasswordComponent,
+    AdopcionAnimalComponent,
     ControlPersonComponent,
     HomeComponent,
+    RecoverPasswordComponent,
     ForAdopcionComponent
   ],
   imports: [

@@ -1,4 +1,3 @@
-import { FichaMedica } from "./fichaMedica";
 import { FichaRegistro } from "./fichaRegistro";
 import { Fundacion } from "./fundacion";
 import { RazaAnimal } from "./razaAnimal";
@@ -9,9 +8,9 @@ export class Animal {
     placaAnimal?: string;
     fotoAnimal?: string;
     edadAnimal?: number;
+    estatura?: string; //atribute add..
     estadoAnimal?: string;
     razaAnimal?: RazaAnimal;
     fichaRegistro?: FichaRegistro;
-    fichaMedica?: FichaMedica;
     fundacion?: Fundacion;
 }

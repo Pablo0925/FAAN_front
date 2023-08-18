@@ -1,4 +1,4 @@
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { environment } from '../../environment/enviroment';
@@ -13,12 +13,22 @@ export class AnimalService {
 
   constructor(private http: HttpClient, private storageService: StorageService) { }
 
+  public findByAdoptadoOrNoAdoptado(page: number, size: number, adoptado: Boolean, NombreOrPlaca: string, sort: string[]): Observable<Animal[]> {
+    return this.http.get<Animal[]>(environment.apiuri + '/animal/findByAdoptadoOrNoAdoptado/' + adoptado + '?' + `busqueda=${NombreOrPlaca}&page=${page}&size=${size}&sort=${sort}`);
+  }
+
   public getAllAnimalesPages(page: number, size: number, sort: string[]): Observable<Animal[]> {
     return this.http.get<Animal[]>(environment.apiuri + '/animal/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
   }
 
   public getAllAnimalesPagesOrPlacaOrName(filtro: string, page: number, size: number, sort: string[]): Observable<Animal[]> {
-    return this.http.get<Animal[]>(environment.apiuri + '/animal/findBynameOrplaca?' + `filter=${filtro}&page=${page}&size=${size}&sort=${sort}`);
+    let params = new HttpParams()
+      .set('page', page)
+      .set('size', size)
+      .set('sort', sort.join(','))
+      .set('filter', filtro)
+      console.log(params);
+    return this.http.get<Animal[]>(environment.apiuri + '/animal/findBynameOrplaca',{params});
   }
 
   public getListaAnimal(): Observable<Animal[]> {
