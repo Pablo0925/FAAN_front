@@ -295,15 +295,14 @@ export class ControlAnimalComponent implements OnInit {
             this.control = data;
             console.log(data);
   
-            const currentDate = new Date(); // Current date
+            const currentDate = new Date(); 
             for (const vacunaTemporal of this.vacunasTemporales) {
               if (vacunaTemporal.fechaProximaVacuna) { 
-                // Calculate days until next vaccination
+           
                 const daysUntilNextVaccination = Math.floor((new Date(vacunaTemporal.fechaProximaVacuna).getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
   
                 this.saveVacuna(this.control, vacunaTemporal);
   
-                // Create notification object
                 const notificacion: Notificaciones = {
                   fullNameMascota: this.control.animal?.nombreAnimal, 
                   cuerpoMensaje: `Próxima vacunación en ${daysUntilNextVaccination} días.`,
