@@ -25,6 +25,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { RecoverPasswordComponent } from './Components/recover-password/recover-password.component';
 import { ForAdopcionComponent } from './Components/formAdopcion/for-adopcion/for-adopcion.component';
 import { DonacionesComponent } from './Components/donaciones/donaciones/donaciones.component';
+import { ContactoComponent } from './Components/contacto/contacto/contacto.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { DonacionesComponent } from './Components/donaciones/donaciones/donacion
     HomeComponent,
     RecoverPasswordComponent,
     ForAdopcionComponent,
-    DonacionesComponent
+    DonacionesComponent,
+    ContactoComponent
   ],
   imports: [
     BrowserModule,

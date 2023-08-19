@@ -18,6 +18,7 @@ import { ControlPersonComponent } from './Modules/Administrador/control-person/c
 import { HomeComponent } from './Components/home/home.component';
 import { ForAdopcionComponent } from './Components/formAdopcion/for-adopcion/for-adopcion.component';
 import { DonacionesComponent } from './Components/donaciones/donaciones/donaciones.component';
+import { ContactoComponent } from './Components/contacto/contacto/contacto.component';
 
 
 const routes: Routes = [
@@ -53,6 +54,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'formulario-adopcion', component: ForAdopcionComponent },
   { path: 'donaciones', component: DonacionesComponent },
+  { path: 'contacto', component: ContactoComponent },
   { path: '**', redirectTo: 'login' },
   
 ];
