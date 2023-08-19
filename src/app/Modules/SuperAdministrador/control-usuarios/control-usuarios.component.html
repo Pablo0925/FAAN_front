@@ -51,9 +51,11 @@
                         field="estadoUsuario"></p-sortIcon>
                 </th>
                 <th>
-                    CAMBIAR ESTADO
+                    <strong> CAMBIARESTADO</strong> 
                 </th>
+                <th>
 
+                </th>
 
             </tr>
         </ng-template>
@@ -67,7 +69,12 @@
                 <td><p-tag [value]="usuario.estadoUsuario ? 'Activado' : 'Desactivado'"
                         [severity]="getSeverity(usuario.estadoUsuario)"></p-tag></td>
                 <td>
-                        <p-inputSwitch [(ngModel)]="checked" (onChange)="toggleUserState(usuario)"></p-inputSwitch>
+                    <p-inputSwitch [(ngModel)]="checked" (onChange)="toggleUserState(usuario)"></p-inputSwitch>
+                </td>
+                <td>
+                    <button pButton pRipple pTooltip="Editar Usuario" tooltipPosition="top" icon="pi pi-pencil"
+                        (click)="editUsuario(usuario)"
+                        class="p-button-rounded p-button-success p-button-outlined mr-2"></button>
                 </td>
             </tr>
         </ng-template>
