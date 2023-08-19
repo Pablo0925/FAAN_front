@@ -64,6 +64,21 @@ export class ControlUsuariosComponent implements OnInit {
   }
 
 
+  
+ checked: boolean = true;
+
+ getSeverity(estadoUsuario: boolean): string {
+   return estadoUsuario ? 'success' : 'danger';
+ }
+ 
+ toggleUserState(usuario: any) {
+  usuario.estadoUsuario = this.checked;
+  this.usuarioService.updateUsuario(usuario.idUsuario, usuario)
+    .subscribe(updatedUser => {
+      console.log('User updated:', updatedUser);
+
+    });
+}
 
   // ADD UPDATE
   public editUsuario(usuario: Usuario) {
@@ -72,12 +87,7 @@ export class ControlUsuariosComponent implements OnInit {
     this.userDialog = true;
   }
 
-  //CHANGE STATE
-  public inhaUser(usuario: Usuario){
-    this.usuario = {...usuario};
-    this.persona = this.usuario.persona;
-    this.desactivarUser = true;
-  }
+
 
   // GET ALL ROLES
   public listRoles: Rol[] = [];
@@ -221,14 +231,4 @@ export class ControlUsuariosComponent implements OnInit {
     this.fullname = '';
   }
 
-  getSeverity(status: boolean) {
-    switch (status) {
-      case true:
-        return 'success';
-      case false:
-        return 'warning';
-      default:
-        return 'danger';
-    }
-  }
 }
