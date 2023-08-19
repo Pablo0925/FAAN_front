@@ -11,6 +11,7 @@
     </div>
 </p-card>
 
+
 <!-- MODAL ANIMALES -->
 <p-dialog header="Datos Fundación" [(visible)]="visible" [modal]="true" [style]="{ width: '80vw' }" [draggable]="false"
     [resizable]="false">
@@ -148,9 +149,33 @@
 
 
                 </form>
+
                 <button type="button" (click)="agregarVacuna()" class="btn btn-primarys m-2">Agregar Vacuna</button>
-                <button type="button" (click)="limpiarVacunasTemporales()" class="btn btn-primarys m-2">Cancelar
-                    Vacunas</button>
+                <button type="button" (click)="limpiarVacunasTemporales()" class="btn btn-primarys m-2">Eliminar Todo</button>
+
+                <div class="card centered-card">
+                    <p-table [value]="vacunasTemporales" responsiveLayout="scroll">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Fecha Vacunacion</th>
+                                <th>Nombre Vacuna</th>
+                                <th>Observaciones</th>
+                                <th>Quitar Vacuna</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-columns="columns" let-data>
+                            <tr>
+                                <td>{{ data.fechaVacuna | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ data.tipoVacuna.nombreVacuna }}</td>
+                                <td>{{ data.observaciones }}</td>
+                                <td>
+                                    <button (click)="eliminarVacuna(data)" pButton icon="pi pi-trash" class="btn btn-primarys m-2"></button>
+                                </td>
+
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
             </p-panel>
 
 
