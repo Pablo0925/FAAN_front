@@ -350,6 +350,15 @@ export class ControlAnimalComponent implements OnInit {
     console.log(this.vacunasTemporales);
   }
 
+  eliminarVacuna(vacuna: any) {
+    const index = this.vacunasTemporales.indexOf(vacuna);
+    if (index !== -1) {
+        this.vacunasTemporales.splice(index, 1);
+        console.log("Vacuna Eliminada");
+        console.log(this.vacunasTemporales);
+    }
+}
+
   limpiarCampos() {
     this.vacuna.observaciones = '';
     this.vacuna.fechaProximaVacuna = new Date();
