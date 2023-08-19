@@ -102,6 +102,54 @@ export class ControlAnimalComponent implements OnInit {
   controlesanimales: PayloadControlAnimal[] = [];
   estadosanimales: EstadoAnimal[] = [];
 
+  VerDetalle(idControlAnimal: number) {
+    console.log(idControlAnimal);
+    this.payloadservice.getPeyloadVacunasAnimalById(idControlAnimal).subscribe(data => {
+      this.vacunasAnimales = data
+      console.log(this.vacunasAnimales);
+      this.visibleVacuna = true;
+    })
+  }
+
+  fechacon?: Date;
+  observa!: any;
+  nombrevete!: any;
+  pesoact!: any;
+  idcontro!: any;
+  visibleEditarControl: boolean = false;
+  CargarDatodControl(idControlAnimal: number) {
+    this.controlAnimalService.getControlById(idControlAnimal).subscribe(data => {
+      console.log(data);
+      this.idcontro = data.idControlAnimal;
+      this.visibleEditarControl = true;
+      this.fechacon = data.fechaControlAnimal;
+      this.observa = data.observaciones;
+      this.nombrevete = data.nombreVeterinario;
+      this.pesoact = data.pesoActual;
+
+    })
+  }
+
+  ActulizarDatosControl() {
+    console.log("entroooupdate");
+    this.control.nombreVeterinario = this.nombrevete;
+    this.control.observaciones = this.observa;
+    this.control.pesoActual = this.pesoact;
+    this.control.fechaControlAnimal = this.fechacon;
+    this.controlAnimalService.updateControl(this.idcontro, this.control).subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  CancelarEditarControl() {
+    this.idcontro = "";
+    this.visibleEditarControl = false;
+    this.fechacon = new Date;
+    this.observa = "";
+    this.nombrevete = "";
+    this.pesoact = "";
+  }
+
   getListaVacunasByIdControlAnimal(idControlAnimal: number) {
     console.log("entro")
     this.payloadservice.getPeyloadVacunasAnimalById(idControlAnimal).subscribe(data => {
@@ -229,26 +277,43 @@ export class ControlAnimalComponent implements OnInit {
   saveControl() {
     this.control.estadoAnimal = this.selectEstado;
     this.control.animal = this.objetoanimal;
+    console.log(this.control.animal);
     this.control.estadoControl = true;
-    this.controlAnimalService.saveControl(this.control).subscribe((data) => {
-      this.control = data;
-      console.log(data);
-      for (const vacunaTemporal of this.vacunasTemporales) {
-        this.saveVacuna(this.control, vacunaTemporal);
+    if (Object.keys(this.objetoanimal).length === 0) {
+      alert('Debe selecionar un animal');
+
+
+    } else {
+      if (Object.keys(this.selectEstado).length === 0) {
+        alert('No a selecionado un estado');
+
+      } else {
+        this.controlAnimalService.saveControl(this.control).subscribe((data) => {
+          this.control = data;
+          console.log(data);
+          for (const vacunaTemporal of this.vacunasTemporales) {
+            this.saveVacuna(this.control, vacunaTemporal);
+          }
+          alert('SUCESSFULL');
+          this.getListaVacunasByIdControlAnimal(this.isControlAnimal.idControlAnimal!)
+          this.control = {} as ControlAnimal;
+          this.isControlAnimal = {} as ControlAnimal;
+        })
+
+
       }
-      alert('SUCESSFULL');
-      this.getListaVacunasByIdControlAnimal(this.isControlAnimal.idControlAnimal!)
-      this.control = {} as ControlAnimal;
-      this.isControlAnimal = {} as ControlAnimal;
-    })
+
+
+    }
+
   }
 
 
-  saveVacuna(control: ControlAnimal, vacunaTemporal: any)  {
+  saveVacuna(control: ControlAnimal, vacunaTemporal: any) {
     this.vacuna.tipoVacuna = vacunaTemporal.tipoVacuna,
-    this.vacuna.controlAnimal = control;
+      this.vacuna.controlAnimal = control;
     this.vacuna.fechaVacuna = vacunaTemporal.fechaVacuna,
-    this.vacuna.estadoVacuna = true;
+      this.vacuna.estadoVacuna = true;
     this.vacunaService.saveVacuna(this.vacuna).subscribe((data) => {
       console.log(data);
       alert('SUCESSFULL');
@@ -260,16 +325,19 @@ export class ControlAnimalComponent implements OnInit {
     })
   }
 
+  
+  
+
   vacunasTemporales: any[] = [];
 
   agregarVacuna() {
     const existeVacuna = this.vacunasTemporales.some(vacuna => vacuna.tipoVacuna === this.selectedVacuna);
-  
+
     if (existeVacuna) {
       alert("Ingreso la misma vacuna");
-      return; 
+      return;
     }
-  
+
     this.vacunasTemporales.push({
       tipoVacuna: this.selectedVacuna,
       observaciones: this.vacuna.observaciones,
