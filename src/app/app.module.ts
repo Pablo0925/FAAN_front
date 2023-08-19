@@ -24,6 +24,7 @@ import { ControlPersonComponent } from './Modules/Administrador/control-person/c
 import { HomeComponent } from './Components/home/home.component';
 import { RecoverPasswordComponent } from './Components/recover-password/recover-password.component';
 import { ForAdopcionComponent } from './Components/formAdopcion/for-adopcion/for-adopcion.component';
+import { DonacionesComponent } from './Components/donaciones/donaciones/donaciones.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ForAdopcionComponent } from './Components/formAdopcion/for-adopcion/for
     ControlPersonComponent,
     HomeComponent,
     RecoverPasswordComponent,
-    ForAdopcionComponent
+    ForAdopcionComponent,
+    DonacionesComponent
   ],
   imports: [
     BrowserModule,

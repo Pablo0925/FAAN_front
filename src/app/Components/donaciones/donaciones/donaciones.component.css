@@ -1,0 +1,144 @@
+h1,
+h2,
+h3 {
+    font-style: normal;
+    font-weight: 700
+}
+
+a:active,
+a:link,
+a:visited {
+    text-decoration: none
+}
+
+body {
+    background-color: #fff;
+    margin: 8px 20px
+}
+
+h1 {
+    font-size: 32px;
+    font-family: Arial, Verdana;
+    color: #70b8d0
+}
+
+h2 {
+    font-size: 22px;
+    font-family: Arial;
+    color: #000
+}
+
+h3 {
+    font-size: 20px;
+    font-family: ARIAL;
+    color: #3c3c3c
+}
+
+h4,
+h5 {
+    font-family: Arial, Verdana
+}
+
+h4,
+h5,
+h6 {
+    font-weight: 300
+}
+
+h4 {
+    font-size: 19px
+}
+
+h5 {
+    font-size: 19px
+}
+
+h6 {
+    font-size: 13px;
+    font-style: italic;
+    font-family: Arial;
+    color: #699
+}
+
+a:link {
+    color: #3770B1
+}
+
+a:visited {
+    color: #57A64C
+}
+
+a:hover {
+    color: #4D5FA6
+}
+
+a:active {
+    color: #767779
+}
+
+.indexbutton {
+    box-shadow: inset 0px 1px 3px 0px #91b8b3;
+    background: linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+    background-color: #768d87;
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+    display: inline-block;
+    cursor: pointer;
+    color: #fff !important;
+    font-family: Arial;
+    font-size: 19px;
+    font-weight: bold;
+    padding: 11px 25px;
+    text-decoration: none;
+    text-shadow: 0px -1px 0px #2b665e;
+}
+
+.indexbutton:hover {
+    color: #585858 !important;
+    background: #ffffff;
+    background: linear-gradient(to top, #19CF0C, #74EE70);
+    background: -ms-linear-gradient(to top, #19CF0C, #74EE70);
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#c1c1c1));
+    background: -moz-linear-gradient(to top, #ffffff, #c1c1c1)
+}
+
+img.right {
+    float: right;
+    margin: 0;
+    padding: 0px;
+    border: 0px;
+}
+
+img.left {
+    float: left;
+    height: 220px;
+    margin: 25px;
+    margin-top: 10px;
+    padding: 0px;
+    border: 0px;
+}
+
+mark.gold {
+    font-size: 22px;
+    font-family: arial;
+    font-weight: bold;
+    font-style: italic;
+    color: #F70926;
+    background: none;
+}
+
+mark.bronze {
+    font-size: 22px;
+    font-weight: bold;
+    color: #cd7f32;
+    background: none;
+}
+
+mark.silver {
+    font-size: 25px;
+    font-family: arial;
+    font-weight: bold;
+    font-style: italic;
+    color: #32DC24;
+    background: none;
+}
