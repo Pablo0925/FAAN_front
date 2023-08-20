@@ -45,7 +45,7 @@ import { ContactoComponent } from './Components/contacto/contacto/contacto.compo
     RecoverPasswordComponent,
     ForAdopcionComponent,
     DonacionesComponent,
-    ContactoComponent
+    ContactoComponent 
   ],
   imports: [
     BrowserModule,

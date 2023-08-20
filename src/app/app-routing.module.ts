@@ -56,7 +56,7 @@ const routes: Routes = [
   { path: 'donaciones', component: DonacionesComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: '**', redirectTo: 'login' },
-  
+   
 ];
 
 @NgModule({

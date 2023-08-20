@@ -9,7 +9,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
     styleUrls: ['./for-adopcion.component.css']
 })
 export class ForAdopcionComponent {
-
+ 
     generarPDF() {
 
         const nombreInput = document.getElementById("nombre") as HTMLInputElement;

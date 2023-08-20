@@ -12,7 +12,7 @@ describe('DonacionesComponent', () => {
     });
     fixture = TestBed.createComponent(DonacionesComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture.detectChanges(); 
   });
 
   it('should create', () => {
