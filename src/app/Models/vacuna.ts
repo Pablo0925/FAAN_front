@@ -6,7 +6,7 @@ export class Vacuna {
     fechaVacuna!: Date;
     fechaProximaVacuna!: Date;
     observaciones?: string;
-    estadoVacuna?: string;
+    estadoVacuna?: boolean;
     tipoVacuna?: TipoVacuna;
     controlAnimal?: ControlAnimal;
 }
