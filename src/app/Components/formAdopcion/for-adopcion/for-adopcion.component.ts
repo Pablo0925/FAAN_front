@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+import { formulario } from 'src/app/Models/fomulario';
 
 @Component({
     selector: 'app-for-adopcion',
@@ -9,8 +10,11 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
     styleUrls: ['./for-adopcion.component.css']
 })
 export class ForAdopcionComponent {
- 
-    generarPDF() {
+
+
+    formulario: formulario = new formulario();
+
+    generarPDF(): void {
 
         const nombreInput = document.getElementById("nombre") as HTMLInputElement;
         const ocupacionInput = document.getElementById("ocupacion") as HTMLInputElement;

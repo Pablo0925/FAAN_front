@@ -84,7 +84,7 @@
 <h1 class="Formulario">FORMULARIO DE ADOPCION DE ANIMAL DE COMPAÑIA</h1>
 <h2 style="width: 100%; height: 100%; text-align: center; margin-bottom: 70px;">Información Personal</h2>
 
-<form action="/procesar_formulario" method="post">
+<form ngNativeValidate action="/procesar_formulario" method="POST">
 
   <fieldset>
     <section class="layout2">
@@ -92,67 +92,67 @@
       <div class="inputContainer">
         <input required="" class="customInput" type="text">
         <label class="inputLabel">Nombre:</label>
-        <div class="inputUnderline"></div>
+        <input type="text" class="inputUnderline" [(ngModel)]="formulario.nombre" required>
       </div>
 
       <div class="inputContainer">
         <input required="" class="customInput" type="text">
         <label class="inputLabel">Ocupacion:</label>
-        <div class="inputUnderline"></div>
+        <input type="text" class="inputUnderline" [(ngModel)]="formulario.ocupacion" required>
       </div>
 
       <div class="inputContainer">
         <input required="" class="customInput" type="text">
         <label class="inputLabel">Ubicacion Domicilaria:</label>
-        <div class="inputUnderline"></div>
+        <input type="text" class="inputUnderline" [(ngModel)]="formulario.ubicaciondomicilio" required>
       </div>
 
       <div class="inputContainer">
         <input required="" class="customInput" type="text">
         <label class="inputLabel">Direccion del Trabajo:</label>
-        <div class="inputUnderline"></div>
+        <input type="text" class="inputUnderline" [(ngModel)]="formulario.direccion" required>
       </div>
 
       <div class="inputContainer">
         <input required="" class="customInput" type="text">
         <label class="inputLabel">Correo Electrónico:</label>
-        <div class="inputUnderline"></div>
+        <input type="text" class="inputUnderline" [(ngModel)]="formulario.correo" required>
       </div>
 
       <div class="inputContainer">
         <input required="" class="customInput" type="text">
         <label class="inputLabel">Telefono de Casa:</label>
-        <div class="inputUnderline"></div>
+        <input type="text" class="inputUnderline" [(ngModel)]="formulario.telefonocasa" required>
       </div>
 
       <div class="inputContainer">
         <input required="" class="customInput" type="text">
         <label class="inputLabel">Telefono de Trabajo:</label>
-        <div class="inputUnderline"></div>
+        <input type="text" class="inputUnderline" [(ngModel)]="formulario.telefonotrabajo" required>
       </div>
 
       <div class="inputContainer">
         <input required="" class="customInput" type="text">
         <label class="inputLabel">Celular:</label>
-        <div class="inputUnderline"></div>
+        <input type="text" class="inputUnderline" [(ngModel)]="formulario.celular" required>
       </div>
 
       <div class="inputContainer">
         <input required="" class="customInput" type="text">
         <label class="inputLabel">Estado Civil:</label>
-        <div class="inputUnderline"></div>
+        <input type="text" class="inputUnderline" [(ngModel)]="formulario.estadocivil" required>
       </div>
 
       <div class="inputContainer">
         <input required="" class="customInput" type="text">
         <label class="inputLabel">Numero de Miembros Familiares:</label>
-        <div class="inputUnderline"></div>
+        <input type="text" class="inputUnderline" [(ngModel)]="formulario.numeroMiembros" required>
       </div>
 
       <div class="inputContainer">
         <input required="" class="customInput" type="text">
         <label class="inputLabel">NIños - Edad:</label>
-        <div class="inputUnderline"></div>
+        <input type="text" class="inputUnderline" [(ngModel)]="formulario.edadNinos" required>
       </div>
 
 
@@ -165,114 +165,136 @@
     <div> <label style="width: 85%;">¿Quién es la persona que autorizará la adopción del animal? (madre, padre, tutor,
         etc) :</label>
       <div class="input-wrapper" style="margin-bottom: 40px;">
-        <input type="text" placeholder="Escriba su respuesta..." name="text" class="input">
+        <input type="text" [(ngModel)]="formulario.autorizacion" placeholder="Escriba su respuesta..." name="text"
+          class="input" required>
       </div>
     </div>
     <div>
       <label style="width: 85%;">¿Están todos los miembros de la familia enterados y de acuerdo con la intención de
-        adoptar un animal de
-        compañía?</label> <br>
-      <input class="check" type="checkbox" id="acuerdo_familia_si" value="Si" required> Si
-      <input class="check" type="checkbox" id="acuerdo_familia_no" value="No" required> No<br>
-      <label>Si su respuesta es no, ¿por qué?</label><br>
-      <textarea style="border-radius: 10px; margin-bottom: 40px;" id="razon_no_acuerdo" rows="3"
-        cols="50"></textarea><br>
+        adoptar un animal de compañía?</label>
+      <br>
+      <input class="check" type="checkbox" id="acuerdo_familia_si" value="Si"
+        [(ngModel)]="formulario.todoMiembrosAcuerdo" name="acuerdo_familia" required> Si
+      <input class="check" type="checkbox" id="acuerdo_familia_no" value="No"
+        [(ngModel)]="formulario.todoMiembrosAcuerdo" name="acuerdo_familia" required> No
+      <br>
+      <label>Si su respuesta es no, ¿por qué?</label>
+      <br>
+      <textarea style="border-radius: 10px; margin-bottom: 40px;" id="razon_no_acuerdo" rows="3" cols="50"
+        [(ngModel)]="formulario.siesno" required></textarea>
+      <br>
     </div>
     <div>
 
       <label>El animalito viviría con:</label><br>
-      <input class="check" type="checkbox" id="viveConmigo" value="Conmigo" required>Conmigo y mi familia <br>
-      <input class="check" type="checkbox" id="viveOtro" value="Otro" required>Es obsequio para un conocido<br>
+      <input class="check" [(ngModel)]="formulario.viviraCon" type="checkbox" id="viveConmigo" value="Conmigo"
+        required>Conmigo y mi familia <br>
+      <input class="check" [(ngModel)]="formulario.viviraCon" type="checkbox" id="viveOtro" value="Otro" required>Es
+      obsequio para un conocido<br>
 
     </div>
     <div>
 
       <label style="margin-top: 40px;">Como lo vas a considerar:</label><br>
       <section class="layoutopciones" style="text-align: justify;">
-        <div style="height: 60%;"> <input class="check" type="checkbox" id="compania" value="Conmigo" required>Compañia
+        <div style="height: 60%;"> <input class="check" [(ngModel)]="formulario.considerar" type="checkbox"
+            id="compania" value="Conmigo" required>Compañia
         </div>
-        <div style="height: 100%;"> <input class="check" type="checkbox" id="guardian" value="Otro" required>Guardian
+        <div style="height: 100%;"> <input class="check" [(ngModel)]="formulario.considerar" type="checkbox"
+            id="guardian" value="Otro" required>Guardian
         </div>
-        <div style="height: 100%;"> <input class="check" type="checkbox" s id="miembroFamilia" value="Otro"
-            required>Miembro de la familia
+        <div style="height: 100%;"> <input class="check" [(ngModel)]="formulario.considerar" type="checkbox" s
+            id="miembroFamilia" value="Otro" required>Miembro de la familia
         </div>
-        <div style="height: 100%;"> <input class="check" type="checkbox" id="amigo" value="Otro" required>Amigo
+        <div style="height: 100%;"> <input class="check" [(ngModel)]="formulario.considerar" type="checkbox" id="amigo"
+            value="Otro" required>Amigo
         </div>
 
       </section>
 
     </div>
     <div>
-
       <label style="margin-top: 40px;">¿Han tenido animales de compañía con anterioridad?</label><br>
-      <input class="check" type="checkbox" id="antesSi" value="Si" required> Si
-      <input class="check" type="checkbox" id="antesNo" value="No" required> No<br><br>
+      <input class="check" [(ngModel)]="formulario.animalesAnterioridad" type="checkbox" id="antesSi" value="Si"
+        required> Si
+      <input class="check" [(ngModel)]="formulario.animalesAnterioridad" type="checkbox" id="antesNo" value="No"
+        required> No<br><br>
     </div>
     <div>
       <label style="margin-top: 80px;">¿Qué animal era? DESCRIBA</label><br>
-      <textarea style="border-radius: 10px; margin-bottom: 40px;" id="animalPasado" rows="3" cols="50"></textarea><br>
+      <textarea style="border-radius: 10px; margin-bottom: 40px;" [(ngModel)]="formulario.animalPasado"
+        id="animalPasado" rows="3" cols="50" required></textarea><br>
 
     </div>
     <div>
 
       <label style="margin-top: 40px;">¿Cuánto tiempo vivió con ustedes? </label><br>
-      <textarea style="border-radius: 10px; margin-bottom: 40px;" id="tiempoPasado" rows="3" cols="50"></textarea><br>
+      <textarea style="border-radius: 10px; margin-bottom: 40px;" [(ngModel)]="formulario.tiempoPasado"
+        id="tiempoPasado" rows="3" cols="50" required></textarea><br>
     </div>
     <div> <label style="margin-top: 40px;">¿En dónde está ahora el animal? ¿Por qué? Falleció, Como?</label><br>
-      <textarea style="border-radius: 10px;  margin-bottom: 40px;" id="animalAhora" rows="3" cols="50"></textarea><br>
+      <textarea style="border-radius: 10px;  margin-bottom: 40px;" [(ngModel)]="formulario.animalAhora" id="animalAhora"
+        rows="3" cols="50" required></textarea><br>
     </div>
     <div>
       <label style="margin-top: 40px;">¿Estaba vacunado? </label><br>
-      <input class="check" type="checkbox" id="vacunaSI" value="Si" required> Si
-      <input class="check" type="checkbox" id="vacunaNO" value="No" required> No<br>
+      <input class="check" type="checkbox" id="vacunaSI" [(ngModel)]="formulario.vacunado" value="Si" required> Si
+      <input class="check" type="checkbox" id="vacunaNO" [(ngModel)]="formulario.vacunado" value="No" required> No<br>
     </div>
     <div>
       <label style="margin-top: 40px;   width: 85%;">¿Qué vacunas se le aplicaron? y ¿Cada cuánto tiempo se
         vacunaba?</label><br>
-      <textarea style="border-radius: 10px; margin-bottom: 40px;" id="vacunasANTES" rows="3" cols="50"></textarea><br>
+      <textarea style="border-radius: 10px; margin-bottom: 40px;" [(ngModel)]="formulario.vacunasAntes"
+        id="vacunasANTES" rows="3" cols="50" required></textarea><br>
     </div>
     <div> <label style="margin-top: 40px;">¿Estaba desparasitado?</label><br>
-      <input class="check" type="checkbox" id="desparasitadoSI" value="Si" required> Si
-      <input class="check" type="checkbox" id="desparasitadoNO" value="No" required> No<br>
+      <input class="check" type="checkbox" [(ngModel)]="formulario.desparasitado" id="desparasitadoSI" value="Si"
+        required> Si
+      <input class="check" type="checkbox" [(ngModel)]="formulario.desparasitado" id="desparasitadoNO" value="No"
+        required> No<br>
     </div>
     <div> <label style="margin-top: 40px;">¿Cada cuánto tiempo se desparasitaba?</label><br>
-      <textarea style="border-radius: 10px;  margin-bottom: 40px;" id="tiempoDesparasita" rows="3"
-        cols="50"></textarea><br>
+      <textarea style="border-radius: 10px;  margin-bottom: 40px;" [(ngModel)]="formulario.tiempoDesparasitado"
+        id="tiempoDesparasita" rows="3" cols="50" required></textarea><br>
     </div>
     <div> <label style="margin-top: 40px;">¿Cuántas horas del día permanecería solo?</label><br>
       <div class="input-wrapper" style="margin-bottom: 40px;">
-        <input type="number" placeholder="Escriba su respuesta..." name="text" class="input" id="horasSolo">
+        <input type="number" placeholder="Escriba su respuesta..." name="text" class="input"
+          [(ngModel)]="formulario.horasSolo" id="horasSolo" required>
       </div>
 
     </div>
 
     <div>
       <label style="margin-top: 40px;">¿En dónde estaría mientras no hubiera nadie en casa? </label><br>
-      <textarea style="border-radius: 10px; margin-bottom: 40px;" id="pasariaAnimal" rows="3" cols="50"></textarea><br>
+      <textarea style="border-radius: 10px; margin-bottom: 40px;" [(ngModel)]="formulario.pasariaAnimal"
+        id="pasariaAnimal" rows="3" cols="50" required></textarea><br>
     </div>
     <div>
       <label style="margin-top: 40px;">¿Hay alguien en su familia con problemas de alergias?</label><br>
-      <textarea style="border-radius: 10px; margin-bottom: 40px;" id="problemaAlergia" rows="3"
-        cols="50"></textarea><br>
+      <textarea style="border-radius: 10px; margin-bottom: 40px;" [(ngModel)]="formulario.problemaAlergia"
+        id="problemaAlergia" rows="3" cols="50" required></textarea><br>
     </div>
     <div> <label style="margin-top: 40px;">¿Qué sucedería si alguien resultara alérgico al animal?</label><br>
-      <textarea style="border-radius: 10px; margin-bottom: 40px;" id="resultaAlergico" rows="3"
-        cols="50"></textarea><br>
+      <textarea style="border-radius: 10px; margin-bottom: 40px;" [(ngModel)]="formulario.resultaAlergico"
+        id="resultaAlergico" rows="3" cols="50" required></textarea><br>
     </div>
     <div>
       <label style="margin-top: 40px;">¿Planea tener hijos? </label><br>
-      <input class="check" type="checkbox" id="planeaSI" value="Si" required> Si
-      <input class="check" type="checkbox" id="planeaNO" value="No" required> No<br>
+      <input class="check" type="checkbox" [(ngModel)]="formulario.planeaHijos" id="planeaSI" value="Si" required> Si
+      <input class="check" type="checkbox" [(ngModel)]="formulario.planeaHijos" id="planeaNO" value="No" required>
+      No<br>
     </div>
     <div> <label style="margin-top: 40px; width: 85%;">¿Qué sucedería si usted o en caso de ser hombre, su pareja,
         quedara
         embarazada?</label><br>
-      <textarea style="border-radius: 10px; margin-bottom: 40px;" id="embaraza" rows="3" cols="50"></textarea><br>
+      <textarea style="border-radius: 10px; margin-bottom: 40px;" [(ngModel)]="formulario.embaraza" id="embaraza"
+        rows="3" cols="50"></textarea><br>
     </div>
     <div>
       <label style="margin-top: 40px;">¿Conoce los gastos que implica tener un perro o gato?</label><br>
-      <input class="check" type="checkbox" id="gastosSI" value="Si" required> Si
-      <input class="check" type="checkbox" id="gastosNO" value="No" required> No<br>
+      <input class="check" type="checkbox" [(ngModel)]="formulario.conoceGastos" id="gastosSI" value="Si" required> Si
+      <input class="check" type="checkbox" conoceGastos id="gastosNO" value="No" required> No<br>
     </div>
   </section>
   <div style="width: 100%; text-align: center;">
@@ -282,76 +304,95 @@
     <section class="layout2">
 
       <div> <label>Su vivienda es:</label><br>
-        <input class="check" type="checkbox" id="casa" value="Si" required>Casa <br>
-        <input class="check" type="checkbox" id="depa" value="No" required> Departamento<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.tipoVivienda" id="casa" value="Si" required>Casa
+        <br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.tipoVivienda" id="depa" value="No" required>
+        Departamento<br>
       </div>
       <div>
         <label>Su vivienda es:</label><br>
-        <input class="check" type="checkbox" id="propia" value="Si" required> Propia<br>
-        <input class="check" type="checkbox" id="rentada" value="No" required> Rentada<br>
-        <input class="check" type="checkbox" id="compartida" value="No" required> Compartida<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.vivienda" id="propia" value="Si" required>
+        Propia<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.vivienda" id="rentada" value="No" required>
+        Rentada<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.vivienda" id="compartida" value="No" required>
+        Compartida<br>
       </div>
       <div> <label>¿Tiene jardín o patio?</label><br>
-        <input class="check" type="checkbox" id="jardin" value="Si" required> Jardin<br>
-        <input class="check" type="checkbox" id="patio" value="No" required> Patio<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.jardioPatio" id="jardin" value="Si" required>
+        Jardin<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.jardioPatio" id="patio" value="No" required>
+        Patio<br>
       </div>
       <div> <label>En que parte de tu casa va a vivir el animalito:</label><br>
-        <input class="check" type="checkbox" id="jardinParte" value="Si" required> Jardin<br>
-        <input class="check" type="checkbox" id="patioParte" value="No" required> Patio<br>
-        <input class="check" type="checkbox" id="azoteaParte" value="No" required> Azotea<br>
-        <input class="check" type="checkbox" id="dentroCasaParte" value="No" required> Dentro de la casa<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.parteCasa" id="jardinParte" value="Si" required>
+        Jardin<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.parteCasa" id="patioParte" value="No" required>
+        Patio<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.parteCasa" id="azoteaParte" value="No" required>
+        Azotea<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.parteCasa" id="dentroCasaParte" value="No"
+          required> Dentro de la casa<br>
       </div>
       <div> <label>¿En dónde dormiría?</label><br>
-        <input class="check" type="checkbox" id="dormirJardin" value="Si" required> Jardin<br>
-        <input class="check" type="checkbox" id="dormirPatio" value="No" required> Patio<br>
-        <input class="check" type="checkbox" id="dormirAzotea" value="No" required> Azotea<br>
-        <input class="check" type="checkbox" id="dormirDentroCasa" value="No" required> Dentro de la casa<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.dormirParte" id="dormirJardin" value="Si" required>
+        Jardin<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.dormirParte" id="dormirPatio" value="No" required>
+        Patio<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.dormirParte" id="dormirAzotea" value="No" required>
+        Azotea<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.dormirParte" id="dormirDentroCasa" value="No"
+          required> Dentro de la casa<br>
       </div>
       <div> <label>Si vive en departamento, ¿hay otros vecinos que tengan animales de compañía? </label>
-        <textarea style="border-radius: 10px; margin-bottom: 40px;" id="vecinosAnimales" rows="3"
-          cols="50"></textarea><br>
+        <textarea style="border-radius: 10px; margin-bottom: 40px;" [(ngModel)]="formulario.vecinosAnimales"
+          id="vecinosAnimales" rows="3" cols="50" required></textarea><br>
       </div>
       <div>
         <label>En caso de renta o condominio,¿cuentas con el permiso de tu casero o administración para poseer animales
           de
           compañía?</label>
-        <input class="check" type="checkbox" id="permisoSI" value="Si" required> SI<br>
-        <input class="check" type="checkbox" id="permisoNO" value="No" required> NO<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.permiso" id="permisoSI" value="Si" required> SI<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.permiso" id="permisoNO" value="No" required> NO<br>
       </div>
       <div> <label>¿Qué sucedería si tuviera que mudarse a otra casa o ciudad /país? </label>
-        <textarea style="border-radius: 10px; margin-bottom: 40px;" id="mudarseLugar" rows="3" cols="50"></textarea><br>
+        <textarea style="border-radius: 10px; margin-bottom: 40px;" [(ngModel)]="formulario.mudarseLugar"
+          id="mudarseLugar" rows="3" cols="50" required></textarea><br>
       </div>
       <div> <label>¿Qué sucedería si al mudarse algún lugar donde no admiten perros o gatos o de tener algún problema
           familiar
           o económico? </label>
-        <textarea style="border-radius: 10px; margin-bottom: 40px;" id="mudarse" rows="3" cols="50"></textarea><br>
+        <textarea style="border-radius: 10px; margin-bottom: 40px;" [(ngModel)]="formulario.mudarse" id="mudarse"
+          rows="3" cols="50"></textarea><br>
       </div>
       <div> <label>¿Está dispuesto a que el perro o gato tenga un periodo de ajuste en el que aprenda dónde debe ir al
           baño y
           se adapte a la familia?</label>
-        <input class="check" type="checkbox" id="dispuestoSI" value="Si" required> SI<br>
-        <input class="check" type="checkbox" id="dispuestoNO" value="No" required> NO<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.dispuesto" id="dispuestoSI" value="Si" required>
+        SI<br>
+        <input class="check" type="checkbox" [(ngModel)]="formulario.dispuesto" id="dispuestoNO" value="No" required>
+        NO<br>
       </div>
 
       <div>
         <label>¿Cómo te enteraste de nosotros?</label>
-        <textarea style="border-radius: 10px; margin-bottom: 40px;" id="enterarseNosotros" rows="3"
-          cols="50"></textarea><br>
+        <textarea style="border-radius: 10px; margin-bottom: 40px;" [(ngModel)]="formulario.enterarse"
+          id="enterarseNosotros" rows="3" cols="50" required></textarea><br>
       </div>
 
     </section>
     <label>otros comentarios.</label><br>
-    <textarea style="border-radius: 10px; margin-bottom: 40px; width: 90%  ;" id="otrosComentarios" rows="3"
-      cols="50"></textarea><br>
+    <textarea style="border-radius: 10px; margin-bottom: 40px; width: 90%  ;" [(ngModel)]="formulario.otrosComentarios"
+      id="otrosComentarios" rows="3" cols="50" required></textarea><br>
     <fieldset>
 
     </fieldset>
-    <div style="width: 100%;"> <button class="learn-more" onclick="generarPDF()"
+    <div style="width: 100%;"> <button type="submit" class="learn-more" onclick="generarPDF()"
         style="font-weight: bolder; letter-spacing: 3px;">
         <span class="circle" aria-hidden="true">
           <span class="icon arrow"></span>
         </span>
-        <span class="button-text">ENVIAR SOLICITUD</span>
+        <span class="button-text">GENERAR SOLICITUD</span>
       </button></div>
 
   </div>
