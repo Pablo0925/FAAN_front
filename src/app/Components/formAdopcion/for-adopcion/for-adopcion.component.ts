@@ -3,6 +3,7 @@ import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { ImageService } from 'src/app/Service/image.service';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+import { formulario } from 'src/app/Models/fomulario';
 
 
 @Component({
@@ -12,9 +13,14 @@ import { ImageService } from 'src/app/Service/image.service';
 })
 export class ForAdopcionComponent {
 
+
+
+    formulario: formulario = new formulario();
+
     constructor(private imageService: ImageService) { }
 
     public async generarPDF() {
+
 
         const nombreInput = document.getElementById("nombre") as HTMLInputElement;
         const ocupacionInput = document.getElementById("ocupacion") as HTMLInputElement;

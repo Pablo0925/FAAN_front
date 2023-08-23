@@ -6,7 +6,7 @@ describe('ForAdopcionComponent', () => {
   let component: ForAdopcionComponent;
   let fixture: ComponentFixture<ForAdopcionComponent>;
 
-  beforeEach(() => {
+  beforeEach(() => { 
     TestBed.configureTestingModule({
       declarations: [ForAdopcionComponent]
     });
