@@ -113,12 +113,14 @@ export class RegisterTipoAnimalComponent implements OnInit {
                     throw new Error()
                 }
                 this.closeDialog();
-                alert('succesfull updated..')
+               
+                this.toastr.success('ACTUALIZADO CORRECTAMENTE.');
             }
         }, (err) => {
             console.log(err)
             if (err.status === 400) {
                 this.errorUnique = 'Nombre existente.';
+                
             }
         })
     }
@@ -135,7 +137,8 @@ export class RegisterTipoAnimalComponent implements OnInit {
             .subscribe((data) => {
                 if (data != null) {
                     if (tipoAnimal.estadoTipo) {
-                        alert('Update')
+                        this.toastr.success('ACTUALIZADO .');
+                        
                     }
                 }
             });

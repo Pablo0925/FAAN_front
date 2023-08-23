@@ -34,7 +34,7 @@ const routes: Routes = [
   // MASCOTAS
 
   { path: 'registro-mascota', component: RegistroMascotasComponent},
-  { path: 'control-animal', component: ControlAnimalComponent},
+  { path: 'control-animal', component: ControlAnimalComponent},//falta valida
   { path: 'adopcion-animal', component: AdopcionAnimalComponent},
 
 
@@ -44,15 +44,15 @@ const routes: Routes = [
 
   // SHARED
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'fundacion', component: FundacionComponent },
+  { path: 'fundacion', component: FundacionComponent },//no vale...
   { path: 'perfil-usuario', component: PerfilUsuarioComponent },
 
   // SUPERADMIN
-  { path: 'control-usuario', component: ControlUsuariosComponent },
+  { path: 'control-usuario', component: ControlUsuariosComponent },//no vale
 
   // PUBLIC
   { path: 'login', component: LoginComponent },
-  { path: 'formulario-adopcion', component: ForAdopcionComponent },
+  { path: 'formulario-adopcion', component: ForAdopcionComponent },//falta
   { path: 'donaciones', component: DonacionesComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: '**', redirectTo: 'login' },
