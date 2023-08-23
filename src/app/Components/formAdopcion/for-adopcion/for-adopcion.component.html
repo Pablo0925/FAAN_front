@@ -84,36 +84,47 @@
 <h1 class="Formulario">FORMULARIO DE ADOPCION DE ANIMAL DE COMPAÑIA</h1>
 <h2 style="width: 100%; height: 100%; text-align: center; margin-bottom: 70px;">Información Personal</h2>
 
-<form ngNativeValidate action="/procesar_formulario" method="POST">
+<!-- <form (ngSubmit)="generarPDF()" ngNativeValidate action="/procesar_formulario" method="POST"> -->
+<form (ngSubmit)="generarPDF()" ngNativeValidate>
 
   <fieldset>
     <section class="layout2">
 
       <div class="inputContainer">
-        <input required="" class="customInput" type="text">
+        <input type="text" class="customInput" name="nombre" id="nombre" [(ngModel)]="formulario.nombre" required />
         <label class="inputLabel">Nombre:</label>
-        <input type="text" class="inputUnderline" [(ngModel)]="formulario.nombre" required>
+        <div class="inputUnderline"></div>
       </div>
 
       <div class="inputContainer">
-        <input required="" class="customInput" type="text">
+        <input type="text" class="customInput" name="ocupacion" id="ocupacion" [(ngModel)]="formulario.ocupacion"
+          required />
         <label class="inputLabel">Ocupacion:</label>
-        <input type="text" class="inputUnderline" [(ngModel)]="formulario.ocupacion" required>
+        <div class="inputUnderline"></div>
       </div>
 
-      <div class="inputContainer">
-        <input required="" class="customInput" type="text">
-        <label class="inputLabel">Ubicacion Domicilaria:</label>
-        <input type="text" class="inputUnderline" [(ngModel)]="formulario.ubicaciondomicilio" required>
+
+      <div class="field">
+        <label class="mb-3">¿Están todos los miembros de la familia enterados y de acuerdo de la intención de adogtar
+          un animal de compañía?</label>
+        <div class="formgrid grid">
+          <div class="field-radiobutton col-6">
+            <input type="radio" id="option1" name="todoMiembrosAcuerdo2" value="SI"
+              [(ngModel)]="formulario.todoMiembrosAcuerdo2" required />
+            <label for="option1">SI</label>
+          </div>
+          <div class="field-radiobutton col-6">
+            <input type="radio" id="option2" name="todoMiembrosAcuerdo2" value="NO"
+              [(ngModel)]="formulario.todoMiembrosAcuerdo2" required />
+            <label for="option2">NO</label>
+          </div>
+
+        </div>
       </div>
 
-      <div class="inputContainer">
-        <input required="" class="customInput" type="text">
-        <label class="inputLabel">Direccion del Trabajo:</label>
-        <input type="text" class="inputUnderline" [(ngModel)]="formulario.direccion" required>
-      </div>
 
-      <div class="inputContainer">
+
+      <!-- <div class="inputContainer">
         <input required="" class="customInput" type="text">
         <label class="inputLabel">Correo Electrónico:</label>
         <input type="text" class="inputUnderline" [(ngModel)]="formulario.correo" required>
@@ -153,15 +164,15 @@
         <input required="" class="customInput" type="text">
         <label class="inputLabel">NIños - Edad:</label>
         <input type="text" class="inputUnderline" [(ngModel)]="formulario.edadNinos" required>
-      </div>
+      </div> -->
 
 
     </section>
   </fieldset>
 
-  <h2 style="width: 100%; height: 100%; text-align: center; margin-bottom: 70px;">Autorizacion de Adopcion</h2>
+  <!-- <h2 style="width: 100%; height: 100%; text-align: center; margin-bottom: 70px;">Autorizacion de Adopcion</h2> -->
 
-  <section style="width: 90%; text-align: center; margin-left: auto; margin-right: auto;" class="layout">
+  <!-- <section style="width: 90%; text-align: center; margin-left: auto; margin-right: auto;" class="layout">
     <div> <label style="width: 85%;">¿Quién es la persona que autorizará la adopción del animal? (madre, padre, tutor,
         etc) :</label>
       <div class="input-wrapper" style="margin-bottom: 40px;">
@@ -176,7 +187,7 @@
       <input class="check" type="checkbox" id="acuerdo_familia_si" value="Si"
         [(ngModel)]="formulario.todoMiembrosAcuerdo" name="acuerdo_familia" required> Si
       <input class="check" type="checkbox" id="acuerdo_familia_no" value="No"
-        [(ngModel)]="formulario.todoMiembrosAcuerdo" name="acuerdo_familia" required> No 
+        [(ngModel)]="formulario.todoMiembrosAcuerdo" name="acuerdo_familia" required> No
       <br>
       <label>Si su respuesta es no, ¿por qué?</label>
       <br>
@@ -296,8 +307,10 @@
       <input class="check" type="checkbox" [(ngModel)]="formulario.conoceGastos" id="gastosSI" value="Si" required> Si
       <input class="check" type="checkbox" conoceGastos id="gastosNO" value="No" required> No<br>
     </div>
-  </section>
-  <div style="width: 100%; text-align: center;">
+  </section> -->
+
+
+  <!-- <div style="width: 100%; text-align: center;">
     <h2 style="width: 100%; height: 100%; text-align: center; margin-bottom: 70px; margin-top: 40px;">Autorizacion de
       Adopcion</h2>
 
@@ -387,16 +400,17 @@
     <fieldset>
 
     </fieldset>
-    <div style="width: 100%;"> <button type="submit" class="learn-more" (click)="generarPDF()"
-        style="font-weight: bolder; letter-spacing: 3px;">
-        <span class="circle" aria-hidden="true">
-          <span class="icon arrow"></span>
-        </span>
-        <span class="button-text">GENERAR SOLICITUD</span>
-      </button></div>
 
+
+  </div> -->
+  <div style="width: 100%;">
+    <button type="submit" class="learn-more" style="font-weight: bolder; letter-spacing: 3px;">
+      <span class="circle" aria-hidden="true">
+        <span class="icon arrow"></span>
+      </span>
+      <span class="button-text">GENERAR SOLICITUD</span>
+    </button>
   </div>
-
 </form>
 
 
