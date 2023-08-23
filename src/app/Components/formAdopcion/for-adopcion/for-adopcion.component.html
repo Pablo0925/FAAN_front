@@ -176,7 +176,7 @@
       <input class="check" type="checkbox" id="acuerdo_familia_si" value="Si"
         [(ngModel)]="formulario.todoMiembrosAcuerdo" name="acuerdo_familia" required> Si
       <input class="check" type="checkbox" id="acuerdo_familia_no" value="No"
-        [(ngModel)]="formulario.todoMiembrosAcuerdo" name="acuerdo_familia" required> No
+        [(ngModel)]="formulario.todoMiembrosAcuerdo" name="acuerdo_familia" required> No 
       <br>
       <label>Si su respuesta es no, ¿por qué?</label>
       <br>
@@ -387,7 +387,7 @@
     <fieldset>
 
     </fieldset>
-    <div style="width: 100%;"> <button type="submit" class="learn-more" onclick="generarPDF()"
+    <div style="width: 100%;"> <button type="submit" class="learn-more" (click)="generarPDF()"
         style="font-weight: bolder; letter-spacing: 3px;">
         <span class="circle" aria-hidden="true">
           <span class="icon arrow"></span>
