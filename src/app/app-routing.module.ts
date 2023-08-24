@@ -16,7 +16,7 @@ import { AdopcionAnimalComponent } from './Modules/Administrador/adopcion-animal
 import { RecoverPasswordComponent } from './Components/recover-password/recover-password.component';
 import { ControlPersonComponent } from './Modules/Administrador/control-person/control-person.component';
 import { HomeComponent } from './Components/home/home.component';
-import { ForAdopcionComponent } from './Components/formAdopcion/for-adopcion/for-adopcion.component';
+// import { ForAdopcionComponent } from './Components/formAdopcion/for-adopcion/for-adopcion.component';
 
 
 const routes: Routes = [
@@ -50,7 +50,7 @@ const routes: Routes = [
 
   // PUBLIC
   { path: 'login', component: LoginComponent },
-  { path: 'formulario-adopcion', component: ForAdopcionComponent },
+  // { path: 'formulario-adopcion', component: ForAdopcionComponent },
   { path: '**', redirectTo: 'login' },
 ];
 
