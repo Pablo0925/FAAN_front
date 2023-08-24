@@ -38,13 +38,13 @@ export class FundacionComponent implements OnInit {
 
     }
 
-    showDialog() {
+    public showDialog() {
         this.visible = true;
+        this.clearData();
     }
 
     selectedFile!: File;
-    isKeyImage: string = '';
-    onFileSelected(event: any) {
+    public onFileSelected(event: any) {
         let data = event.target.files[0];
 
         if (data.size >= 1048576) {
