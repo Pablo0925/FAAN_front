@@ -23,7 +23,11 @@ import { AdopcionAnimalComponent } from './Modules/Administrador/adopcion-animal
 import { ControlPersonComponent } from './Modules/Administrador/control-person/control-person.component';
 import { HomeComponent } from './Components/home/home.component';
 import { RecoverPasswordComponent } from './Components/recover-password/recover-password.component';
-// import { ForAdopcionComponent } from './Components/formAdopcion/for-adopcion/for-adopcion.component';
+
+import { ForAdopcionComponent } from './Components/formAdopcion/for-adopcion/for-adopcion.component';
+import { DonacionesComponent } from './Components/donaciones/donaciones/donaciones.component';
+import { ContactoComponent } from './Components/contacto/contacto/contacto.component';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +45,10 @@ import { RecoverPasswordComponent } from './Components/recover-password/recover-
     ControlPersonComponent,
     HomeComponent,
     RecoverPasswordComponent,
-    // ForAdopcionComponent
+
+    ForAdopcionComponent,
+    DonacionesComponent,
+    ContactoComponent 
   ],
   imports: [
     BrowserModule,

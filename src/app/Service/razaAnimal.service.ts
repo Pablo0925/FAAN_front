@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 import { environment } from '../../environment/enviroment';
 import { RazaAnimal } from '../Models/razaAnimal';
 import { StorageService } from './storage.service';
+import { TipoAnimal } from '../Models/tipoAnimal';
 
 
 @Injectable({
@@ -16,6 +17,10 @@ export class RazaAnimalService {
 
   public getAllRazaAnimal(page: number, size: number, sort: string[]): Observable<RazaAnimal[]> {
     return this.http.get<RazaAnimal[]>(environment.apiuri + '/razaAnimal/pageable?' + `page=${page}&size=${size}&sort=${sort}`);
+  }
+
+  public findTipoAnimalById(idTipoAnimal: number): Observable<TipoAnimal> {
+    return this.http.get<TipoAnimal>(environment.apiuri + '/tipoanimal/findOne/' + idTipoAnimal);
   }
 
   public getAllRazaAnimalAtribute(page: number, size: number, sort: string[], nameAtribute: string, valueAtricute: string): Observable<RazaAnimal[]> {
