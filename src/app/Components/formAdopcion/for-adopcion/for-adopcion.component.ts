@@ -168,20 +168,11 @@ export class ForAdopcionComponent {
 
                 { text: '\n 31. otros comentarios.', style: 'question' },
                 { text: '' + this.formulario.otrosComentarios, },
-
-
-                { text: '\n Una vez llenado este formulario pasaremos a los siguientes requerimientos:', },
-                { text: '\n Después de conocer el perro o gato con interés en adoptar, se deberá realizar una visita de convivencia, así como recibir una platica sobre el cuidado de una mascota. ' },
-
+                
                 {
-                    text: 'Entregar copia de Identificación oficial y comprobante de domicilio (planilla servicios básicos) Tener la disponibilidad de recibir una visita de parte de la asociación para conocer el lugar donde habitará el animalito en adopción.'
+                    text: 'Si al terminar de leer aún estas convencido de aDOGtar, envíala a nuestros contactos 0998681859 - 0987614520'
                 },
-                {
-                    text: 'Segunda visita de familiarización y entrega de donativo de $ 15.00 o su equivalente en comida para perros los cual ayudara a seguir con nuestra labor.'
-                },
-                {
-                    text: 'Es obligación de FAAN entregarte al animalito vacunado, desparasitado y esterilizado si tiene edad para hacerlo'
-                },
+                
 
 
             ],
