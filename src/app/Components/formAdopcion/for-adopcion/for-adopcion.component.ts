@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { ImageService } from 'src/app/Service/image.service';
+import { Formulario } from 'src/app/Models/fomulario';
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import { ImageService } from 'src/app/Service/image.service';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
-import { Formulario } from 'src/app/Models/fomulario';
 
 
 @Component({
