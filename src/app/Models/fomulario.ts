@@ -1,5 +1,4 @@
-
-export class formulario {
+export class Formulario {
 
     nombre?: string;
     ocupacion?: string;
@@ -10,38 +9,82 @@ export class formulario {
     telefonotrabajo?: string;
     celular?: string;
     estadocivil?: string;
-    numeroMiembros?: number;
-    edadNinos?: number;
+    numeroMiembros?: string;
+    edadNinos?: string;
+    //
     autorizacion?: string;
-    todoMiembrosAcuerdo?: string;
-    siesno?:string;
-    viviraCon?: string;
-    considerar?: string;
-    animalesAnterioridad?: string;
+    todoMiembrosAcuerdoSI?: string;
+    todoMiembrosAcuerdoNO?: string;
+    siesno?: string;
+    //
+    viviraConNosotros?: string;
+    viviraConConocidos?: string;
+    //
+    considerarCompania?: string;
+    considerarGuardian?: string;
+    considerarMiembro?: string;
+    considerarAmigo?: string;
+    //
+    animalesAnterioridadSI?: string;
+    animalesAnterioridadNO?: string;
+    //
     animalPasado?: string;
     tiempoPasado?: string;
     animalAhora?: string;
-    vacunado?: string;
+    //
+    vacunadoSI?: string;
+    vacunadoNO?: string;
     vacunasAntes?: string;
-    desparasitado?: string;
+    //
+    desparasitadoSI?: string;
+    desparasitadoNO?: string;
+    //
     tiempoDesparasitado?: string;
     horasSolo?: string;
     pasariaAnimal?: string;
     problemaAlergia?: string;
     resultaAlergico?: string;
-    planeaHijos?: string;
+    //
+    planeaHijosSI?: string;
+    planeaHijosNO?: string;
+    //
     embaraza?: string;
-    conoceGastos?: string;
-    tipoVivienda?: string;
-    vivienda?: string;
-    jardioPatio?: string;
-    parteCasa?: string;
-    dormirParte?: string;
+    //
+    conoceGastosSI?: string;
+    conoceGastosNO?: string;
+    //
+    tipoViviendaCasa?: string;
+    tipoViviendaDepartamento?: string;
+    //
+    viviendaPropia?: string;
+    viviendaRentada?: string;
+    viviendaCompartida?: string;
+    viviendaOtra?: string;
+    //
+    jardin?: string;
+    patio?: string;
+    //
+    parteCasaJardin?: string;
+    parteCasaPatio?: string;
+    parteCasaAzotea?: string;
+    parteCasaDentro?: string;
+    //
+    dormirParteJardin?: string;
+    dormirPartePatio?: string;
+    dormirParteAzotea?: string;
+    dormirParteDentro?: string;
+    //
     vecinosAnimales?: string;
-    permiso?: string;
+    //
+    permisoSI?: string;
+    permisoNO?: string;
+    //
     mudarseLugar?: string;
     mudarse?: string;
-    dispuesto?: string;
+    //
+    dispuestoSI?: string;
+    dispuestoNO?: string;
+    //
     enterarse?: string;
     otrosComentarios?: string;
 
