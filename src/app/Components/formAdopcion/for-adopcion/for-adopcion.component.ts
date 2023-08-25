@@ -4,6 +4,7 @@ import { Form } from 'src/app/Models/fomulario';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -13,12 +14,64 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 })
 export class ForAdopcionComponent {
     public formulario: Form = new Form();
+    private ban: boolean = true;
+    private patternLetras: string = "[a-zA-Z ]{2,254}";
+    private patternCorreo: string = "^[\\w-+]+(\\.[\\w-]{1,62}){0,126}@[\\w-]{1,63}(\\.[\\w-]{1,62})+/[\\w-]+$";
+    private patternTelefonos: string = "^(?:\+593|593|0)(?:2|3|4|5|6|7|8|9)(?:\d{7})$"
+    private patternNumeros: string = "^[0-9]+$"
 
-    constructor(private imageService: ImageService) { }
+    constructor(private imageService: ImageService, private toastr: ToastrService) { }
+
+    public ejecutar() {
+        if (this.validarFormulario()) {
+            this.generarPDF()
+            this.toastr.success('Formulario generado correctamente. ¡Gracias!');
+        } else {
+            this.toastr.error('Error en el formulario. Por favor, verifica los campos.');
+            console.log('COMPRUEBE LOS CAMPOS')
+        }
+    }
+
+    validarFormulario(): boolean {
+
+        //letras, numeros y telefonos
+        if (!this.formulario.nombre?.match(this.patternLetras) &&
+            !this.formulario.ocupacion?.match(this.patternLetras) &&
+            !this.formulario.direccionDomiciliaria?.match(this.patternLetras) &&
+            !this.formulario.direccionTrabajo?.match(this.patternLetras) &&
+            !this.formulario.correoE?.match(this.patternCorreo) &&
+            !this.formulario.telefonoCasa?.match(this.patternTelefonos) &&
+            !this.formulario.telefonoTrabajo?.match(this.patternTelefonos) &&
+            !this.formulario.celular?.match(this.patternTelefonos) &&
+            !this.formulario.estadoCivil?.match(this.patternLetras) &&
+            !this.formulario.numeroMiembros?.match(this.patternNumeros) &&
+            !this.formulario.edadNinos?.match(this.patternNumeros) &&
+            !this.formulario.autorizacion1?.match(this.patternLetras) &&
+            !this.formulario.animalPasado7?.match(this.patternLetras) &&
+            !this.formulario.tiempoVivido8?.match(this.patternLetras) &&
+            !this.formulario.animalAhora9?.match(this.patternLetras) &&
+            !this.formulario.vacunasAntes11?.match(this.patternLetras) &&
+            !this.formulario.tiempoDesparasitado13?.match(this.patternLetras) &&
+            !this.formulario.horasSolo14?.match(this.patternLetras) &&
+            !this.formulario.pasariaAnimal15?.match(this.patternLetras) &&
+            !this.formulario.problemaAlergia16?.match(this.patternLetras) &&
+            !this.formulario.resultaAlergico17?.match(this.patternLetras) &&
+            !this.formulario.embaraza19?.match(this.patternLetras) &&
+            !this.formulario.separacionFamilia21?.match(this.patternLetras) &&
+            !this.formulario.mudarseLugar29?.match(this.patternLetras) &&
+            !this.formulario.mudarse30?.match(this.patternLetras) &&
+            !this.formulario.enterarse32?.match(this.patternLetras) &&
+            !this.formulario.otrosComentarios33?.match(this.patternLetras)
+        ) {
+            this.ban = false;
+        }
+
+
+        return this.ban;
+    }
 
     public async generarPDF() {
         console.log(this.formulario)
-
 
         const styles = {
             header: {
