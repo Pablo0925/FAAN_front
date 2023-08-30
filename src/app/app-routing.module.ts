@@ -55,7 +55,7 @@ const routes: Routes = [
   { path: 'formulario-adopcion', component: ForAdopcionComponent },
   { path: 'donaciones', component: DonacionesComponent },
   { path: 'contacto', component: ContactoComponent },
-  { path: '**', redirectTo: 'login' },
+  { path: '**', redirectTo: 'home' },
    
 ];
 
