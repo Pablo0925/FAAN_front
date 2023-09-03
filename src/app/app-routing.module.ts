@@ -24,12 +24,9 @@ import { ContactoComponent } from './Components/contacto/contacto/contacto.compo
 
 
 const routes: Routes = [
-  //Public
-  { path: 'home', component: HomeComponent },
 
   //Password recover..
   { path: 'recover/password/:token', component: RecoverPasswordComponent },
-  // { path: 'recover-password', component: RecoverPasswordComponent },
 
   { path: 'person/gestion', component: ControlPersonComponent },
 
@@ -54,11 +51,11 @@ const routes: Routes = [
 
   // PUBLIC
   { path: 'login', component: LoginComponent },
-
+  { path: 'home', component: HomeComponent },
   { path: 'formulario-adopcion', component: ForAdopcionComponent },
   { path: 'donaciones', component: DonacionesComponent },
   { path: 'contacto', component: ContactoComponent },
-  { path: '**', redirectTo: 'login' },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({
