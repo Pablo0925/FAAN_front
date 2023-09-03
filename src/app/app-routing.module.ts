@@ -16,9 +16,11 @@ import { AdopcionAnimalComponent } from './Modules/Administrador/adopcion-animal
 import { RecoverPasswordComponent } from './Components/recover-password/recover-password.component';
 import { ControlPersonComponent } from './Modules/Administrador/control-person/control-person.component';
 import { HomeComponent } from './Components/home/home.component';
+
 import { ForAdopcionComponent } from './Components/formAdopcion/for-adopcion/for-adopcion.component';
 import { DonacionesComponent } from './Components/donaciones/donaciones/donaciones.component';
 import { ContactoComponent } from './Components/contacto/contacto/contacto.component';
+
 
 
 const routes: Routes = [
@@ -52,11 +54,11 @@ const routes: Routes = [
 
   // PUBLIC
   { path: 'login', component: LoginComponent },
-  { path: 'formulario-adopcion', component: ForAdopcionComponent },//falta
+
+  { path: 'formulario-adopcion', component: ForAdopcionComponent },
   { path: 'donaciones', component: DonacionesComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: '**', redirectTo: 'login' },
-   
 ];
 
 @NgModule({
