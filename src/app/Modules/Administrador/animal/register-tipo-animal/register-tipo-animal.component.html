@@ -96,7 +96,7 @@
                 <input type="text"
                     [class]="submitted && (!tipoAnimal.nombreTipo || errorUnique) ? 'ng-invalid ng-dirty':''"
                     id="nombreTipo" placeholder="Nombre tipo" pInputText [(ngModel)]="tipoAnimal.nombreTipo" required
-                    autofocus />
+                    autofocus oninput="this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/g, '')"/>
             </span>
             <small class="p-error" *ngIf="submitted && !tipoAnimal.nombreTipo">Name is required.</small>
             <small class="p-error" *ngIf="submitted && !tipoAnimal.nombreTipo || errorUnique">{{errorUnique}}</small>
